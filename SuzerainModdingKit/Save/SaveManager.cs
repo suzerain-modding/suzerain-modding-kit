@@ -50,7 +50,7 @@ internal static class SaveManager
             _firstLoadSaveCalled = false;
             if (_loadedSaveName == null)
             {
-                Melon<Core>.Logger.Warning("Loaded save name is null. Cannot load mod save.");
+                Melon<Core>.Logger.Error("Loaded save name is null. Cannot load mod save.");
                 return;
             }
             LoadSave(_loadedSaveName);
@@ -98,7 +98,7 @@ internal static class SaveManager
         }
         catch (Exception e)
         {
-            Melon<Core>.Logger.Warning($"Failed to save mod data: {e}");
+            Melon<Core>.Logger.Error($"Failed to save mod data: {e}");
             return;
         }
 
@@ -138,13 +138,13 @@ internal static class SaveManager
         }
         catch (Exception e)
         {
-            Melon<Core>.Logger.Warning($"Failed to deserialize mod save at '{savePath}': {e}");
+            Melon<Core>.Logger.Error($"Failed to deserialize mod save at '{savePath}': {e}");
             return;
         }
 
         if (modSaveData == null || modSaveData.Variables == null)
         {
-            Melon<Core>.Logger.Warning($"Invalid mod save at '{savePath}'.");
+            Melon<Core>.Logger.Error($"Invalid mod save at '{savePath}'.");
             return;
         }
 
@@ -157,7 +157,7 @@ internal static class SaveManager
         }
         catch (Exception e)
         {
-            Melon<Core>.Logger.Warning("Failed to load game variables from mod save at " +
+            Melon<Core>.Logger.Error("Failed to load game variables from mod save at " +
                 $"'{savePath}': {e}");
             return;
         }

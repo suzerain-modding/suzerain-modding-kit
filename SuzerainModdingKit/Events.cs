@@ -1,3 +1,4 @@
+using MelonLoader;
 using SuzerainModdingKit.StoryFragments.Decision;
 
 namespace SuzerainModdingKit;
@@ -13,11 +14,8 @@ public static class Events
     //   1b. After (On) events. Alphabetical order.
     // 2. EventArgs classes: Same order as properties.
     // 3. Trigger methods: Same order as properties.
+    // 4. Private methods.
 
-    /// <summary>
-    /// Called before the game shows a decision. This event can modify the decision.
-    /// </summary>
-    public static event EventHandler<DecisionShowEventArgs> BeforeDecisionShow;
     /// <summary>
     /// Called before a step ends.
     /// </summary>
@@ -30,6 +28,14 @@ public static class Events
     /// Called when a bill is vetoed by the player.
     /// </summary>
     public static event EventHandler<BillEventArgs> OnBillVetoed;
+    /// <summary>
+    /// Called when the player selects an option in a decision.
+    /// </summary>
+    public static event EventHandler<DecisionFinishedEventArgs> OnDecisionFinished;
+    /// <summary>
+    /// Called when the game shows a decision.
+    /// </summary>
+    public static event EventHandler OnDecisionShow;
     /// <summary>
     /// Called when a step is evaluated. Note that this may be called multiple times per step.
     /// </summary>
@@ -57,57 +63,99 @@ public static class Events
             get;
         }
 
+        /// <summary>
+        /// Creates a new instance of this class.
+        /// </summary>
+        /// <param name="billName">
+        /// The name of the bill.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if any required arguments are null.
+        /// </exception>
         public BillEventArgs(string billName)
         {
             BillName = billName ?? throw new ArgumentNullException(nameof(billName));
         }
     }
 
-    public class DecisionShowEventArgs : EventArgs
+    public class DecisionFinishedEventArgs : EventArgs
     {
-        public DecisionShowContext Context
+        public DecisionOptionInfo SelectedOptionInfo
         {
             get;
         }
 
-        public DecisionShowEventArgs(DecisionShowContext context)
+        public DecisionFinishedEventArgs(DecisionOptionInfo selectedOptionInfo)
         {
-            Context = context ?? throw new ArgumentNullException(nameof(context));
+            SelectedOptionInfo = selectedOptionInfo ??
+                throw new ArgumentNullException(nameof(selectedOptionInfo));
         }
-    }
-
-    internal static void TriggerBeforeDecisionShow(DecisionShowContext context)
-    {
-        BeforeDecisionShow?.Invoke(sender: null, new DecisionShowEventArgs(context));
     }
 
     internal static void TriggerBeforeStepEnd()
     {
-        BeforeStepEnd?.Invoke(sender: null, EventArgs.Empty);
+        SafeInvoke(BeforeStepEnd, nameof(BeforeStepEnd));
     }
 
     internal static void TriggerOnBillSigned(string billName)
     {
-        OnBillSigned?.Invoke(sender: null, new BillEventArgs(billName));
+        SafeInvoke(OnBillSigned, nameof(OnBillSigned), new BillEventArgs(billName));
     }
 
     internal static void TriggerOnBillVetoed(string billName)
     {
-        OnBillVetoed?.Invoke(sender: null, new BillEventArgs(billName));
+        SafeInvoke(OnBillVetoed, nameof(OnBillVetoed), new BillEventArgs(billName));
+    }
+
+    internal static void TriggerOnDecisionFinished(DecisionOptionInfo selectedOptionInfo)
+    {
+        SafeInvoke(OnDecisionFinished, nameof(OnDecisionFinished),
+            new DecisionFinishedEventArgs(selectedOptionInfo));
+    }
+
+    internal static void TriggerOnDecisionShow()
+    {
+        SafeInvoke(OnDecisionShow, nameof(OnDecisionShow));
     }
 
     internal static void TriggerOnEvaluateStep()
     {
-        OnEvaluateStep?.Invoke(sender: null, EventArgs.Empty);
+        SafeInvoke(OnEvaluateStep, nameof(OnEvaluateStep));
     }
 
     internal static void TriggerOnJournalInitialized()
     {
-        OnJournalInitialized?.Invoke(sender: null, EventArgs.Empty);
+        SafeInvoke(OnJournalInitialized, nameof(OnJournalInitialized));
     }
 
     internal static void TriggerOnTurnEnd()
     {
-        OnTurnEnd?.Invoke(sender: null, EventArgs.Empty);
+        SafeInvoke(OnTurnEnd, nameof(OnTurnEnd));
+    }
+
+    private static void SafeInvoke(
+        Delegate eventHandler,
+        string eventName,
+        EventArgs eventArgs = null)
+    {
+        if (eventHandler == null)
+        {
+            return;
+        }
+        string name = eventName ?? "undefined";
+        EventArgs args = eventArgs ?? EventArgs.Empty;
+
+        foreach (Delegate subscriber in eventHandler.GetInvocationList())
+        {
+            try
+            {
+                _ = subscriber.DynamicInvoke([null, args]);
+            }
+            catch (Exception ex)
+            {
+                Melon<Core>.Logger.Error($"Delegate '{subscriber.Method.Name}' " +
+                    $"for event '{name}' threw an exception: {ex}");
+            }
+        }
     }
 }

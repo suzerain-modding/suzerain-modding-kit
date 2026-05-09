@@ -102,6 +102,9 @@ public class CustomBillData
             Description = Description,
             HubTitle = HubTitle,
             HubDescription = HubDescription,
+            // The game crashes if these properties are not defined.
+            SignVariables = string.Empty,
+            VetoVariables = string.Empty,
         };
         BillData data = new()
         {

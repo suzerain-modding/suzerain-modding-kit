@@ -8,7 +8,7 @@ internal static class JsonSaveLoad_SaveDataToFile_Patch
 {
     public static void Postfix(string path)
     {
-        if (!GameState.IsGameActive())
+        if (!GameState.IsGameActive)
         {
             // Return if the game is not active. This function may be called
             // before the game actually starts loading, so if we create a

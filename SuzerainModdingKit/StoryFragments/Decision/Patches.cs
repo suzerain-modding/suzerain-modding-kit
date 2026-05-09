@@ -7,13 +7,22 @@ namespace SuzerainModdingKit.StoryFragments.Decision;
 [HarmonyPatch(typeof(DecisionPanel), nameof(DecisionPanel.Show))]
 internal static class DecisionPanel_Show_Patch
 {
-    // Use Prefix to modify the decision before it shows.
-    public static void Prefix(DecisionPanel __instance)
+    public static void Postfix()
     {
-        string decisionName = __instance.currentDecisionData.NameInDatabase;
-        DecisionShowContext context = new(decisionName);
+        Melon<Core>.Logger.Msg(
+            $"Event: OnDecisionShow ({DecisionManager.CurrentDecisionName}).");
+        Events.TriggerOnDecisionShow();
+    }
+}
 
-        Melon<Core>.Logger.Msg($"Event: BeforeDecisionShow ({decisionName}).");
-        Events.TriggerBeforeDecisionShow(context);
+[HarmonyPatch(typeof(DecisionPanel), nameof(DecisionPanel.OnFinish))]
+internal static class DecisionPanel_OnFinish_Patch
+{
+    public static void Postfix(DecisionProperties.DecisionOption decisionOption)
+    {
+        DecisionOptionInfo info = new(decisionOption.Text, DecisionManager.CurrentDecisionName);
+        Melon<Core>.Logger.Msg(
+            $"Event: OnDecisionFinished ({DecisionManager.CurrentDecisionName}).");
+        Events.TriggerOnDecisionFinished(info);
     }
 }

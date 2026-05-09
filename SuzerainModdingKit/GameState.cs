@@ -27,17 +27,10 @@ public static class GameState
     /// </summary>
     public static string CurrentTurnName => Managers.Instance?.GameFlowManager?.currentTurnData
         ?.NameInDatabase;
-
     /// <summary>
-    /// Check if the game is active. The game is "active" when the current step is not null.
+    /// Is the game active? The game is "active" when the current step is not null.
     /// </summary>
-    /// <returns>
-    /// A boolean indicating whether the game is active.
-    /// </returns>
-    public static bool IsGameActive()
-    {
-        return CurrentStepName != null;
-    }
+    public static bool IsGameActive => CurrentStepName != null;
 
     /// <summary>
     /// Check if a story fragment exists in the current step.
@@ -60,6 +53,9 @@ public static class GameState
     /// <param name="customBillData">
     /// The custom bill data.
     /// </param>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if any required arguments are null.
+    /// </exception>
     /// <exception cref="InvalidOperationException">
     /// Thrown if the game is not active.
     /// </exception>
@@ -70,13 +66,7 @@ public static class GameState
         // don't recognize custom variables.
 
         ArgumentNullException.ThrowIfNull(customBillData);
-
-        if (!IsGameActive())
-        {
-            throw new InvalidOperationException(
-                "Cannot add a story fragment when the game is not active.");
-        }
-
+        ThrowIfInactive();
         if (StoryFragmentExistsInCurrentStep(customBillData.Name))
         {
             throw new InvalidOperationException(
@@ -112,14 +102,18 @@ public static class GameState
             TokenIndicatorPanel.TokenIndicatorType.StoryFragment);
     }
 
+    internal static void ThrowIfInactive()
+    {
+        if (!IsGameActive)
+        {
+            throw new InvalidOperationException("The game is not active.");
+        }
+    }
+
     private static void CreateTokenIndicator(string assignedTokenName,
         TokenIndicatorPanel.TokenIndicatorType indicatorType)
     {
-        if (!IsGameActive())
-        {
-            throw new InvalidOperationException(
-                "Cannot add a token indicator when the game is not active.");
-        }
+        ThrowIfInactive();
 
         TokenIndicatorPanel panel = Panels.Instance.TokenIndicatorPanel;
 

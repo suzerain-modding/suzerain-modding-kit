@@ -32,21 +32,7 @@ internal sealed class Core : MelonMod
         LoggerInstance.Msg("Cleaning up mod saves.");
         SaveManager.CleanupOrphanedModSaves();
 
-        //TODO: context should check if panel is valid before allowing operations
-        // to prevent the object from being used after the event is over.
-        //TODO: consider using a different pattern than passing context? context is technically
-        // not necessary, since the panel is globally accessible. maybe use GameState?
-        //TODO: expose NameInDatabase and add read only getter for existing decision options.
-        //TODO: OnDecisionCompleted event so modders can react to players selecting their option
-        // or add additional behavior to existing options.
-        Events.BeforeDecisionShow += BeforeDecisionShow;
-
         LoggerInstance.Msg("Pre-initialization complete.");
-    }
-
-    public void BeforeDecisionShow(object sender, Events.DecisionShowEventArgs e)
-    {
-        e.Context.AddOption("Hello!!");
     }
 
     public override void OnLateInitializeMelon()

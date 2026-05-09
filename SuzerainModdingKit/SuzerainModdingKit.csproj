@@ -508,7 +508,8 @@
 		<Compile Include="StoryFragments\Conversation\Patches.cs" />
 		<Compile Include="StoryFragments\Conversation\ResolvedConversationNodeHook.cs" />
 		<Compile Include="StoryFragments\Bill\CustomBillData.cs" />
-		<Compile Include="StoryFragments\Decision\DecisionShowContext.cs" />
+		<Compile Include="StoryFragments\Decision\DecisionManager.cs" />
+		<Compile Include="StoryFragments\Decision\DecisionOptionInfo.cs" />
 		<Compile Include="StoryFragments\Decision\Patches.cs" />
 		<Compile Include="Utils\ArticyIDGenerator.cs" />
 		<Compile Include="Utils\ConversationNodeSequenceBuilder.cs" />

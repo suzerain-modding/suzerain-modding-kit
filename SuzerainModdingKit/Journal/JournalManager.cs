@@ -7,11 +7,7 @@ public static class JournalManager
 {
     public static void AddCustomJournalEntry(CustomJournalEntryData entry)
     {
-        if (!GameState.IsGameActive())
-        {
-            throw new InvalidOperationException(
-                "Cannot add a journal entry when the game is not active.");
-        }
+        GameState.ThrowIfInactive();
 
         JournalDecisionsPage decisionsPage = Panels.Instance.JournalPanel.journalDecisionsPage;
         int index = decisionsPage.instantiatedJournalTurns.Count - entry.TurnNum;
