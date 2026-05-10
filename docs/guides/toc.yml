@@ -1,2 +1,6 @@
-- name: Getting Started
-  href: getting-started.md
+- name: Installing Mods
+  href: installing-mods.md
+- name: Uninstalling Mods
+  href: uninstalling-mods.md
+- name: Disabling Mods
+  href: disabling-mods.md
