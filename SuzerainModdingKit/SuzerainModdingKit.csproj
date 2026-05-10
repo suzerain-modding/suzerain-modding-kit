@@ -508,6 +508,8 @@
 		<Compile Include="StoryFragments\Conversation\Patches.cs" />
 		<Compile Include="StoryFragments\Conversation\ResolvedConversationNodeHook.cs" />
 		<Compile Include="StoryFragments\Bill\CustomBillData.cs" />
+		<Compile Include="StoryFragments\CustomStoryFragmentData.cs" />
+		<Compile Include="StoryFragments\Decision\CustomDecisionData.cs" />
 		<Compile Include="StoryFragments\Decision\DecisionManager.cs" />
 		<Compile Include="StoryFragments\Decision\DecisionOptionInfo.cs" />
 		<Compile Include="StoryFragments\Decision\Patches.cs" />

@@ -1,38 +1,38 @@
 using Il2Cpp;
 using SuzerainModdingKit.Utils;
 
-namespace SuzerainModdingKit.StoryFragments.Bill;
+namespace SuzerainModdingKit.StoryFragments.Decision;
 
 /// <summary>
-/// Represents the data required to define a custom bill story fragment for injection
+/// Represents the data required to define a custom decision story fragment for injection
 /// into the game.
 /// </summary>
 /// <seealso cref="GameState.AddCustomStoryFragment"/>
-public class CustomBillData : CustomStoryFragmentData
+public class CustomDecisionData : CustomStoryFragmentData
 {
     /// <summary>
-    /// The full title of this bill shown in the bill panel.
+    /// The full title of this decision shown in the decision panel.
     /// </summary>
     public string Title
     {
         get;
     }
     /// <summary>
-    /// The full description of this bill shown in the bill panel.
+    /// The full description of this decision shown in the decision panel.
     /// </summary>
     public string Description
     {
         get;
     }
     /// <summary>
-    /// The short title of this bill shown under the assigned token.
+    /// The short title of this decision shown under the assigned token.
     /// </summary>
     public string HubTitle
     {
         get;
     }
     /// <summary>
-    /// The short description of this bill shown under the assigned token.
+    /// The short description of this decision shown under the assigned token.
     /// </summary>
     public string HubDescription
     {
@@ -43,27 +43,27 @@ public class CustomBillData : CustomStoryFragmentData
     /// Creates a new instance of this class.
     /// </summary>
     /// <param name="name">
-    /// The unique identifier of this bill.
+    /// The unique identifier of this decision.
     /// </param>
     /// <param name="assignedTokenName">
     /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
     /// </param>
     /// <param name="title">
-    /// The full title of this bill shown in the bill panel.
+    /// The full title of this decision shown in the decision panel.
     /// </param>
     /// <param name="description">
-    /// The full description of this bill shown in the bill panel.
+    /// The full description of this decision shown in the decision panel.
     /// </param>
     /// <param name="hubTitle">
-    /// The short title of this bill shown under the assigned token.
+    /// The short title of this decision shown under the assigned token.
     /// </param>
     /// <param name="hubDescription">
-    /// The short description of this bill shown under the assigned token.
+    /// The short description of this decision shown under the assigned token.
     /// </param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
-    public CustomBillData(
+    public CustomDecisionData(
         string name,
         string assignedTokenName,
         string title,
@@ -77,34 +77,31 @@ public class CustomBillData : CustomStoryFragmentData
         HubDescription = hubDescription ?? throw new ArgumentNullException(nameof(hubDescription));
     }
 
-    internal override BillData RegisterInSuzerain()
+    internal override DecisionData RegisterInSuzerain()
     {
-        BillData data = ToSuzerainStoryFragmentData();
-        Func<BillData, bool> match = d => string.Equals(
+        DecisionData data = ToSuzerainStoryFragmentData();
+        Func<DecisionData, bool> match = d => string.Equals(
             d.NameInDatabase,
             data.NameInDatabase,
             StringComparison.Ordinal);
-        bool existsInRegistry = EntityDataManager.AllBillsData.Exists(match);
+        bool existsInRegistry = EntityDataManager.AllDecisionsData.Exists(match);
         if (!existsInRegistry)
         {
-            EntityDataManager.AllBillsData.Add(data);
+            EntityDataManager.AllDecisionsData.Add(data);
         }
         return data;
     }
 
-    private BillData ToSuzerainStoryFragmentData()
+    private DecisionData ToSuzerainStoryFragmentData()
     {
-        BillProperties properties = new()
+        DecisionProperties properties = new()
         {
             Title = Title,
             Description = Description,
             HubTitle = HubTitle,
             HubDescription = HubDescription,
-            // The game crashes if these properties are not defined.
-            SignVariables = string.Empty,
-            VetoVariables = string.Empty,
         };
-        BillData data = new()
+        DecisionData data = new()
         {
             AppBundleProperties = new AppBundleProperties()
             {
@@ -115,9 +112,9 @@ public class CustomBillData : CustomStoryFragmentData
             {
                 AssignedToken = AssignedTokenName,
             },
-            BillProperties = properties,
+            DecisionProperties = properties,
             NameInDatabase = Name,
-            Path = "Sordland/Bills",
+            Path = "Sordland/Decisions",
             StoryFragmentProperties = new StoryFragmentProperties()
             {
                 IsDone = false,

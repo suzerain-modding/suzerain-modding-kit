@@ -1,6 +1,6 @@
 using Il2Cpp;
 using MelonLoader;
-using SuzerainModdingKit.StoryFragments.Bill;
+using SuzerainModdingKit.StoryFragments;
 
 namespace SuzerainModdingKit;
 
@@ -48,58 +48,60 @@ public static class GameState
     }
 
     /// <summary>
-    /// Add a custom bill to the current step.
+    /// Add a custom story fragment to the current step.
     /// </summary>
-    /// <param name="customBillData">
-    /// The custom bill data.
+    /// <param name="customStoryFragmentData">
+    /// The custom story fragment data.
     /// </param>
+    /// <returns>
+    /// A boolean indicating whether the operation succeeded or not.
+    /// </returns>
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
     /// <exception cref="InvalidOperationException">
     /// Thrown if the game is not active.
     /// </exception>
-    public static void AddCustomBill(CustomBillData customBillData)
+    public static bool AddCustomStoryFragment(CustomStoryFragmentData customStoryFragmentData)
     {
-        // This method adds a custom bill to the current step dynamically.
+        // This method adds a custom story fragment to the current step dynamically.
         // We don't use Suzerain's registry because articy:expresso scripts
         // don't recognize custom variables.
 
-        ArgumentNullException.ThrowIfNull(customBillData);
+        ArgumentNullException.ThrowIfNull(customStoryFragmentData);
         ThrowIfInactive();
-        if (StoryFragmentExistsInCurrentStep(customBillData.Name))
+
+        if (StoryFragmentExistsInCurrentStep(customStoryFragmentData.Name))
         {
-            throw new InvalidOperationException(
-                $"A story fragment with the name '{customBillData.Name}' already exists in the " +
-                "current step.");
+            Melon<Core>.Logger.Error(
+                $"A story fragment with the name '{customStoryFragmentData.Name}' already " +
+                "exists in the current step.");
+            return false;
         }
 
         GameFlowManager gameFlowManager = Managers.Instance.GameFlowManager;
-        BillData billData = customBillData.ToSuzerainBillData();
-
-        // Check if the bill data already exists in the registry.
-        Func<BillData, bool> match = d => string.Equals(
-            d.NameInDatabase,
-            customBillData.Name,
-            StringComparison.Ordinal);
-        bool existsInRegistry = EntityDataManager.AllBillsData.Exists(match);
-        if (!existsInRegistry)
-        {
-            EntityDataManager.AllBillsData.Add(billData);
-        }
+        StoryFragmentData registeredData = customStoryFragmentData.RegisterInSuzerain();
 
         // Add it to the scene.
-        gameFlowManager.currentStepData.StoryFragments.Add(customBillData.Name);
+        gameFlowManager.currentStepData.StoryFragments.Add(customStoryFragmentData.Name);
         gameFlowManager.EvaluateStoryFragment(
             isEnabled: true,
             isDone: false,
-            billData,
-            billData.NameInDatabase);
+            registeredData,
+            customStoryFragmentData.Name);
 
         // Create the exclamation icon.
-        CreateTokenIndicator(
-            customBillData.AssignedTokenName,
+        bool didCreateIndicatorSuccessfully = CreateTokenIndicator(
+            customStoryFragmentData.AssignedTokenName,
             TokenIndicatorPanel.TokenIndicatorType.StoryFragment);
+        if (!didCreateIndicatorSuccessfully)
+        {
+            Melon<Core>.Logger.Warning(
+                $"Added story fragment '{customStoryFragmentData.Name}' to current step with " +
+                "warnings.");
+        }
+
+        return true;
     }
 
     internal static void ThrowIfInactive()
@@ -110,7 +112,7 @@ public static class GameState
         }
     }
 
-    private static void CreateTokenIndicator(string assignedTokenName,
+    private static bool CreateTokenIndicator(string assignedTokenName,
         TokenIndicatorPanel.TokenIndicatorType indicatorType)
     {
         ThrowIfInactive();
@@ -126,7 +128,7 @@ public static class GameState
         bool exists = panel.tokenIndicators.Exists(match);
         if (exists)
         {
-            return;
+            return true;
         }
 
         // TryAddTokenIndicator creates the token indicator and adds it to the list.
@@ -139,9 +141,9 @@ public static class GameState
         TokenIndicatorPanel.TokenIndicator newIndicator = panel.tokenIndicators.Find(match);
         if (newIndicator == null)
         {
-            Melon<Core>.Logger.Error(
+            Melon<Core>.Logger.Warning(
                 $"Failed to create token indicator for token '{assignedTokenName}'.");
-            return;
+            return false;
         }
 
         // Get a template. For some reason, panel.templateTokenIndicator doesn't work,
@@ -149,10 +151,10 @@ public static class GameState
         TemplateTokenIndicator indicatorTemplate = panel.instantiatedTokenIndicators[0];
         if (indicatorTemplate == null)
         {
-            Melon<Core>.Logger.Error(
+            Melon<Core>.Logger.Warning(
                 $"Failed to create token indicator for token '{assignedTokenName}'. No template " +
                 "object found.");
-            return;
+            return false;
         }
 
         // Create the game object.
@@ -161,5 +163,7 @@ public static class GameState
             indicatorTemplate.transform.parent);
         indicatorObj.Setup(newIndicator);
         panel.instantiatedTokenIndicators.Add(indicatorObj);
+
+        return true;
     }
 }
