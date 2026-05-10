@@ -1,6 +1,7 @@
 using Il2Cpp;
 using MelonLoader;
 using SuzerainModdingKit.StoryFragments;
+using SuzerainModdingKit.StoryPack;
 
 namespace SuzerainModdingKit;
 
@@ -9,28 +10,54 @@ namespace SuzerainModdingKit;
 /// </summary>
 public static class GameState
 {
+    private static GameFlowManager _gameFlowManager => Managers.Instance?.GameFlowManager;
+
     /// <summary>
     /// The current step number.
     /// </summary>
-    public static int? CurrentStepNum => Managers.Instance?.GameFlowManager?.CurrentStepNo;
+    public static int? CurrentStepNum => _gameFlowManager?.CurrentStepNo;
     /// <summary>
-    /// The current step name (eg. "Sordland_Turn_2_Step_3").
+    /// The current step name (eg. "Sordland_Turn_2_Step_3"). Note that the format of step names
+    /// may vary between story packs.
     /// </summary>
-    public static string CurrentStepName => Managers.Instance?.GameFlowManager?.currentStepData
-        ?.NameInDatabase;
+    public static string CurrentStepName => _gameFlowManager?.currentStepData?.NameInDatabase;
     /// <summary>
     /// The current turn number.
     /// </summary>
-    public static int? CurrentTurnNum => Managers.Instance?.GameFlowManager?.CurrentTurnNo;
+    public static int? CurrentTurnNum => _gameFlowManager?.CurrentTurnNo;
     /// <summary>
-    /// The current turn name (eg. "Sordland_Turn_2").
+    /// The current turn name (eg. "Sordland_Turn_2"). Note that the format of step names
+    /// may vary between story packs.
     /// </summary>
-    public static string CurrentTurnName => Managers.Instance?.GameFlowManager?.currentTurnData
-        ?.NameInDatabase;
+    public static string CurrentTurnName => _gameFlowManager?.currentTurnData?.NameInDatabase;
     /// <summary>
-    /// Is the game active? The game is "active" when the current step is not null.
+    /// The name of the current story pack.
+    /// </summary>
+    public static string CurrentStoryPackName => _gameFlowManager?.currentTurnData
+        ?.TurnProperties?.AssignedStoryPack;
+    /// <summary>
+    /// Is the game active? The game is "active" when the current step name is not null.
     /// </summary>
     public static bool IsGameActive => CurrentStepName != null;
+
+    /// <summary>
+    /// Check if the current story pack matches the given
+    /// <c cref="StoryPackInfo">StoryPackInfo</c>.
+    /// </summary>
+    /// <param name="storyPack">
+    /// The <c cref="StoryPackInfo">StoryPackInfo</c> to test against.
+    /// </param>
+    /// <returns>
+    /// A boolean indicating whether the current story pack matches the given
+    /// <c cref="StoryPackInfo">StoryPackInfo</c>.
+    /// </returns>
+    public static bool IsCurrentStoryPack(StoryPackInfo storyPack)
+    {
+        return string.Equals(
+            storyPack?.StoryPackName,
+            CurrentStoryPackName,
+            StringComparison.Ordinal);
+    }
 
     /// <summary>
     /// Check if a story fragment exists in the current step.
@@ -43,8 +70,7 @@ public static class GameState
     /// </returns>
     public static bool StoryFragmentExistsInCurrentStep(string name)
     {
-        return Managers.Instance?.GameFlowManager?.currentStepData?.StoryFragments?.Contains(name)
-            ?? false;
+        return _gameFlowManager?.currentStepData?.StoryFragments?.Contains(name) ?? false;
     }
 
     /// <summary>
@@ -79,12 +105,11 @@ public static class GameState
             return false;
         }
 
-        GameFlowManager gameFlowManager = Managers.Instance.GameFlowManager;
         StoryFragmentData registeredData = customStoryFragmentData.RegisterInSuzerain();
 
         // Add it to the scene.
-        gameFlowManager.currentStepData.StoryFragments.Add(customStoryFragmentData.Name);
-        gameFlowManager.EvaluateStoryFragment(
+        _gameFlowManager.currentStepData.StoryFragments.Add(customStoryFragmentData.Name);
+        _gameFlowManager.EvaluateStoryFragment(
             isEnabled: true,
             isDone: false,
             registeredData,

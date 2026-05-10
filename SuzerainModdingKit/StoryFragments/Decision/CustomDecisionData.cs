@@ -1,5 +1,5 @@
 using Il2Cpp;
-using SuzerainModdingKit.Utils;
+using SuzerainModdingKit.StoryPack;
 
 namespace SuzerainModdingKit.StoryFragments.Decision;
 
@@ -43,7 +43,10 @@ public class CustomDecisionData : CustomStoryFragmentData
     /// Creates a new instance of this class.
     /// </summary>
     /// <param name="name">
-    /// The unique identifier of this decision.
+    /// The unique identifier of this story fragment.
+    /// </param>
+    /// <param name="storyPack">
+    /// The story pack that this story fragment should appear in.
     /// </param>
     /// <param name="assignedTokenName">
     /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
@@ -65,11 +68,12 @@ public class CustomDecisionData : CustomStoryFragmentData
     /// </exception>
     public CustomDecisionData(
         string name,
+        StoryPackInfo storyPack,
         string assignedTokenName,
         string title,
         string description,
         string hubTitle,
-        string hubDescription) : base(name, assignedTokenName)
+        string hubDescription) : base(name, storyPack, assignedTokenName)
     {
         Title = title ?? throw new ArgumentNullException(nameof(title));
         Description = description ?? throw new ArgumentNullException(nameof(description));
@@ -103,11 +107,7 @@ public class CustomDecisionData : CustomStoryFragmentData
         };
         DecisionData data = new()
         {
-            AppBundleProperties = new AppBundleProperties()
-            {
-                AppBundle = "AppBundle_Main",
-                StoryPacks = Il2CppUtils.CreateIl2CppList(["StoryPack_Main"]),
-            },
+            AppBundleProperties = StoryPack.ToAppBundleProperties(),
             AssignedTokenProperties = new AssignedTokenProperties()
             {
                 AssignedToken = AssignedTokenName,

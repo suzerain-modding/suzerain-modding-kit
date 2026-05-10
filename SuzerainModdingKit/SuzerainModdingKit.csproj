@@ -513,9 +513,12 @@
 		<Compile Include="StoryFragments\Decision\DecisionManager.cs" />
 		<Compile Include="StoryFragments\Decision\DecisionOptionInfo.cs" />
 		<Compile Include="StoryFragments\Decision\Patches.cs" />
+		<Compile Include="StoryPack\StoryPackInfo.cs" />
 		<Compile Include="Utils\ArticyIDGenerator.cs" />
 		<Compile Include="Utils\ConversationNodeSequenceBuilder.cs" />
 		<Compile Include="Utils\Il2CppUtils.cs" />
+		<Compile Include="StoryPack\SuzerainStoryPackInfo.cs" />
+		<Compile Include="StoryPack\SuzerainTokenName.cs" />
 		<Compile Include="Variables.cs" />
 	</ItemGroup>
 

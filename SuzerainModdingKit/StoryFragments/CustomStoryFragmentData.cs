@@ -1,4 +1,5 @@
 using Il2Cpp;
+using SuzerainModdingKit.StoryPack;
 
 namespace SuzerainModdingKit.StoryFragments;
 
@@ -17,6 +18,13 @@ public abstract class CustomStoryFragmentData
         get;
     }
     /// <summary>
+    /// The story pack that this story fragment should appear in.
+    /// </summary>
+    public StoryPackInfo StoryPack
+    {
+        get;
+    }
+    /// <summary>
     /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
     /// </summary>
     public string AssignedTokenName
@@ -28,7 +36,10 @@ public abstract class CustomStoryFragmentData
     /// Creates a new instance of this class.
     /// </summary>
     /// <param name="name">
-    /// The unique identifier of the bill.
+    /// The unique identifier of this story fragment.
+    /// </param>
+    /// <param name="storyPack">
+    /// The story pack that this story fragment should appear in.
     /// </param>
     /// <param name="assignedTokenName">
     /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
@@ -36,9 +47,10 @@ public abstract class CustomStoryFragmentData
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
-    internal CustomStoryFragmentData(string name, string assignedTokenName)
+    internal CustomStoryFragmentData(string name, StoryPackInfo storyPack, string assignedTokenName)
     {
         Name = name ?? throw new ArgumentNullException(nameof(name));
+        StoryPack = storyPack ?? throw new ArgumentNullException(nameof(storyPack));
         AssignedTokenName = assignedTokenName ??
             throw new ArgumentNullException(nameof(assignedTokenName));
     }
