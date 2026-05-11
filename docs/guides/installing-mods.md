@@ -1,6 +1,6 @@
 # Installing Mods
 
-A beginner's guide to installing mods for Suzerain **on Windows**.
+A beginner's guide to installing Suzerain mods **on Windows**.
 
 You must own Suzerain **on Steam** and you must have it installed.
 
@@ -10,7 +10,7 @@ Mods are third-party code that run directly on your computer with the same permi
 
 **Only ever install mods from sources you trust. Do not download or install anything you are unsure about.**
 
-We only distribute Suzerain Modding Kit on the [official repository](https://github.com/suzerain-modding/suzerain-modding-kit). **Never download Suzerain Modding Kit from anywhere but the official repository.**
+We only distribute Suzerain Modding Kit on the [official repository](https://github.com/suzerain-modding/suzerain-modding-kit) and the official Nexus Mods page (TODO: link nexus mods post). **Do not download Suzerain Modding Kit from any other source.**
 
 ## Back Up Saves
 

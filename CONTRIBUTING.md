@@ -8,7 +8,7 @@ Reading the [Suzerain Implementation Info](suzerain_implementation_info.md) docu
 
 ## Basic Setup
 
-**Important Note:** Suzerain Modding Kit currently only supports Windows and the Steam version of Suzerain.
+**Important Note:** Suzerain Modding Kit currently only supports Windows. This guide is intended for the Steam version of Suzerain.
 
 1. Install Visual Studio.
 2. Follow the instructions on the [MelonLoader Wiki](https://melonwiki.xyz/#/README) to download and install MelonLoader.
