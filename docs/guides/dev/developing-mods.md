@@ -4,9 +4,13 @@ A guide to creating Suzerain mods. This guide assumes that you are familiar with
 
 This guide is intended for Windows and the Steam version of Suzerain.
 
+## Beta Disclaimer
+
+Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.
+
 ## Setup
 
-1. Follow the [Installing Mods](installing-mods.md) guide to install MelonLoader and Suzerain Modding Kit.
+1. Follow the [Installing Mods](../user/installing-mods.md) guide to install MelonLoader and Suzerain Modding Kit.
 2. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (Visual Studio, not Visual Studio Code).
 3. Download the [MelonLoader VS Wizard](https://github.com/TrevTV/MelonLoader.VSWizard/releases) and run the `.vsix` file to install it as a Visual Studio extension.
 4. Open Visual Studio and create a new project. Select "MelonLoader Mod" as the project template.

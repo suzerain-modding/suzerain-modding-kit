@@ -1,10 +1,6 @@
-- name: Back Up Saves
-  href: back-up-saves.md
-- name: Developing Mods
-  href: developing-mods.md
-- name: Disabling Mods
-  href: disabling-mods.md
-- name: Installing Mods
-  href: installing-mods.md
-- name: Uninstalling Mods
-  href: uninstalling-mods.md
+- name: Guides
+  href: index.md
+- name: User Guides
+  href: user/toc.yml
+- name: Development Guides
+  href: dev/toc.yml
