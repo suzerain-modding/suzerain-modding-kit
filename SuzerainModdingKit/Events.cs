@@ -153,7 +153,10 @@ public static class Events
             }
             catch (Exception ex)
             {
-                Melon<Core>.Logger.Error($"Delegate '{subscriber.Method.Name}' " +
+                string delegateName =
+                    $"{subscriber.Method.DeclaringType.FullName}.{subscriber.Method.Name}";
+
+                Melon<Core>.Logger.Error($"Delegate '{delegateName}' " +
                     $"for event '{name}' threw an exception: {ex}");
             }
         }
