@@ -82,7 +82,7 @@ So, what's happening here?
 Now, add an `Init` method to the class:
 
 ```cs
-public static void Init()
+internal static void Init()
 {
     // Suzerain Modding Kit needs to know that our variables exist.
     Variables.Register(SpendBudgetOptionVar);
@@ -95,7 +95,7 @@ Suzerain Modding Kit needs to know that a custom variable exists in order to sav
 Add an `OnEvaluateStep` method:
 
 ```cs
-public static void OnEvaluateStep()
+internal static void OnEvaluateStep()
 {
     // If we're not in Sordland on turn 1 step 2, return.
     if (!GameState.IsCurrentStoryPack(SuzerainStoryPackInfo.Sordland) ||
@@ -132,7 +132,7 @@ We will call this method whenever a step is evaluted.
 Add an `OnDecisionShow` method:
 
 ```cs
-public static void OnDecisionShow()
+internal static void OnDecisionShow()
 {
     // If the current decision name does not match our decision name, return.
     if (!Data.Name.Equals(DecisionManager.CurrentDecisionName, StringComparison.Ordinal))
@@ -158,7 +158,7 @@ We will call this method whenever a decision shows.
 Finally, we need a method to do something when an option is selected. Add an `OnDecisionFinished` method:
 
 ```cs
-public static void OnDecisionFinished(DecisionOptionInfo selectedOption)
+internal static void OnDecisionFinished(DecisionOptionInfo selectedOption)
 {
     // If the decision name of the selected option does not match our decision name, return.
     if (!Data.Name.Equals(selectedOption.DecisionName, StringComparison.Ordinal))
@@ -242,6 +242,7 @@ We have updated the `Core` class to listen to the events we need for our decisio
 The fruits of our labor:
 
 ![Screenshot 1](https://raw.githubusercontent.com/suzerain-modding/suzerain-mod-examples/refs/heads/main/DecisionExample/images/screenshot_hub.png)
+
 ![Screenshot 1](https://raw.githubusercontent.com/suzerain-modding/suzerain-mod-examples/refs/heads/main/DecisionExample/images/screenshot_panel.png)
 
 Congratulations! You just made your first Suzerain mod.

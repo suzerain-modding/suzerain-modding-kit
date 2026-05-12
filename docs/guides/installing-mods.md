@@ -12,16 +12,13 @@ Mods are third-party code that run directly on your computer with the same permi
 
 We only distribute Suzerain Modding Kit on the [official repository](https://github.com/suzerain-modding/suzerain-modding-kit) and the official Nexus Mods page (TODO: link nexus mods post). **Do not download Suzerain Modding Kit from any other source.**
 
+### Beta Disclaimer
+
+Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes.
+
 ## Back Up Saves
 
-If something goes wrong, your save files could get lost or corrupted. If you don't care about losing your saves, skip to the next section.
-
-To back up your saves:
-
-1. Press Win + R to open Run.
-2. Type `%localappdata%low\Torpor Games\Suzerain` and press OK.
-3. All saves are named `Autosave`, `FinalSave`, `ManualSave`, or `TurnSave` and then the date. Copy the ones you want to back up (or all of them) into another folder somewhere else on your computer. Don't forget where you put the back ups.
-4. If you need to restore the saves, copy the back ups back into `%localappdata%low\Torpor Games\Suzerain`.
+If something goes wrong, your save files could get lost or corrupted. See [Back Up Saves](back-up-saves.md) for back up instructions.
 
 ## Install .NET and Visual C++ Redistributable
 
