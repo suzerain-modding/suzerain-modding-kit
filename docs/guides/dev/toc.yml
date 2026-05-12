@@ -1,5 +1,13 @@
 - name: Development Guides
   href: index.md
+- name: Custom Story Fragments
+  href: custom-story-fragments.md
+- name: Debug Overlay
+  href: debug-overlay.md
 - name: Developing Mods
   href: developing-mods.md
+- name: Events
+  href: events.md
+- name: Variables
+  href: variables.md
 

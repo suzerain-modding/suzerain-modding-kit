@@ -54,7 +54,8 @@ To install Suzerain Modding Kit:
 5. Move the Suzerain Modding Kit DLL into the `Mods` folder.
 6. Check if Suzerain Modding Kit is working:
     1. Launch Suzerain.
-    2. Once you're in the main menu screen, press Ctrl + D. If Suzerain Modding Kit is working, you'll see a debug menu appear. Press Ctrl + D again or press the "Hide" button in the top right to close the debug menu.
+    2. Once you're in the main menu screen, press Ctrl + D. If Suzerain Modding Kit is working, you'll see a debug overlay appear. Press Ctrl + D again or press the "Hide" button in the top right to close the debug menu.
+        - Don't worry if it says "GameFlowManager not loaded!" This just means that there is no loaded campaign, which is because you are in the main menu.
     3. Quit the game.
 
 ## Install Mods

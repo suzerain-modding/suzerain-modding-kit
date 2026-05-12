@@ -251,3 +251,9 @@ The fruits of our labor:
 
 Congratulations! You just made your first Suzerain mod.
 
+## Next Steps
+
+See more [development guides](index.md).
+
+See the [API reference](../../api/SuzerainModdingKit.yml).
+
