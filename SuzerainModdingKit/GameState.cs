@@ -97,6 +97,15 @@ public static class GameState
         ArgumentNullException.ThrowIfNull(customStoryFragmentData);
         ThrowIfInactive();
 
+        // Turn 1 Step 1 only contains the beginning scene (inauguration, coronation, etc).
+        // Trying to add a story fragment during this step will throw an exception.
+        if (CurrentTurnNum == 1 && CurrentStepNum == 1)
+        {
+            Melon<Core>.Logger.Error("Cannot add story fragments on Turn 1 Step 1. " +
+                "Turn 1 Step 2 is the earliest step that supports custom story fragments.");
+            return false;
+        }
+
         if (StoryFragmentExistsInCurrentStep(customStoryFragmentData.Name))
         {
             Melon<Core>.Logger.Error(
@@ -140,6 +149,10 @@ public static class GameState
     private static bool CreateTokenIndicator(string assignedTokenName,
         TokenIndicatorPanel.TokenIndicatorType indicatorType)
     {
+        // This method uses warnings instead of errors even when it causes the method to
+        // terminate because this method is called when adding a custom story fragment,
+        // which is successful regardless of whether the token indicator is created or not.
+
         ThrowIfInactive();
 
         TokenIndicatorPanel panel = Panels.Instance.TokenIndicatorPanel;
@@ -173,7 +186,12 @@ public static class GameState
 
         // Get a template. For some reason, panel.templateTokenIndicator doesn't work,
         // so we just grab the first one from the list of instantiated token indicators.
-        TemplateTokenIndicator indicatorTemplate = panel.instantiatedTokenIndicators[0];
+        bool isAnyTemplateAvailable =
+            panel.instantiatedTokenIndicators != null &&
+            panel.instantiatedTokenIndicators.Count > 1;
+        TemplateTokenIndicator indicatorTemplate = isAnyTemplateAvailable
+            ? panel.instantiatedTokenIndicators[0]
+            : null;
         if (indicatorTemplate == null)
         {
             Melon<Core>.Logger.Warning(
