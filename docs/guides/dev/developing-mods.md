@@ -1,6 +1,6 @@
 # Developing Mods
 
-A guide to creating Suzerain mods. This guide assumes that you are familiar with programming and C#. This is a guide to developing mods with MelonLoader and Suzerain Modding Kit, not a guide to programming or a guide to C#.
+A guide to creating Suzerain mods with MelonLoader and Suzerain Modding Kit. This is a simple guide that should be easy to follow, but it does assume that you have atleast a basic understanding of programming and C#. If you have never programmed in C# before, we highly recommend learning the basics of programming and/or C# first.
 
 This guide is intended for Windows and the Steam version of Suzerain.
 

@@ -1,5 +1,9 @@
 - name: Development Guides
   href: index.md
+- name: Custom Bills
+  href: custom-bills.md
+- name: Custom Decisions
+  href: custom-decisions.md
 - name: Custom Story Fragments
   href: custom-story-fragments.md
 - name: Debug Overlay
