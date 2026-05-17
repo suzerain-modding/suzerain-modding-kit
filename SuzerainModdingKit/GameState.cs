@@ -1,5 +1,6 @@
 using Il2Cpp;
 using MelonLoader;
+using SuzerainModdingKit.Report;
 using SuzerainModdingKit.StoryFragments;
 using SuzerainModdingKit.StoryPack;
 
@@ -74,6 +75,22 @@ public static class GameState
     }
 
     /// <summary>
+    /// Check if a report exists in the current turn.
+    /// </summary>
+    /// <param name="name">
+    /// The name of the report.
+    /// </param>
+    /// <returns>
+    /// A boolean indicating whether the report exists in the current turn.
+    /// </returns>
+    public static bool ReportExistsInCurrentTurn(string name)
+    {
+        Func<ReportData, bool> match = data =>
+            string.Equals(data.NameInDatabase, name, StringComparison.Ordinal);
+        return _gameFlowManager?.currentTurnReports?.Exists(match) ?? false;
+    }
+
+    /// <summary>
     /// Add a custom story fragment to the current step.
     /// </summary>
     /// <param name="customStoryFragmentData">
@@ -132,6 +149,60 @@ public static class GameState
         {
             Melon<Core>.Logger.Warning(
                 $"Added story fragment '{customStoryFragmentData.Name}' to current step with " +
+                "warnings.");
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Add a custom report to the current turn.
+    /// </summary>
+    /// <param name="customReportData">
+    /// The custom report data.
+    /// </param>
+    /// <returns>
+    /// A boolean indicating whether the operation succeeded or not.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if any required arguments are null.
+    /// </exception>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the game is not active.
+    /// </exception>
+    public static bool AddCustomReport(CustomReportData customReportData)
+    {
+        ArgumentNullException.ThrowIfNull(customReportData);
+        ThrowIfInactive();
+
+        // Turn 1 Step 1 only contains the beginning scene (inauguration, coronation, etc).
+        // Trying to add a story fragment during this step will throw an exception.
+        if (CurrentTurnNum == 1 && CurrentStepNum == 1)
+        {
+            Melon<Core>.Logger.Error("Cannot add reports on Turn 1 Step 1. " +
+                "Turn 1 Step 2 is the earliest step that supports custom reports.");
+            return false;
+        }
+
+        if (ReportExistsInCurrentTurn(customReportData.Name))
+        {
+            Melon<Core>.Logger.Error(
+                $"A report with the name '{customReportData.Name}' already " +
+                "exists in the current turn.");
+            return false;
+        }
+
+        ReportData registeredData = customReportData.RegisterInSuzerain((int)CurrentTurnNum);
+        _gameFlowManager.currentTurnReports.Add(registeredData);
+        _gameFlowManager.enabledNotDoneReportData.Add(registeredData);
+
+        bool didCreateIndicatorSuccessfully = CreateTokenIndicator(
+            customReportData.AssignedTokenName,
+            TokenIndicatorPanel.TokenIndicatorType.StoryFragment);
+        if (!didCreateIndicatorSuccessfully)
+        {
+            Melon<Core>.Logger.Warning(
+                $"Added report '{customReportData.Name}' to current step with " +
                 "warnings.");
         }
 
