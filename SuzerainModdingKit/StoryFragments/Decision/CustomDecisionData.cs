@@ -110,20 +110,18 @@ public class CustomDecisionData : CustomStoryFragmentData
         DecisionData data = new()
         {
             AppBundleProperties = StoryPack.ToAppBundleProperties(),
-            AssignedTokenProperties = new AssignedTokenProperties()
+            AssignedTokenProperties = new()
             {
                 AssignedToken = AssignedTokenName,
             },
             DecisionProperties = properties,
             NameInDatabase = Name,
-            Path = "Sordland/Decisions",
-            StoryFragmentProperties = new StoryFragmentProperties()
+            StoryFragmentProperties = new()
             {
                 IsDone = false,
                 OnStoryFragmentBeginInstruction = string.Empty,
                 OnStoryFragmentEndInstruction = string.Empty,
             },
-            TagsProperties = new TagsProperties(),
         };
         return data;
     }

@@ -113,20 +113,18 @@ public class CustomBillData : CustomStoryFragmentData
         BillData data = new()
         {
             AppBundleProperties = StoryPack.ToAppBundleProperties(),
-            AssignedTokenProperties = new AssignedTokenProperties()
+            AssignedTokenProperties = new()
             {
                 AssignedToken = AssignedTokenName,
             },
             BillProperties = properties,
             NameInDatabase = Name,
-            Path = "Sordland/Bills",
-            StoryFragmentProperties = new StoryFragmentProperties()
+            StoryFragmentProperties = new()
             {
                 IsDone = false,
                 OnStoryFragmentBeginInstruction = string.Empty,
                 OnStoryFragmentEndInstruction = string.Empty,
             },
-            TagsProperties = new TagsProperties(),
         };
         return data;
     }
