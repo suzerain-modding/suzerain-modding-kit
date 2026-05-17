@@ -47,9 +47,11 @@ public class CustomDecisionData : CustomStoryFragmentData
     /// </param>
     /// <param name="storyPack">
     /// The story pack that this story fragment should appear in.
+    /// See <c cref="SuzerainStoryPackInfo">SuzerainStoryPackInfo</c>.
     /// </param>
     /// <param name="assignedTokenName">
-    /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
+    /// The name of the token this story fragment should appear on.
+    /// See <c cref="SuzerainTokenName">SuzerainTokenName</c>.
     /// </param>
     /// <param name="title">
     /// The full title of this decision shown in the decision panel.

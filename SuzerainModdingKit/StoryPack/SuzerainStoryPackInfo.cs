@@ -1,5 +1,9 @@
 namespace SuzerainModdingKit.StoryPack;
 
+/// <summary>
+/// Static class containing <c cref="StoryPackInfo">StoryPackInfo</c> objects representing the
+/// story packs in vanilla Suzerain.
+/// </summary>
 public static class SuzerainStoryPackInfo
 {
     public static readonly StoryPackInfo Sordland = new("AppBundle_Main", "StoryPack_Main");

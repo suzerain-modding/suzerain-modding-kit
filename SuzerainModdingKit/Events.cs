@@ -78,13 +78,29 @@ public static class Events
         }
     }
 
+    /// <summary>
+    /// Event args passed to the <c cref="OnDecisionFinished">OnDecisionFinished</c> event.
+    /// </summary>
     public class DecisionFinishedEventArgs : EventArgs
     {
+        /// <summary>
+        /// Info about the selected decision option. This object also contains the name of the
+        /// parent decision.
+        /// </summary>
         public DecisionOptionInfo SelectedOptionInfo
         {
             get;
         }
 
+        /// <summary>
+        /// Creates a new instance of this class.
+        /// </summary>
+        /// <param name="selectedOptionInfo">
+        /// Info about the selected decision option.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if any required arguments are null.
+        /// </exception>
         public DecisionFinishedEventArgs(DecisionOptionInfo selectedOptionInfo)
         {
             SelectedOptionInfo = selectedOptionInfo ??

@@ -19,14 +19,18 @@ public class CustomReportData
     }
     /// <summary>
     /// The story pack that this report should appear in.
+    /// See <c cref="SuzerainStoryPackInfo">SuzerainStoryPackInfo</c>.
     /// </summary>
+    /// <seealso cref="SuzerainStoryPackInfo"/>
     public StoryPackInfo StoryPack
     {
         get;
     }
     /// <summary>
-    /// The name of the token this report should appear on (eg. "Sordland_City_Holsord").
+    /// The name of the token this report should appear on.
+    /// See <c cref="SuzerainTokenName">SuzerainTokenName</c>.
     /// </summary>
+    /// <seealso cref="SuzerainTokenName"/>
     public string AssignedTokenName
     {
         get;
@@ -54,9 +58,11 @@ public class CustomReportData
     /// </param>
     /// <param name="storyPack">
     /// The story pack that this report should appear in.
+    /// See <c cref="SuzerainStoryPackInfo">SuzerainStoryPackInfo</c>.
     /// </param>
     /// <param name="assignedTokenName">
-    /// The name of the token this report should appear on (eg. "Sordland_City_Holsord").
+    /// The name of the token this report should appear on.
+    /// See <c cref="SuzerainTokenName">SuzerainTokenName</c>.
     /// </param>
     /// <param name="title">
     /// The title of this report.

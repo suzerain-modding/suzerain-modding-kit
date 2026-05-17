@@ -1,5 +1,8 @@
 namespace SuzerainModdingKit.StoryPack;
 
+/// <summary>
+/// Static class containing the names of all tokens in vanilla Suzerain.
+/// </summary>
 public static class SuzerainTokenName
 {
     public const string RiziaCityArgno = "Rizia_City_Argno";

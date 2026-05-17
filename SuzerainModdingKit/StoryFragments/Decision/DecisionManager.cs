@@ -3,11 +3,28 @@ using MelonLoader;
 
 namespace SuzerainModdingKit.StoryFragments.Decision;
 
+/// <summary>
+/// Static interface for querying and modifying the current active decision.
+/// </summary>
 public static class DecisionManager
 {
     private static DecisionPanel _panel => Panels.Instance?.DecisionPanel;
+
+    /// <summary>
+    /// The name of the current decision. May be null.
+    /// </summary>
     public static string CurrentDecisionName => _panel?.currentDecisionData?.NameInDatabase;
 
+    /// <summary>
+    /// Get the list of options in the current decision.
+    /// </summary>
+    /// <returns>
+    /// Returns a list of <c cref="DecisionOptionInfo">DecisionOptionInfo</c> objects representing
+    /// the options in the decision.
+    /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the game is not active.
+    /// </exception>
     public static IList<DecisionOptionInfo> GetOptions()
     {
         GameState.ThrowIfInactive();
@@ -32,6 +49,18 @@ public static class DecisionManager
         return options;
     }
 
+    /// <summary>
+    /// Add an option to the current decision.
+    /// </summary>
+    /// <param name="text">
+    /// The text of the new option.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if any required arguments are null.
+    /// </exception>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the game is not active.
+    /// </exception>
     public static void AddOption(string text)
     {
         ArgumentNullException.ThrowIfNull(text);

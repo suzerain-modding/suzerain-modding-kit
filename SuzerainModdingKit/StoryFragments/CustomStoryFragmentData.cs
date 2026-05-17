@@ -19,14 +19,18 @@ public abstract class CustomStoryFragmentData
     }
     /// <summary>
     /// The story pack that this story fragment should appear in.
+    /// See <c cref="SuzerainStoryPackInfo">SuzerainStoryPackInfo</c>.
     /// </summary>
+    /// <seealso cref="SuzerainStoryPackInfo"/>
     public StoryPackInfo StoryPack
     {
         get;
     }
     /// <summary>
-    /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
+    /// The name of the token this story fragment should appear on.
+    /// See <c cref="SuzerainTokenName">SuzerainTokenName</c>.
     /// </summary>
+    /// <seealso cref="SuzerainTokenName"/>
     public string AssignedTokenName
     {
         get;
@@ -40,9 +44,11 @@ public abstract class CustomStoryFragmentData
     /// </param>
     /// <param name="storyPack">
     /// The story pack that this story fragment should appear in.
+    /// See <c cref="SuzerainStoryPackInfo">SuzerainStoryPackInfo</c>.
     /// </param>
     /// <param name="assignedTokenName">
-    /// The name of the token this story fragment should appear on (eg. "Sordland_City_Holsord").
+    /// The name of the token this story fragment should appear on.
+    /// See <c cref="SuzerainTokenName">SuzerainTokenName</c>.
     /// </param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
