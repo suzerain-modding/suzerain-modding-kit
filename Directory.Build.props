@@ -1,5 +1,19 @@
 <Project>
+  <!--
+    GamePath resolution order (first match wins):
+      1. GamePath already set (e.g. /p:GamePath=... on the command line)
+      2. Directory.Build.user.props next to this file (gitignored, per-developer)
+      3. SUZERAIN_GAME_PATH environment variable
+      4. Platform default below
+    If you have a non-default Steam install location, prefer setting the env
+    variable or creating Directory.Build.user.props rather than editing this file.
+  -->
+  <Import Project="Directory.Build.user.props" Condition="Exists('Directory.Build.user.props')" />
+
   <PropertyGroup>
-    <GamePath>C:\Program Files (x86)\Steam\steamapps\common\Suzerain</GamePath>
+    <GamePath Condition=" '$(GamePath)' == '' AND '$(SUZERAIN_GAME_PATH)' != '' ">$(SUZERAIN_GAME_PATH)</GamePath>
+    <GamePath Condition=" '$(GamePath)' == '' AND $([MSBuild]::IsOSPlatform('Windows')) ">C:\Program Files (x86)\Steam\steamapps\common\Suzerain</GamePath>
+    <GamePath Condition=" '$(GamePath)' == '' AND $([MSBuild]::IsOSPlatform('Linux')) ">$(HOME)/.steam/steam/steamapps/common/Suzerain</GamePath>
+    <GamePath Condition=" '$(GamePath)' == '' AND $([MSBuild]::IsOSPlatform('OSX')) ">$(HOME)/Library/Application Support/Steam/steamapps/common/Suzerain</GamePath>
   </PropertyGroup>
 </Project>

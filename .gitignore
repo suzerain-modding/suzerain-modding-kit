@@ -112,6 +112,9 @@ StyleCopReport.xml
 *.rsp
 # but not Directory.Build.rsp, as it configures directory-level build defaults
 !Directory.Build.rsp
+
+# Per-developer GamePath / build overrides; see Directory.Build.props.
+Directory.Build.user.props
 *.sbr
 *.tlb
 *.tli
