@@ -12,8 +12,8 @@
 *.yml      text eol=lf
 *.yaml     text eol=lf
 *.md       text eol=lf
-*.editorconfig text eol=lf
-.gitignore text eol=lf
+.editorconfig  text eol=lf
+.gitignore     text eol=lf
 .gitattributes text eol=lf
 
 # Windows-only scripts keep CRLF so cmd.exe/PowerShell don't choke.
