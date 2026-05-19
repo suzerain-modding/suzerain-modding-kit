@@ -62,6 +62,8 @@ To install Suzerain Modding Kit:
 
 Remember to **only ever install mods from sources you trust!**
 
+**Where do I find mods?** The recommended site to find mods on is [Nexus Mods](https://www.nexusmods.com/games/suzerain). Alternatively, see the `#mod-promotions` channel on our Discord server (TODO: add discord links).
+
 If a mod provides its own installation instructions, follow them. Otherwise, follow the instructions below.
 
 To install most mods:

@@ -253,7 +253,7 @@ Congratulations! You just made your first Suzerain mod.
 
 ## Next Steps
 
-See more [development guides](index.md).
-
-See the [API reference](../../api/SuzerainModdingKit.yml).
+- See more [development guides](index.md).
+- See the [API reference](../../api/SuzerainModdingKit.yml).
+- **Where do I post my mods?** The recommended site to post mods on is [Nexus Mods](https://www.nexusmods.com/games/suzerain). You may also promote your mods in the `#mod-promotions` channel on our Discord server (TODO: add discord links).
 
