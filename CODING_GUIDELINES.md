@@ -4,7 +4,7 @@ Coding guidelines for contributing to Suzerain Modding Kit.
 
 ## Formatting
 
-- Lines should not exceed 100 characters in length. If you're using Visual Studio, you can use the [Editor Guidelines](https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelinesPreview) extension to set a guideline at 100 characters.
+- Lines should not exceed 100 characters in length. If you're using Visual Studio, you can use the [Editor Guidelines](https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelinesPreview) extension (NOTE: This extension includes telemetry that cannot be disabled. Use [this no telemetry fork](https://github.com/adrianiainlam/EditorGuidelinesNoTelemetry) if you don't want telemetry) to set a guideline at 100 characters.
 
 ## General Naming Conventions
 

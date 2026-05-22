@@ -7,6 +7,8 @@ indent_style = space
 indent_size = 4
 
 [*.cs]
+max_line_length = 100
+
 # formatting
 dotnet_diagnostic.IDE0055.severity = warning
 
