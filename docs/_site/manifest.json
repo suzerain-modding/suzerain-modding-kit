@@ -1,0 +1,858 @@
+{
+  "source_base_path": "C:/Users/shawn/MyFiles/suzerainmods/SuzerainModdingKit/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Character.CharacterNameSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Character.CharacterNameSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Character.CharacterNameSelector",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Character.CharacterNameSelector.yml\" sourcestartlinenumber=\"1\">Select a character by its name (eg. &quot;Petr Vectern&quot;).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Character.CharacterSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Character.CharacterSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Character.CharacterSelector",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Character.CharacterSelector.yml\" sourcestartlinenumber=\"1\">An abstract class that selects a character in the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Character.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Character.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Character",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Events.BillEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Events.BillEventArgs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Events.BillEventArgs",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Events.BillEventArgs.yml\" sourcestartlinenumber=\"1\">Event args passed to <code>OnBillSigned</code> and\n<code>OnBillVetoed</code> events.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Events.DecisionFinishedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Events.DecisionFinishedEventArgs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Events.DecisionFinishedEventArgs",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Events.DecisionFinishedEventArgs.yml\" sourcestartlinenumber=\"1\">Event args passed to the <code>OnDecisionFinished</code> event.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Events.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Events.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Events",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Events.yml\" sourcestartlinenumber=\"1\">Suzerain lifecycle events.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.GameState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.GameState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.GameState",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.GameState.yml\" sourcestartlinenumber=\"1\">Static interface for querying and modifying the current state of the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Journal.CustomJournalEntryData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Journal.CustomJournalEntryData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Journal.CustomJournalEntryData",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Journal.JournalManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Journal.JournalManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Journal.JournalManager",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Journal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Journal.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Journal",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Report.CustomReportData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Report.CustomReportData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Report.CustomReportData",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Report.CustomReportData.yml\" sourcestartlinenumber=\"1\">Represents the data required to define a custom report for injection\ninto the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Report.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Report.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Report",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.SmkInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.SmkInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.SmkInfo",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.SmkInfo.yml\" sourcestartlinenumber=\"1\">Info about the current SMK build.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Bill.CustomBillData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Bill.CustomBillData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Bill.CustomBillData",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Bill.CustomBillData.yml\" sourcestartlinenumber=\"1\">Represents the data required to define a custom bill story fragment for injection\ninto the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Bill.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Bill.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Bill",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationInjection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationInjection",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationInjection.yml\" sourcestartlinenumber=\"1\">A list of nodes to be injected into a conversation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationNode",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.yml\" sourcestartlinenumber=\"1\">A dialogue line or choice in a conversation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookMode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookMode",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookMode.yml\" sourcestartlinenumber=\"1\">Methods for hooking a <code>ConversationNode</code> to a parent node.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookPriority.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookPriority.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookPriority",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.HookPriority.yml\" sourcestartlinenumber=\"1\">Priorities for hooking a <code>ConversationNode</code> to a parent node.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.yml\" sourcestartlinenumber=\"1\">Hook configuration for a <code>ConversationNode</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry.yml\" sourcestartlinenumber=\"1\">Static interface for registering <code>ConversationInjections</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.InjectedConversationNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.InjectedConversationNode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.InjectedConversationNode",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.InjectedConversationNode.yml\" sourcestartlinenumber=\"1\">Information about a <code>ConversationNode</code> that has been injected.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeArticyIDSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeArticyIDSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeArticyIDSelector",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeArticyIDSelector.yml\" sourcestartlinenumber=\"1\">Selects a conversation node by its Articy ID.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeModdedNameSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeModdedNameSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeModdedNameSelector",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeModdedNameSelector.yml\" sourcestartlinenumber=\"1\">Selects a modded conversation node by its name.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector.yml\" sourcestartlinenumber=\"1\">An abstract class that selects a node in a conversation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Conversation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Conversation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.CustomStoryFragmentData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.CustomStoryFragmentData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.CustomStoryFragmentData",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.CustomStoryFragmentData.yml\" sourcestartlinenumber=\"1\">Represents the data required to define a custom story fragment for injection\ninto the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.CustomDecisionData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.CustomDecisionData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Decision.CustomDecisionData",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Decision.CustomDecisionData.yml\" sourcestartlinenumber=\"1\">Represents the data required to define a custom decision story fragment for injection\ninto the game.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.DecisionManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.DecisionManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Decision.DecisionManager",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Decision.DecisionManager.yml\" sourcestartlinenumber=\"1\">Static interface for querying and modifying the current active decision.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.DecisionOptionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.DecisionOptionInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Decision.DecisionOptionInfo",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryFragments.Decision.DecisionOptionInfo.yml\" sourcestartlinenumber=\"1\">Read-only representation of an option in a decision.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.Decision.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments.Decision",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryFragments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryFragments.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryFragments",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryPack.StoryPackInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryPack.StoryPackInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryPack.StoryPackInfo",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryPack.StoryPackInfo.yml\" sourcestartlinenumber=\"1\">Read-only representation of a story pack.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryPack.SuzerainStoryPackInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryPack.SuzerainStoryPackInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryPack.SuzerainStoryPackInfo",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryPack.SuzerainStoryPackInfo.yml\" sourcestartlinenumber=\"1\">Static class containing <code>StoryPackInfo</code> objects representing the\nstory packs in vanilla Suzerain.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryPack.SuzerainTokenName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryPack.SuzerainTokenName.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryPack.SuzerainTokenName",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.StoryPack.SuzerainTokenName.yml\" sourcestartlinenumber=\"1\">Static class containing the names of all tokens in vanilla Suzerain.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.StoryPack.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.StoryPack.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.StoryPack",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Utils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Utils",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.Variables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.Variables.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit.Variables",
+      "Summary": "<p sourcefile=\"api/SuzerainModdingKit.Variables.yml\" sourcestartlinenumber=\"1\">Static interface for reading and writing game variables.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SuzerainModdingKit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SuzerainModdingKit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SuzerainModdingKit",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/custom-bills.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/custom-bills.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/custom-decisions.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/custom-decisions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/custom-story-fragments.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/custom-story-fragments.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/debug-overlay.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/debug-overlay.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/developing-mods.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/developing-mods.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/editing-conversations.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/editing-conversations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/events.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/events.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/inspecting-game-data.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/inspecting-game-data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/lua-dialogue-system.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/lua-dialogue-system.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guides/dev/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/toc.html"
+        },
+        ".json": {
+          "relative_path": "guides/dev/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/variables.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/variables.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guides/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "guides/toc.html"
+        },
+        ".json": {
+          "relative_path": "guides/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/user/back-up-saves.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/back-up-saves.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/user/disabling-mods.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/disabling-mods.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/user/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/user/installing-mods.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/installing-mods.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guides/user/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/toc.html"
+        },
+        ".json": {
+          "relative_path": "guides/user/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/user/uninstalling-mods.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/user/uninstalling-mods.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/sdv_conversation_node_articy_id.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/sdv_conversation_node_articy_id.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/sdv_conversations_index.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/sdv_conversations_index.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
