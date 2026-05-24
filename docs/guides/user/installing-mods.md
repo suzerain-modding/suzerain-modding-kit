@@ -10,7 +10,7 @@ Mods are third-party code that run directly on your computer with the same permi
 
 **Only ever install mods from sources you trust. Do not download or install anything you are unsure about.**
 
-We only distribute Suzerain Modding Kit on the [official repository](https://github.com/suzerain-modding/suzerain-modding-kit) and the official Nexus Mods page (TODO: link nexus mods post). **Do not download Suzerain Modding Kit from any other source.**
+We only distribute Suzerain Modding Kit on the [official repository](https://github.com/suzerain-modding/suzerain-modding-kit) and the [official Nexus Mods page](https://www.nexusmods.com/suzerain/mods/7). **Do not download Suzerain Modding Kit from any other source.**
 
 ### Beta Disclaimer
 
@@ -47,7 +47,7 @@ Suzerain Modding Kit is the modding API for Suzerain.
 
 To install Suzerain Modding Kit:
 
-1. Download the latest version (TODO: add download link).
+1. Download the latest version from [Nexus Mods](https://www.nexusmods.com/suzerain/mods/7) or [GitHub Releases](https://github.com/suzerain-modding/suzerain-modding-kit/releases).
 2. Launch Steam if it's not already open.
 3. Select Suzerain in your library.
 4. Select the gear icon > Manage > Browse local files.
@@ -62,7 +62,7 @@ To install Suzerain Modding Kit:
 
 Remember to **only ever install mods from sources you trust!**
 
-**Where do I find mods?** The recommended site to find mods on is [Nexus Mods](https://www.nexusmods.com/games/suzerain). Alternatively, see the `#mod-promotions` channel on our Discord server (TODO: add discord links).
+**Where do I find mods?** The recommended site to find mods on is [Nexus Mods](https://www.nexusmods.com/games/suzerain). Alternatively, see the `#mod-promotions` channel on our [Discord server](https://discord.gg/za8eDBJ8TH).
 
 If a mod provides its own installation instructions, follow them. Otherwise, follow the instructions below.
 

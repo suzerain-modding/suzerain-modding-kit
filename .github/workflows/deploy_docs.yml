@@ -1,0 +1,44 @@
+name: Deploy Docs
+
+on:
+    workflow_dispatch:
+
+permissions:
+    actions: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
+jobs:
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v5
+              with:
+                  dotnet-version: "6.0"
+
+            - name: Install DocFX
+              run: dotnet tool update -g docfx
+
+            - name: Build documentation
+              run: docfx docs/docfx.json
+
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v5
+              with:
+                  path: "docs/_site"
+
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v5
+
