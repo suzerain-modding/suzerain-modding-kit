@@ -14,6 +14,10 @@
   href: editing-conversations.md
 - name: Events
   href: events.md
+- name: Inspecting Game Data
+  href: inspecting-game-data.md
+- name: Lua in the Dialogue System
+  href: lua-dialogue-system.md
 - name: Variables
   href: variables.md
 
