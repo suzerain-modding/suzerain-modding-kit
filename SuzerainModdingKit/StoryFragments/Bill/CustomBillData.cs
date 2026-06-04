@@ -111,9 +111,9 @@ public class CustomBillData : CustomStoryFragmentData
             : StoryPack.StoryPackName switch
             {
                 SuzerainStoryPackInfo.SordlandStoryPackName =>
-                    Variables.GetBool("BaseGame.Policy_Law_Veto_Removed") ? "true" : "false",
+                    "BaseGame.Policy_Law_Veto_Removed == true",
                 SuzerainStoryPackInfo.RiziaStoryPackName =>
-                    Variables.GetBool("RiziaDLC.Reform_Monarch_Veto") ? "false" : "true",
+                    "RiziaDLC.Reform_Monarch_Veto == false",
                 _ => "false",
             };
     }
