@@ -83,9 +83,15 @@ public class CustomBillData : CustomStoryFragmentData
         HubDescription = hubDescription ?? throw new ArgumentNullException(nameof(hubDescription));
     }
 
-    internal override BillData RegisterInSuzerain()
+    internal override BillData RegisterInSuzerain(AddStoryFragmentOptions options)
     {
-        BillData data = ToSuzerainStoryFragmentData();
+        bool? shouldDisableVeto = null;
+        if (options is AddBillOptions o)
+        {
+            shouldDisableVeto = o.ShouldDisableVeto;
+        }
+
+        BillData data = ToSuzerainStoryFragmentData(shouldDisableVeto);
         Func<BillData, bool> match = d => string.Equals(
             d.NameInDatabase,
             data.NameInDatabase,
@@ -98,7 +104,21 @@ public class CustomBillData : CustomStoryFragmentData
         return data;
     }
 
-    private BillData ToSuzerainStoryFragmentData()
+    private string GetVetoDisabledCondition(bool? shouldDisable)
+    {
+        return shouldDisable != null
+            ? (bool)shouldDisable ? "true" : "false"
+            : StoryPack.StoryPackName switch
+            {
+                SuzerainStoryPackInfo.SordlandStoryPackName =>
+                    Variables.GetBool("BaseGame.Policy_Law_Veto_Removed") ? "true" : "false",
+                SuzerainStoryPackInfo.RiziaStoryPackName =>
+                    Variables.GetBool("RiziaDLC.Reform_Monarch_Veto") ? "false" : "true",
+                _ => "false",
+            };
+    }
+
+    private BillData ToSuzerainStoryFragmentData(bool? shouldDisableVeto)
     {
         BillProperties properties = new()
         {
@@ -106,6 +126,7 @@ public class CustomBillData : CustomStoryFragmentData
             Description = Description,
             HubTitle = HubTitle,
             HubDescription = HubDescription,
+            IsVetoDisabledCondition = GetVetoDisabledCondition(shouldDisableVeto),
             // The game crashes if these properties are not defined.
             SignVariables = string.Empty,
             VetoVariables = string.Empty,

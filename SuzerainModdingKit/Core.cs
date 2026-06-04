@@ -32,43 +32,6 @@ internal sealed class Core : MelonMod
         LoggerInstance.Msg("Cleaning up mod saves.");
         SaveManager.CleanupOrphanedModSaves();
 
-        //// Target 'Sordland/Turn02/Personal_Funeral', which is Bernard Circas' funeral.
-        //new ConversationInjection("Sordland/Turn02/Personal_Funeral")
-        //    // Add a node to the injection.
-        //    .AddNode(new ConversationNode(
-        //        // The unique identifier of this node.
-        //        name: "ExampleMod.PetrHello",
-        //        // The text of this node.
-        //        text: "Hello from Suzerain Modding Kit!",
-        //        // Select the character that should speak this line.
-        //        speakerSelector: new CharacterNameSelector("Petr Vectern"),
-        //        // Which nodes should this node "hook" or attach to?
-        //        hooks: [
-        //            new ConversationNodeHook(
-        //                // '0x0100000400008561' is "Dark clouds were looming over Deyr..."
-        //                selector: new ConversationNodeArticyIDSelector("0x0100000400008561"),
-        //                mode: ConversationNodeHook.HookMode.Override),
-        //        ],
-        //        // Which nodes should this node continue on to?
-        //        nextNodes: [
-        //            new ConversationNodeModdedNameSelector("ExampleMod.PlayerHeyPetr"),
-        //            new ConversationNodeModdedNameSelector("ExampleMod.PlayerHelloPetr"),
-        //        ]))
-        //    .AddNode(new ConversationNode(
-        //        name: "ExampleMod.PlayerHeyPetr",
-        //        text: "Hey Petr!"
-        //        // 'speakerSelector' is omitted here and the next node,
-        //        // which means that it will be a choice (the player speaks it).
-        //        ))
-        //    .AddNode(new ConversationNode(
-        //        name: "ExampleMod.PlayerHelloPetr",
-        //        text: "Hello Petr.",
-        //        nextNodes: [
-        //            // Narrator: "Evening descended on the capital as..."
-        //            new ConversationNodeArticyIDSelector("0x010000640000BBDB", "Sordland/Turn04/Personal_LucianChessMatch"),
-        //        ]))
-        //    .Register();
-
         LoggerInstance.Msg("Pre-initialization complete.");
     }
 

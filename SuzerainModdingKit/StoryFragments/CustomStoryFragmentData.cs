@@ -61,5 +61,5 @@ public abstract class CustomStoryFragmentData
             throw new ArgumentNullException(nameof(assignedTokenName));
     }
 
-    internal abstract StoryFragmentData RegisterInSuzerain();
+    internal abstract StoryFragmentData RegisterInSuzerain(AddStoryFragmentOptions options);
 }

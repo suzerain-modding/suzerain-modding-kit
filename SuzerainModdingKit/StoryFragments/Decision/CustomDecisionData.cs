@@ -83,7 +83,7 @@ public class CustomDecisionData : CustomStoryFragmentData
         HubDescription = hubDescription ?? throw new ArgumentNullException(nameof(hubDescription));
     }
 
-    internal override DecisionData RegisterInSuzerain()
+    internal override DecisionData RegisterInSuzerain(AddStoryFragmentOptions options)
     {
         DecisionData data = ToSuzerainStoryFragmentData();
         Func<DecisionData, bool> match = d => string.Equals(

@@ -96,6 +96,9 @@ public static class GameState
     /// <param name="customStoryFragmentData">
     /// The custom story fragment data.
     /// </param>
+    /// <param name="options">
+    /// Optional parameters for adding the story fragment.
+    /// </param>
     /// <returns>
     /// A boolean indicating whether the operation succeeded or not.
     /// </returns>
@@ -105,7 +108,9 @@ public static class GameState
     /// <exception cref="InvalidOperationException">
     /// Thrown if the game is not active.
     /// </exception>
-    public static bool AddCustomStoryFragment(CustomStoryFragmentData customStoryFragmentData)
+    public static bool AddCustomStoryFragment(
+        CustomStoryFragmentData customStoryFragmentData,
+        AddStoryFragmentOptions options = null)
     {
         // This method adds a custom story fragment to the current step dynamically.
         // We don't use Suzerain's registry because articy:expresso scripts
@@ -131,7 +136,7 @@ public static class GameState
             return false;
         }
 
-        StoryFragmentData registeredData = customStoryFragmentData.RegisterInSuzerain();
+        StoryFragmentData registeredData = customStoryFragmentData.RegisterInSuzerain(options);
 
         // Add it to the scene.
         _gameFlowManager.currentStepData.StoryFragments.Add(customStoryFragmentData.Name);

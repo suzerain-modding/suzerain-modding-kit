@@ -482,6 +482,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="StoryFragments\Bill\AddBillOptions.cs" />
+		<Compile Include="StoryFragments\AddStoryFragmentOptions.cs" />
 		<Compile Include="Character\CharacterNameSelector.cs" />
 		<Compile Include="Character\CharacterSelector.cs" />
 		<Compile Include="DebugOverlay.cs" />
@@ -493,7 +495,6 @@
 		<Compile Include="GameState.cs" />
 		<Compile Include="Journal\Patches.cs" />
 		<Compile Include="Report\CustomReportData.cs" />
-		<Compile Include="Save\ModSaveData.cs" />
 		<Compile Include="Save\Patches.cs" />
 		<Compile Include="Save\SaveManager.cs" />
 		<Compile Include="SmkInfo.cs" />

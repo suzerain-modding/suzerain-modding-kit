@@ -6,6 +6,14 @@ namespace SuzerainModdingKit.Save;
 
 internal static class SaveManager
 {
+    internal sealed class ModSaveData
+    {
+        public Dictionary<string, object> Variables
+        {
+            get; set;
+        }
+    }
+
     public static readonly string UserDir = Environment.GetEnvironmentVariable("userprofile");
     public static readonly string SuzerainSavePath = Path.Combine(UserDir,
         @"AppData\LocalLow\Torpor Games\Suzerain");
