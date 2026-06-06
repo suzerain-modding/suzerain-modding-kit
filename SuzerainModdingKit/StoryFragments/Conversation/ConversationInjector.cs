@@ -236,38 +236,82 @@ internal static class ConversationInjector
         }
     }
 
-    private static InjectedConversationNode InjectNode(
+    /// <summary>
+    /// Injects a node into a conversation.
+    /// </summary>
+    /// <param name="node">
+    /// The node to inject.
+    /// </param>
+    /// <param name="conversation">
+    /// The target conversation.
+    /// </param>
+    /// <returns>
+    /// An InjectNodeResult.
+    /// </returns>
+    private static InjectNodeResult InjectNode(
         ConversationNode node,
         DialogueConversation conversation)
     {
         int? speakerID = node.SpeakerSelector?.Resolve();
-        if (speakerID == null && !node.IsChoice)
+        if (speakerID == null && !node.IsChoice && !node.IsOverride)
         {
             Melon<Core>.Logger.Error($"Failed to inject conversation node '{node.Name}': " +
                 "Speaker character could not be resolved.");
-            return null;
+            return new(success: false);
         }
 
-        Template template = Template.FromDefault();
-        int newID = template.GetNextDialogueEntryID(conversation);
+        DialogueEntry newEntry;
+        if (node.IsOverride)
+        {
+            newEntry = node.OverrideTarget.Resolve(conversation);
+            if (newEntry == null)
+            {
+                Melon<Core>.Logger.Error("Failed to inject conversation node override " +
+                    $"'{node.Name}': Target could not be resolved.");
+                return new(success: false);
+            }
+        }
+        else
+        {
+            Template template = Template.FromDefault();
+            int newID = template.GetNextDialogueEntryID(conversation);
 
-        DialogueEntry newEntry = template.CreateDialogueEntry(newID, conversation.id, node.Name);
-        string articyID = ArticyIDGenerator.GenerateArticyID(node.Name);
-        newEntry.SetTextField("Articy Id", articyID);
+            newEntry = template.CreateDialogueEntry(newID, conversation.id, node.Name);
+            string articyID = ArticyIDGenerator.GenerateArticyID(node.Name);
+            newEntry.SetTextField("Articy Id", articyID);
+        }
+
         newEntry.SetTextField("SuzerainModdingKit.NodeName", node.Name);
-        newEntry.currentLocalizedDialogueText = node.Text;
-        newEntry.userScript = node.LuaScript;
-        newEntry.conditionsString = node.LuaCondition;
-        newEntry.currentLocalizedSequence = node.Sequence;
+        if (node.Text != null)
+        {
+            newEntry.currentLocalizedDialogueText = node.Text;
+        }
+        if (node.LuaScript != null)
+        {
+            newEntry.userScript = node.LuaScript;
+        }
+        if (node.LuaCondition != null)
+        {
+            newEntry.conditionsString = node.LuaCondition;
+        }
+        if (node.Sequence != null)
+        {
+            newEntry.currentLocalizedSequence = node.Sequence;
+        }
 
         // Actor = The person speaking the line.
         // Conversant = The person listening to the line.
         if (node.IsChoice)
         {
-            // conversation.ActorID is the player.
-            newEntry.ActorID = conversation.ActorID;
-            // ConversantID doesn't matter for choices, so just inherit from the conversation.
-            newEntry.ConversantID = conversation.ConversantID;
+            // An override node cannot change a node from a choice to a dialogue line.
+            // Ignore if the node is an override.
+            if (!node.IsOverride)
+            {
+                // conversation.ActorID is the player.
+                newEntry.ActorID = conversation.ActorID;
+                // ConversantID doesn't matter for choices, so just inherit from the conversation.
+                newEntry.ConversantID = conversation.ConversantID;
+            }
         }
         else
         {
@@ -276,9 +320,15 @@ internal static class ConversationInjector
             newEntry.ConversantID = conversation.ActorID;
         }
 
-        conversation.dialogueEntries.Add(newEntry);
+        // Early return before adding to dialogueEntries because the node already exists there.
+        if (node.IsOverride)
+        {
+            return new(success: true);
+        }
 
-        return new InjectedConversationNode(node, newEntry, conversation);
+        conversation.dialogueEntries.Add(newEntry);
+        InjectedConversationNode injectedNode = new(node, newEntry, conversation);
+        return new(success: true, injectedNode);
     }
 
     public static void PatchConversation(DialogueConversation conversation)
@@ -292,6 +342,7 @@ internal static class ConversationInjector
         Melon<Core>.Logger.Msg($"Patching conversation '{conversation.Title}'.");
 
         List<InjectedConversationNode> injectedNodes = [];
+        int overrideCount = 0;
         foreach (ConversationInjection injection in ConversationRegistry.Injections)
         {
             if (!injection.ConversationTitle.Equals(conversation.Title, StringComparison.Ordinal))
@@ -301,21 +352,54 @@ internal static class ConversationInjector
 
             foreach (ConversationNode node in injection.Nodes)
             {
-                InjectedConversationNode injected = InjectNode(node, conversation);
-                if (injected != null)
+                InjectNodeResult result = InjectNode(node, conversation);
+                if (result.InjectedNode != null)
                 {
-                    injectedNodes.Add(injected);
+                    injectedNodes.Add(result.InjectedNode);
+                }
+                else if (result.Success)
+                {
+                    // The operation was successful but InjectedNode is null, so it must have been
+                    // an override.
+                    overrideCount++;
                 }
             }
         }
-        Melon<Core>.Logger.Msg($"Injected {injectedNodes.Count} nodes.");
-        if (injectedNodes.Count == 0)
+        Melon<Core>.Logger.Msg(string.Create(CultureInfo.InvariantCulture,
+            $"Injected {injectedNodes.Count} nodes and {overrideCount} overrides successfully."));
+
+        if (injectedNodes.Count > 0)
         {
-            return;
+            LinkInjectedNodes(injectedNodes);
         }
 
-        LinkInjectedNodes(injectedNodes);
-
         Melon<Core>.Logger.Msg($"Patched conversation '{conversation.Title}'.");
+    }
+
+    /// <summary>
+    /// The result of the 'InjectNode' method.
+    /// </summary>
+    private sealed class InjectNodeResult
+    {
+        /// <summary>
+        /// Was it successful?
+        /// </summary>
+        public bool Success
+        {
+            get;
+        }
+        /// <summary>
+        /// The injected node. Null if the node is an override.
+        /// </summary>
+        public InjectedConversationNode InjectedNode
+        {
+            get;
+        }
+
+        public InjectNodeResult(bool success, InjectedConversationNode injectedNode = null)
+        {
+            Success = success;
+            InjectedNode = injectedNode;
+        }
     }
 }

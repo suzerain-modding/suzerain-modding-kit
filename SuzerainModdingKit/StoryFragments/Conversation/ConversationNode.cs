@@ -18,14 +18,14 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// The text of the node.
+    /// The text of the node. This may be null if the node is an override.
     /// </summary>
     public string Text
     {
         get;
     }
     /// <summary>
-    /// A read-only list of hooks.
+    /// A read-only list of hooks. This is always an empty collection if the node is an override.
     /// </summary>
     /// <remarks>
     /// Hooks are nodes that this node should attach (or hook) to.
@@ -35,7 +35,8 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// A read-only list of next node selectors.
+    /// A read-only list of next node selectors. This is always an empty collection if the
+    /// node is an override.
     /// </summary>
     /// <remarks>
     /// These are the nodes that will show after this one.
@@ -55,14 +56,14 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// An optional Lua script to run when the dialogue is spoken.
+    /// Optional: A Lua script to run when the dialogue is spoken.
     /// </summary>
     public string LuaScript
     {
         get;
     }
     /// <summary>
-    /// An optional Lua condition to determine whether the dialogue should be spoken or not.
+    /// Optional: A Lua condition to determine whether the dialogue should be spoken or not.
     /// </summary>
     public string LuaCondition
     {
@@ -77,13 +78,25 @@ public class ConversationNode
         get;
     }
     /// <summary>
+    /// Optional: A selector targeting a node to override.
+    /// </summary>
+    public ConversationNodeSelector OverrideTarget
+    {
+        get;
+    }
+    /// <summary>
     /// Returns a boolean indicating whether the node should be considered a choice
     /// (is <c cref="SpeakerSelector">SpeakerSelector</c> null?).
     /// </summary>
     public bool IsChoice => SpeakerSelector == null;
+    /// <summary>
+    /// Returns a boolean indicating whether the node is meant to override an existing node.
+    /// (is <c cref="OverrideTarget">OverrideTarget</c> not null?)
+    /// </summary>
+    public bool IsOverride => OverrideTarget != null;
 
     /// <summary>
-    /// Creates a new instance of this class.
+    /// Creates a new custom conversation node.
     /// </summary>
     /// <param name="name">
     /// The unique identifier of the node.
@@ -117,6 +130,9 @@ public class ConversationNode
     /// Optional: Conversation-related actions to perform when this dialogue is spoken.
     /// See <see cref="ConversationNodeSequenceBuilder"/>.
     /// </param>
+    /// <exception cref="ArgumentException">
+    /// Thrown if any arguments are invalid.
+    /// </exception>
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
@@ -130,11 +146,70 @@ public class ConversationNode
         string luaCondition = null,
         string sequence = null)
     {
-        Name = name ?? throw new ArgumentNullException(nameof(name));
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name cannot be null, empty, or whitespace.", nameof(name));
+        }
+
+        Name = name;
         Text = text ?? throw new ArgumentNullException(nameof(text));
-        Hooks = new ReadOnlyCollection<ConversationNodeHook>(hooks != null ? [.. hooks] : []);
-        NextNodes = new ReadOnlyCollection<ConversationNodeSelector>(
-            nextNodes != null ? [.. nextNodes] : []);
+        Hooks = new(hooks != null ? [.. hooks] : []);
+        NextNodes = new(nextNodes != null ? [.. nextNodes] : []);
+        SpeakerSelector = speakerSelector;
+        LuaScript = luaScript;
+        LuaCondition = luaCondition;
+        Sequence = sequence;
+    }
+
+    /// <summary>
+    /// Creates a new conversation node to override an existing node.
+    /// </summary>
+    /// <param name="overrideTarget">
+    /// A selector targeting the node to override.
+    /// </param>
+    /// <param name="name">
+    /// The unique identifier of the node.
+    /// </param>
+    /// <param name="text">
+    /// Optional: Override the text of the node.
+    /// </param>
+    /// <param name="speakerSelector">
+    /// Optional: Override the speaker of the node.
+    /// </param>
+    /// <param name="luaScript">
+    /// Optional: Override the script of the node.
+    /// </param>
+    /// <param name="luaCondition">
+    /// Optional: Override the condition of the node.
+    /// </param>
+    /// <param name="sequence">
+    /// Optional: Override the sequence of the node.
+    /// </param>
+    /// <exception cref="ArgumentException">
+    /// Thrown if any arguments are invalid.
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if any required arguments are null.
+    /// </exception>
+    public ConversationNode(
+        ConversationNodeSelector overrideTarget,
+        string name,
+        string text = null,
+        CharacterSelector speakerSelector = null,
+        string luaScript = null,
+        string luaCondition = null,
+        string sequence = null)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name cannot be null, empty, or whitespace.", nameof(name));
+        }
+
+        OverrideTarget = overrideTarget ?? throw new ArgumentNullException(nameof(overrideTarget));
+        Name = name;
+        Text = text;
+        Hooks = new([]);
+        NextNodes = new([]);
         SpeakerSelector = speakerSelector;
         LuaScript = luaScript;
         LuaCondition = luaCondition;

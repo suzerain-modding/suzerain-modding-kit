@@ -118,7 +118,7 @@ internal static class DebugOverlay
         {
             Il2CppStringArray items = DialogueLua.GetAllVariables();
 
-            IEnumerable<string> filtered = string.IsNullOrEmpty(_searchQuery) ? items :
+            IEnumerable<string> filtered = string.IsNullOrWhiteSpace(_searchQuery) ? items :
                 items.Where(s => s.Contains(_searchQuery, StringComparison.OrdinalIgnoreCase));
 
             _filteredItems = [.. filtered];

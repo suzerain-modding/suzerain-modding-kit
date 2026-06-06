@@ -29,7 +29,7 @@ public class ConversationNodeSequenceBuilder
 
     public static bool IsValidInput(string input)
     {
-        return !string.IsNullOrEmpty(input) &&
+        return !string.IsNullOrWhiteSpace(input) &&
             !input.Contains('(', StringComparison.InvariantCulture) &&
             !input.Contains(')', StringComparison.InvariantCulture) &&
             !input.Contains(';', StringComparison.InvariantCulture);

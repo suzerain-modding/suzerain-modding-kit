@@ -16,7 +16,7 @@ internal static class DialogueUtils
     /// </returns>
     public static DialogueConversation GetConversation(string title)
     {
-        return string.IsNullOrEmpty(title)
+        return string.IsNullOrWhiteSpace(title)
             ? null
             : DialogueManager.MasterDatabase?.GetConversation(title);
     }
