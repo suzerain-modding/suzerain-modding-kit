@@ -1,8 +1,8 @@
 # Installing Mods
 
-A beginner's guide to installing Suzerain mods **on Windows**.
+A beginner's guide to installing Suzerain mods on Windows or Linux.
 
-You must own Suzerain **on Steam** and you must have it installed.
+You must own Suzerain on Steam. If you're on Linux, you must be running the game through Proton.
 
 ## Understand the Risks
 
@@ -20,20 +20,45 @@ Suzerain Modding Kit is currently in beta and should not be considered stable. E
 
 If something goes wrong, your save files could get lost or corrupted. See [Back Up Saves](back-up-saves.md) for back up instructions.
 
-## Install .NET and Visual C++ Redistributable
+## Install MelonLoader (Windows)
 
-To run mods for Suzerain, you must have the following installed on your computer. The exact versions linked here are required.
+First, install the following dependencies:
 
 - [Microsoft Visual C++ 2015-2019 Redistributable 64 Bit](https://aka.ms/vs/16/release/vc_redist.x64.exe).
 - [.NET Desktop Runtime 6.0.36](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.36-windows-x64-installer).
 
-## Install MelonLoader
+Next, install MelonLoader using the installer (recommended) or install it manually.
 
-MelonLoader is the program that will inject the mods into Suzerain.
+**Using the installer (recommended):**
 
-Install [MelonLoader.Installer.exe](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe). Launch the installer, then select Suzerain.
+1. Download [MelonLoader.Installer.exe](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe).
+2. Run the installer. It will list your installed Steam games. Select Suzerain and install.
 
-**I want to install MelonLoader manually (I know what I am doing!):** See the [MelonLoader Wiki](https://melonwiki.xyz/#/README?id=manual-installation) for manual installation instructions.
+**Install manually (I know what I am doing!):** See the [MelonLoader Wiki](https://melonwiki.xyz/#/README?id=manual-installation) for manual installation instructions.
+
+## Install MelonLoader (Linux)
+
+First, install MelonLoader using the installer or install it manually.
+
+**Using the installer:**
+
+1. Download [MelonLoader.Installer.Linux](https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.Linux).
+2. Run the installer: `./MelonLoader.Installer.Linux`.
+    - Grant executable permissions if neccessary: `chmod +x MelonLoader.Installer.Linux`.
+3. The installer will list your installed Steam games. Select Suzerain and install.
+
+**Installing manually:** See the [MelonLoader Wiki](https://melonwiki.xyz/#/README?id=manual-installation) for manual installation instructions.
+
+Next, export the `WINEDLLOVERRIDES="version=n,b"` environment variable.
+
+1. Select Suzerain in your Steam library.
+2. Select the gear icon > Properties.
+3. Under launch options, add `WINEDLLOVERRIDES="version=n,b"` before any other launch options.
+
+Finally, install the Windows version of .NET 6 using protontricks.
+
+1. Refer to the [protontricks installation guide](https://github.com/Matoking/protontricks#installation) to install for your distribution.
+2. Run `protontricks 1207650 dotnetdesktop6`.
 
 ## Launch Suzerain
 
