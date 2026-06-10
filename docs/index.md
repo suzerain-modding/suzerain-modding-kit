@@ -6,7 +6,7 @@ _layout: landing
 
 An API for creating Suzerain mods with MelonLoader.
 
-**Suzerain Modding Kit is currently in beta** and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.
+**Suzerain Modding Kit is currently in beta** and should not be considered stable. Expect bugs and crashes.
 
 ## Overview
 

@@ -6,7 +6,7 @@ This guide is for Windows and Linux. You must own Suzerain on Steam.
 
 ## Beta Disclaimer
 
-Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.
+Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes.
 
 ## Setup
 
