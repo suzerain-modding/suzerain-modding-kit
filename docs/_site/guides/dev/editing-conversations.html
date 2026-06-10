@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Editing Conversations | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Editing Conversations | Suzerain Modding Kit ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/editing-conversations.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="editing-conversations">Editing Conversations</h1>
+
+<p>This guide explains how to edit existing conversations. Note that adding new conversations is not yet supported. You can only add new nodes or override existing nodes in existing conversations.</p>
+<h2 id="what-is-a-conversation">What Is a Conversation?</h2>
+<p>A conversation is a graph of nodes. A node can be a line of dialogue, a choice for the player, or just an empty node that connects other nodes.</p>
+<h2 id="injecting-nodes">Injecting Nodes</h2>
+<p>New content is added via <code>ConversationInjection</code>. An injection contains a list of nodes and describes which conversation the nodes should be injected to.</p>
+<pre><code class="lang-cs">// Target 'Sordland/Turn02/Personal_Funeral', which is Bernard Circas' funeral.
+new ConversationInjection(&quot;Sordland/Turn02/Personal_Funeral&quot;)
+    // Add a node to the injection.
+    .AddNode(new ConversationNode(
+        // The unique identifier of this node.
+        name: &quot;ExampleMod.PetrHello&quot;,
+        // The text of this node.
+        text: &quot;Hello from Suzerain Modding Kit!&quot;,
+        // Select the character that should speak this line.
+        speakerSelector: new CharacterNameSelector(&quot;Petr Vectern&quot;),
+        // Which nodes should this node &quot;hook&quot; or attach to?
+        hooks: [
+            new ConversationNodeHook(
+                // '0x0100000400008561' is &quot;Dark clouds were looming over Deyr...&quot;
+                selector: new ConversationNodeArticyIDSelector(&quot;0x0100000400008561&quot;)),
+        ],
+        // Which nodes should this node continue on to?
+        nextNodes: [
+            new ConversationNodeModdedNameSelector(&quot;ExampleMod.PlayerHeyPetr&quot;),
+            new ConversationNodeModdedNameSelector(&quot;ExampleMod.PlayerHelloPetr&quot;),
+        ]))
+    .AddNode(new ConversationNode(
+        name: &quot;ExampleMod.PlayerHeyPetr&quot;,
+        text: &quot;Hey Petr!&quot;
+        // 'speakerSelector' is omitted here and the next node,
+        // which means that it will be a choice (the player speaks it).
+        ))
+    .AddNode(new ConversationNode(
+        name: &quot;ExampleMod.PlayerHelloPetr&quot;,
+        text: &quot;Hello Petr.&quot;))
+    .Register();
+</code></pre>
+<p>Injections <strong>must</strong> be registered in <code>OnInitializeMelon</code>. <code>Register</code> will throw an exception if called after <code>OnInitializeMelon</code>.</p>
+<h3 id="important-types">Important Types</h3>
+<p>What's happening here? First, let's look at the different types and what they do:</p>
+<ul>
+<li><code>ConversationNode</code> represents one node in the conversation graph.</li>
+<li><code>ConversationInjection</code> describes what you want to add or change in an existing conversation.</li>
+<li><code>CharacterSelector</code> (subclasses: <code>CharacterNameSelector</code>, ...) describes a character that should be selected when it is time to resolve the conversation node. If the character cannot be resolved, the conversation node will be ignored.</li>
+<li><code>ConversationNodeHook</code> contains a selector for a node to hook to and optionally describes how to hook it. In the example above, the &quot;how to hook&quot; arguments are omitted so the hook will just use the default hook strategy.</li>
+<li><code>ConversationNodeSelector</code> (subclasses: <code>ConversationNodeArticyIDSelector</code>, <code>ConversationNodeModdedNameSelector</code>, ...) describes another node that should be selected when it is time to resolve this conversation node.</li>
+</ul>
+<h3 id="hooks">Hooks</h3>
+<p>We see <code>hooks</code> in the example. What exactly is a &quot;hook?&quot; A hook is an object that describes which node to attach this node to.</p>
+<p>What's the difference between hooks and next nodes? Notice that <code>nextNodes</code> can only be defined from within the node itself. We cannot add to a node's <code>nextNodes</code> from a different node. However, a node can hook to another node without the other node knowing about it.</p>
+<p>So, <strong>use hooks when you need to connect to a node you don't control</strong> and <strong>use next nodes when you are connecting a node you do control</strong> to another node.</p>
+<p>Hooks are also very powerful. There are a few properties we don't see in the example:</p>
+<ul>
+<li><code>mode</code> defines the <code>HookMode</code> that should be used when hooking to the target node. There are three hook modes:
+<ul>
+<li><code>Split</code> (default): Break the chain immediately after the target and insert this node in-between. For example, if we have the existing chain: <code>A -&gt; B -&gt; C</code> and we hook <code>D</code> to <code>A</code> using <code>Split</code>, the new chain will be: <code>A -&gt; D -&gt; B -&gt; C</code>. This is the default and the safest option because all existing nodes will still trigger.</li>
+<li><code>ConditionGated</code>: Choose the first (sorted by priority) outgoing link with a successful condition. For choices, all with successful conditions will show. <strong>This should be used when adding a new choice to a list of choices.</strong>
+<ul>
+<li>Dialogue example: If we have the existing chain of <strong>dialogue lines</strong>: <code>A -&gt; B -&gt; C</code> and we hook <code>D</code> to <code>A</code> using <code>ConditionGated</code>, the new chain will be <code>A -&gt; ((B -&gt; C) OR D)</code>. <code>(B -&gt; C)</code> or <code>D</code> will be selected based on their priorities and conditions. If neither have a condition, the one with the highest priority will be selected.</li>
+<li>Choices example: If we have the existing chain of <strong>choices</strong>: <code>A -&gt; [B, C]</code> and we hook <code>D</code> to <code>A</code> using <code>ConditionGated</code>, the new chain will be <code>A -&gt; [B, C, D]</code>. All choices with successful conditions will show. This is why <code>ConditionGated</code> should be used when adding a new choice to a list of choices.</li>
+</ul>
+</li>
+<li><code>Override</code>: Delete all other outgoing links and add this node. For example, if we have the existing chain: <code>A -&gt; B -&gt; C</code> and we hook <code>D</code> to <code>A</code> using <code>Override</code>, the new chain will be: <code>A -&gt; D</code>. This is the most dangerous option and should generally not be used unless you are fundamentally rewriting a conversation.</li>
+</ul>
+</li>
+<li><code>priority</code> defines the <code>HookPriority</code> that should be used when resolving the hook. There are three priorities: <code>Low</code>, <code>Normal</code> (default), and <code>High</code>.</li>
+</ul>
+<h3 id="articy-ids">Articy IDs</h3>
+<p>Notice that when we reference the &quot;Dark clouds were looming over Deyr...&quot; node, we use the identifier <code>0x0100000400008561</code>. All vanilla nodes have &quot;Articy IDs,&quot; which is what we are referencing here.</p>
+<p>To find the Articy ID of a node, we need to dump and inspect the game data. See <a href="inspecting-game-data.html">Inspecting Game Data</a> to set up Suzerain Data Dumper and Suzerain Data Viewer.</p>
+<p>Using Suzerain Data Dumper, dump the conversations of the story pack you want. Then, run Suzerain Data Viewer and select the generated JSON to generate a static site. Open the <code>out/index.html</code> file generated by Suzerain Data Viewer.</p>
+<p><img src="../../images/sdv_conversations_index.png" alt="Suzerain Data Viewer Conversations Index"></p>
+<p>Select the conversation you want to look in. Find and expand the node you want, expand the <code>fields</code> dropdown, then expand the field titled <code>Articy Id</code>.</p>
+<p><img src="../../images/sdv_conversation_node_articy_id.png" alt="Suzerain Data Viewer Conversation Node Articy ID Field"></p>
+<h3 id="conditions-scripts-and-sequences">Conditions, Scripts, and Sequences</h3>
+<p>You can also pass the <code>luaCondition</code>, <code>luaScript</code>, and <code>sequence</code> arguments to <code>ConversationNode</code>.</p>
+<ul>
+<li><code>luaCondition</code> is the Lua script that must resolve to <code>true</code> to show this node. See <a href="lua-dialogue-system.html">Lua in the Dialogue System</a>.</li>
+<li><code>luaScript</code> is the Lua script that will execute when the line is spoken. See <a href="lua-dialogue-system.html">Lua in the Dialogue System</a>.</li>
+<li><code>sequence</code> is the conversation-related actions to perform when this line is spoken. See <a href="../../api/SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.html">ConversationNodeSequenceBuilder</a>.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/editing-conversations.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Installing Mods | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Installing Mods | Suzerain Modding Kit ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/user/installing-mods.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="installing-mods">Installing Mods</h1>
+
+<p>A beginner's guide to installing Suzerain mods <strong>on Windows</strong>.</p>
+<p>You must own Suzerain <strong>on Steam</strong> and you must have it installed.</p>
+<h2 id="understand-the-risks">Understand the Risks</h2>
+<p>Mods are third-party code that run directly on your computer with the same permissions as the game itself. This means a malicious mod can cause serious harm.</p>
+<p><strong>Only ever install mods from sources you trust. Do not download or install anything you are unsure about.</strong></p>
+<p>We only distribute Suzerain Modding Kit on the <a href="https://github.com/suzerain-modding/suzerain-modding-kit">official repository</a> and the <a href="https://www.nexusmods.com/suzerain/mods/7">official Nexus Mods page</a>. <strong>Do not download Suzerain Modding Kit from any other source.</strong></p>
+<h3 id="beta-disclaimer">Beta Disclaimer</h3>
+<p>Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes.</p>
+<h2 id="back-up-saves">Back Up Saves</h2>
+<p>If something goes wrong, your save files could get lost or corrupted. See <a href="back-up-saves.html">Back Up Saves</a> for back up instructions.</p>
+<h2 id="install-net-and-visual-c-redistributable">Install .NET and Visual C++ Redistributable</h2>
+<p>To run mods for Suzerain, you must have the following installed on your computer. The exact versions linked here are required.</p>
+<ul>
+<li><a href="https://aka.ms/vs/16/release/vc_redist.x64.exe">Microsoft Visual C++ 2015-2019 Redistributable 64 Bit</a>.</li>
+<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.36-windows-x64-installer">.NET Desktop Runtime 6.0.36</a>.</li>
+</ul>
+<h2 id="install-melonloader">Install MelonLoader</h2>
+<p>MelonLoader is the program that will inject the mods into Suzerain.</p>
+<p>Install <a href="https://github.com/LavaGang/MelonLoader.Installer/releases/latest/download/MelonLoader.Installer.exe">MelonLoader.Installer.exe</a>. Launch the installer, then select Suzerain.</p>
+<p><strong>I want to install MelonLoader manually (I know what I am doing!):</strong> See the <a href="https://melonwiki.xyz/#/README?id=manual-installation">MelonLoader Wiki</a> for manual installation instructions.</p>
+<h2 id="launch-suzerain">Launch Suzerain</h2>
+<p>You must launch Suzerain after installing MelonLoader atleast once so MelonLoader can create the necessary files.</p>
+<p>Launch Suzerain from Steam as normal. This will launch the MelonLoader console before launching the game. The first launch may take a while. Once you reach the Suzerain main menu screen, just exit the game.</p>
+<h2 id="install-suzerain-modding-kit">Install Suzerain Modding Kit</h2>
+<p>Suzerain Modding Kit is the modding API for Suzerain.</p>
+<p>To install Suzerain Modding Kit:</p>
+<ol>
+<li>Download the latest version from <a href="https://www.nexusmods.com/suzerain/mods/7">Nexus Mods</a> or <a href="https://github.com/suzerain-modding/suzerain-modding-kit/releases">GitHub Releases</a>.</li>
+<li>Launch Steam if it's not already open.</li>
+<li>Select Suzerain in your library.</li>
+<li>Select the gear icon &gt; Manage &gt; Browse local files.</li>
+<li>Move the Suzerain Modding Kit DLL into the <code>Mods</code> folder.</li>
+<li>Check if Suzerain Modding Kit is working:
+<ol>
+<li>Launch Suzerain.</li>
+<li>Once you're in the main menu screen, press Ctrl + D. If Suzerain Modding Kit is working, you'll see a debug overlay appear. Press Ctrl + D again or press the &quot;Hide&quot; button in the top right to close the debug menu.
+<ul>
+<li>Don't worry if it says &quot;GameFlowManager not loaded!&quot; This just means that there is no loaded campaign, which is because you are in the main menu.</li>
+</ul>
+</li>
+<li>Quit the game.</li>
+</ol>
+</li>
+</ol>
+<h2 id="install-mods">Install Mods</h2>
+<p>Remember to <strong>only ever install mods from sources you trust!</strong></p>
+<p><strong>Where do I find mods?</strong> The recommended site to find mods on is <a href="https://www.nexusmods.com/games/suzerain">Nexus Mods</a>. Alternatively, see the <code>#mod-promotions</code> channel on our <a href="https://discord.gg/za8eDBJ8TH">Discord server</a>.</p>
+<p>If a mod provides its own installation instructions, follow them. Otherwise, follow the instructions below.</p>
+<p>To install most mods:</p>
+<ol>
+<li>Download the DLL and its required dependencies if it has any.</li>
+<li>Launch Steam if it's not already open.</li>
+<li>Select Suzerain in your library.</li>
+<li>Select the gear icon &gt; Manage &gt; Browse local files.</li>
+<li>Move the DLL(s) into the <code>Mods</code> folder.</li>
+</ol>
+<h2 id="disabling-or-uninstalling-mods">Disabling or Uninstalling Mods</h2>
+<p>See <a href="disabling-mods.html">Disabling Mods</a> to learn how to disable mods without uninstalling them.</p>
+<p>See <a href="uninstalling-mods.html">Uninstalling Mods</a> to learn how to uninstall mods or uninstall MelonLoader entirely.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/user/installing-mods.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

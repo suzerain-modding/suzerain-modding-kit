@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Suzerain Modding Kit | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Suzerain Modding Kit | Suzerain Modding Kit ">
+      
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="landing" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="suzerain-modding-kit">Suzerain Modding Kit</h1>
+
+<p>An API for creating Suzerain mods with MelonLoader.</p>
+<p><strong>Suzerain Modding Kit is currently in beta</strong> and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.</p>
+<h2 id="overview">Overview</h2>
+<p>Suzerain Modding Kit provides an API for modders to extend Suzerain using C# and MelonLoader. The API currently includes support for:</p>
+<ul>
+<li>New bills, decisions, reports, and journal entries.</li>
+<li>Editing and creating new dialogue for conversations.</li>
+<li>Adding new options to decisions.</li>
+<li>Subscribing to game events (eg. <code>OnBillSigned</code>, <code>OnBillVetoed</code>, <code>OnDecisionFinished</code>).</li>
+<li>Supports both Sordland and Rizia.</li>
+</ul>
+<h2 id="compatibility">Compatibility</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>Linux (via Proton)</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>❌ Not Supported</td>
+</tr>
+</tbody>
+</table>
+<p>Only the Steam version of Suzerain is supported.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p><strong>How do I install mods?</strong> See <a href="https://suzerain-modding.github.io/suzerain-modding-kit/guides/user/installing-mods.html">Installing Mods</a>.</p>
+<p><strong>How do I develop mods?</strong> See <a href="https://suzerain-modding.github.io/suzerain-modding-kit/guides/dev/developing-mods.html">Developing Mods</a>.</p>
+<h2 id="versioning">Versioning</h2>
+<p>SMK uses a two-component versioning scheme: <code>era.release</code>.</p>
+<ul>
+<li><code>era</code> increments when a planned milestone ships. This <em>usually</em> indicates a content update with new features.</li>
+<li><code>release</code> increments when any release ships. Incrementing this without incrementing <code>era</code> <em>usually</em> indicates bug fixes, small changes, and/or compatibility with a new Suzerain version.</li>
+</ul>
+<p><strong>Both components may contain breaking changes.</strong> This is because Suzerain updates can release at any time and may force a breaking change in SMK.</p>
+<p>The <code>release</code> component is the primary signal for staying up to date as it increments for every update. <code>era</code> exists to track and plan content updates.</p>
+<p>We aim to deprecate APIs before removing them, ideally allowing at least one release before removal. However, <strong>this is not a guarantee</strong> as Suzerain updates may force immediate removal.</p>
+<blockquote>
+<p>This versioning system was adopted on June 9th, 2026.</p>
+</blockquote>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome. See <a href="https://github.com/suzerain-modding/suzerain-modding-kit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for more information.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the <a href="https://github.com/suzerain-modding/suzerain-modding-kit/blob/main/LICENSE">ISC License</a>.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>Suzerain Modding Kit is an unofficial, community-made API for modding Suzerain. It is not affiliated with, endorsed by, or sponsored by Torpor Games. Suzerain is the property of Torpor Games.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

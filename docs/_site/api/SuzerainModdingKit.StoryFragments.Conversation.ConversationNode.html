@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ConversationNode | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ConversationNode | Suzerain Modding Kit ">
+      
+      <meta name="description" content="A dialogue line or choice in a conversation.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/new/docs-1.3/apiSpec/new?filename=SuzerainModdingKit_StoryFragments_Conversation_ConversationNode.md&amp;value=---%0Auid%3A%20SuzerainModdingKit.StoryFragments.Conversation.ConversationNode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode">
+
+
+
+  <h1 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode" class="text-break">
+Class ConversationNode  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SuzerainModdingKit.html">SuzerainModdingKit</a>.<a class="xref" href="SuzerainModdingKit.StoryFragments.html">StoryFragments</a>.<a class="xref" href="SuzerainModdingKit.StoryFragments.Conversation.html">Conversation</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SuzerainModdingKit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A dialogue line or choice in a conversation.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ConversationNode</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ConversationNode</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode__ctor_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.#ctor*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode__ctor_System_String_System_String_System_Collections_Generic_IReadOnlyList_SuzerainModdingKit_StoryFragments_Conversation_ConversationNodeHook__System_Collections_Generic_IReadOnlyList_SuzerainModdingKit_StoryFragments_Conversation_NodeSelectors_ConversationNodeSelector__SuzerainModdingKit_Character_CharacterSelector_System_String_System_String_System_String_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.#ctor(System.String,System.String,System.Collections.Generic.IReadOnlyList{SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook},System.Collections.Generic.IReadOnlyList{SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector},SuzerainModdingKit.Character.CharacterSelector,System.String,System.String,System.String)">
+  ConversationNode(string, string, IReadOnlyList&lt;ConversationNodeHook&gt;, IReadOnlyList&lt;ConversationNodeSelector&gt;, CharacterSelector, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new instance of this class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConversationNode(string name, string text, IReadOnlyList&lt;ConversationNodeHook&gt; hooks = null, IReadOnlyList&lt;ConversationNodeSelector&gt; nextNodes = null, CharacterSelector speakerSelector = null, string luaScript = null, string luaCondition = null, string sequence = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique identifier of the node.</p>
+</dd>
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The text of the node.</p>
+</dd>
+    <dt><code>hooks</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.html">ConversationNodeHook</a>&gt;</dt>
+    <dd><p>Optional: A list of hooks. Hooks are nodes that this node should attach (or hook) to.
+Hooks should only be used when trying to link to a node that you don't control
+(such as a node from vanilla Suzerain or another mod). If you control the node you are
+trying to hook to, you should add this node to the other node's
+<code>NextNodes</code> instead.</p>
+</dd>
+    <dt><code>nextNodes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector.html">ConversationNodeSelector</a>&gt;</dt>
+    <dd><p>Optional: A list of next node selectors. These are the nodes that will show after this one.
+Only the first node with a successful condition will show. If the nodes are choices,
+all choice nodes with successful conditions will show.</p>
+</dd>
+    <dt><code>speakerSelector</code> <a class="xref" href="SuzerainModdingKit.Character.CharacterSelector.html">CharacterSelector</a></dt>
+    <dd><p>Optional: The speaker of the line. If null, the node will
+be considered a choice rather than a dialogue line.</p>
+</dd>
+    <dt><code>luaScript</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional: A Lua script to run when the dialogue is spoken.</p>
+</dd>
+    <dt><code>luaCondition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional: A Lua condition to determine whether the dialogue should be spoken or not.</p>
+</dd>
+    <dt><code>sequence</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional: Conversation-related actions to perform when this dialogue is spoken.
+See <a class="xref" href="SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.html">ConversationNodeSequenceBuilder</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>Thrown if any required arguments are null.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Hooks_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Hooks*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Hooks" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Hooks">
+  Hooks
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A read-only list of hooks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyCollection&lt;ConversationNodeHook&gt; Hooks { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="SuzerainModdingKit.StoryFragments.Conversation.ConversationNodeHook.html">ConversationNodeHook</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Hooks_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Hooks are nodes that this node should attach (or hook) to.</p>
+</div>
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_IsChoice_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.IsChoice*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_IsChoice" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.IsChoice">
+  IsChoice
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a boolean indicating whether the node should be considered a choice
+(is <code>SpeakerSelector</code> null?).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsChoice { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_LuaCondition_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.LuaCondition*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_LuaCondition" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.LuaCondition">
+  LuaCondition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>An optional Lua condition to determine whether the dialogue should be spoken or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string LuaCondition { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_LuaScript_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.LuaScript*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_LuaScript" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.LuaScript">
+  LuaScript
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>An optional Lua script to run when the dialogue is spoken.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string LuaScript { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Name_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Name*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Name" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The unique identifier of the node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_NextNodes_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.NextNodes*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_NextNodes" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.NextNodes">
+  NextNodes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A read-only list of next node selectors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyCollection&lt;ConversationNodeSelector&gt; NextNodes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationNodeSelector.html">ConversationNodeSelector</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_NextNodes_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>These are the nodes that will show after this one.
+Only the first node with a successful condition will show. If the nodes are choices,
+all choice nodes with successful conditions will show.</p>
+</div>
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Sequence_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Sequence*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Sequence" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Sequence">
+  Sequence
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Optional conversation-related actions to perform when this dialogue is spoken.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Sequence { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+  <dl class="typelist seealso">
+    <dt>See Also</dt>
+    <dd>
+    <div><a class="xref" href="SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.html">ConversationNodeSequenceBuilder</a></div>
+    </dd>
+  </dl>
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_SpeakerSelector_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.SpeakerSelector*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_SpeakerSelector" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.SpeakerSelector">
+  SpeakerSelector
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The speaker of the line. This property is optional. If null, the node should
+be considered a choice rather than a dialogue line.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterSelector SpeakerSelector { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SuzerainModdingKit.Character.CharacterSelector.html">CharacterSelector</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Text_" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Text*"></a>
+
+  <h3 id="SuzerainModdingKit_StoryFragments_Conversation_ConversationNode_Text" data-uid="SuzerainModdingKit.StoryFragments.Conversation.ConversationNode.Text">
+  Text
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The text of the node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/SuzerainModdingKit/StoryFragments/Conversation/ConversationNode.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
