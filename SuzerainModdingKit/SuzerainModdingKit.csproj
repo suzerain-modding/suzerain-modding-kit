@@ -425,9 +425,6 @@
 		<Reference Include="UnityEngine.UnityCurlModule">
 			<HintPath>$(GamePath)/MelonLoader\Il2CppAssemblies\UnityEngine.UnityCurlModule.dll</HintPath>
 		</Reference>
-		<Reference Include="UnityEngine.UnityTestProtocolModule">
-			<HintPath>$(GamePath)/MelonLoader\Il2CppAssemblies\UnityEngine.UnityTestProtocolModule.dll</HintPath>
-		</Reference>
 		<Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
 			<HintPath>$(GamePath)/MelonLoader\Il2CppAssemblies\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
 		</Reference>

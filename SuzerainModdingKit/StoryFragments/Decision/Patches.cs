@@ -1,6 +1,7 @@
 using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
+using DecisionOption = Il2Cpp.DecisionProperties.DecisionOption;
 
 namespace SuzerainModdingKit.StoryFragments.Decision;
 
@@ -15,12 +16,13 @@ internal static class DecisionPanel_Show_Patch
     }
 }
 
-[HarmonyPatch(typeof(DecisionPanel), nameof(DecisionPanel.OnFinish))]
-internal static class DecisionPanel_OnFinish_Patch
+[HarmonyPatch(typeof(TemplateDecisionOptionButton), nameof(TemplateDecisionOptionButton.OnClick))]
+internal static class TemplateDecisionOptionButton_OnClick_Patch
 {
-    public static void Postfix(DecisionProperties.DecisionOption decisionOption)
+    public static void Postfix(TemplateDecisionOptionButton __instance)
     {
-        DecisionOptionInfo info = new(decisionOption.Text, DecisionManager.CurrentDecisionName);
+        DecisionOption option = __instance.currentDecisionOption;
+        DecisionOptionInfo info = new(option.Text, DecisionManager.CurrentDecisionName);
         Melon<Core>.Logger.Msg(
             $"Event: OnDecisionFinished ({DecisionManager.CurrentDecisionName}).");
         Events.TriggerOnDecisionFinished(info);

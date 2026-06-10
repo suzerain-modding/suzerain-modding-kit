@@ -14,17 +14,36 @@ Suzerain Modding Kit provides an API for modders to extend Suzerain using C# and
 - Subscribing to game events (eg. `OnBillSigned`, `OnBillVetoed`, `OnDecisionFinished`).
 - Supports both Sordland and Rizia.
 
+## Compatibility
+
+| Platform           | Support          |
+| ------------------ | ---------------- |
+| Windows            | ✅ Supported     |
+| Linux (via Proton) | ✅ Supported     |
+| macOS              | ❌ Not Supported |
+
+Only the Steam version of Suzerain is supported.
+
 ## Getting Started
 
 **How do I install mods?** See [Installing Mods](https://suzerain-modding.github.io/suzerain-modding-kit/guides/user/installing-mods.html).
 
 **How do I develop mods?** See [Developing Mods](https://suzerain-modding.github.io/suzerain-modding-kit/guides/dev/developing-mods.html).
 
-## Current Status
+## Versioning
 
-- **Beta:** Expect bugs, crashes, and breaking changes in minor updates.
-- **Steam only:** The API and installation workflow are currently targeted to Steam.
-- **Windows expected:** Suzerain Modding Kit is built for Windows x64 but it may run on Linux through Proton. It has only been tested on Windows and documentation is targeted to Windows.
+SMK uses a two-component versioning scheme: `era.release`.
+
+- `era` increments when a planned milestone ships. This _usually_ indicates a content update with new features.
+- `release` increments when any release ships. Incrementing this without incrementing `era` _usually_ indicates bug fixes, small changes, and/or compatibility with a new Suzerain version.
+
+**Both components may contain breaking changes.** This is because Suzerain updates can release at any time and may force a breaking change in SMK.
+
+The `release` component is the primary signal for staying up to date as it increments for every update. `era` exists to track and plan content updates.
+
+We aim to deprecate APIs before removing them, ideally allowing at least one release before removal. However, **this is not a guarantee** as Suzerain updates may force immediate removal.
+
+> This versioning system was adopted on June 9th, 2026.
 
 ## Contributing
 
