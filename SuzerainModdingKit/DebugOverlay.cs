@@ -5,6 +5,8 @@ using Il2CppPixelCrushers.DialogueSystem;
 using MelonLoader;
 using UnityEngine;
 
+#nullable enable
+
 namespace SuzerainModdingKit;
 
 internal static class DebugOverlay
@@ -13,7 +15,7 @@ internal static class DebugOverlay
     public const int OverlayWidthVarsList = 700;
 
     private static bool _show;
-    private static VariableSearchOverlay _varsList;
+    private static VariableSearchOverlay? _varsList;
 
     public static bool IsShowing()
     {
@@ -44,7 +46,7 @@ internal static class DebugOverlay
             return;
         }
 
-        string stepName = GameState.CurrentStepName;
+        string? stepName = CreateStepName();
 
         int overlayWidth = _varsList == null ? OverlayWidthDefault : OverlayWidthVarsList;
         int overlayX = Screen.width - overlayWidth - 10;
@@ -66,7 +68,7 @@ internal static class DebugOverlay
                 if (GUILayout.Button("Next Step"))
                 {
                     Managers.Instance.GameFlowManager.EndStep();
-                    string newStepName = GameState.CurrentStepName;
+                    string? newStepName = CreateStepName();
                     Melon<Core>.Logger.Msg($"Debug overlay: Skipped step '{stepName}'. " +
                         $"New step: '{newStepName}'.");
                 }
@@ -98,6 +100,14 @@ internal static class DebugOverlay
         GUILayout.EndArea();
     }
 
+    private static string? CreateStepName()
+    {
+        return GameState.IsGameActive ? string.Create(CultureInfo.InvariantCulture,
+            $"{GameState.CurrentStoryPackName} " +
+            $"Turn {GameState.CurrentTurnNum} " +
+            $"Step {GameState.CurrentStepNum}") : null;
+    }
+
     public sealed class VariableSearchOverlay
     {
         public const float ItemHeight = 25f;
@@ -106,13 +116,13 @@ internal static class DebugOverlay
 
         private string _searchQuery = "";
         private Vector2 _scrollPos;
-        private List<string> _filteredItems;
+        private List<string>? _filteredItems;
         private readonly GUIStyle _buttonStyle = new(GUI.skin.button)
         {
             fontSize = 11,
             alignment = TextAnchor.MiddleLeft,
         };
-        private VariableEditorOverlay _editor;
+        private VariableEditorOverlay? _editor;
 
         private void ComputeFilteredItems()
         {
@@ -198,7 +208,7 @@ internal static class DebugOverlay
     public sealed class VariableEditorOverlay
     {
         public readonly string VariableName;
-        private string _resultMessage;
+        private string? _resultMessage;
         private string _newValue = "";
 
         public VariableEditorOverlay(string variableName)

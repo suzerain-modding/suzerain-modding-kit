@@ -30,6 +30,21 @@ Only the Steam version of Suzerain is supported.
 
 **How do I develop mods?** See [Developing Mods](https://suzerain-modding.github.io/suzerain-modding-kit/guides/dev/developing-mods.html).
 
+## Versioning
+
+SMK uses a two-component versioning scheme: `era.release`.
+
+- `era` increments when a planned milestone ships. This _usually_ indicates a content update with new features.
+- `release` increments when any release ships. Incrementing this without incrementing `era` _usually_ indicates bug fixes, small changes, and/or compatibility with a new Suzerain version.
+
+**Both components may contain breaking changes.** This is because Suzerain updates can release at any time and may force a breaking change in SMK.
+
+The `release` component is the primary signal for staying up to date as it increments for every update. `era` exists to track and plan content updates.
+
+We aim to deprecate APIs before removing them, ideally allowing at least one release before removal. However, **this is not a guarantee** as Suzerain updates may force immediate removal.
+
+> This versioning system was adopted on June 9th, 2026.
+
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](https://github.com/suzerain-modding/suzerain-modding-kit/blob/main/CONTRIBUTING.md) for more information.

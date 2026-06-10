@@ -3,6 +3,9 @@ using SuzerainModdingKit.Utils;
 
 namespace SuzerainModdingKit.Journal;
 
+/// <summary>
+/// Experimental: Use at your own risk. Only supports Sordland.
+/// </summary>
 public class CustomJournalEntryData
 {
     public string Name
@@ -34,9 +37,8 @@ public class CustomJournalEntryData
         };
         JournalEntryData data = new()
         {
-            AppBundleProperties = new AppBundleProperties()
+            AppBundleProperties = new AppBundleProperties(string.Empty)
             {
-                AppBundle = "AppBundle_Main",
                 StoryPacks = Il2CppUtils.CreateIl2CppList(["StoryPack_Main"]),
             },
             JournalEntryProperties = properties,
