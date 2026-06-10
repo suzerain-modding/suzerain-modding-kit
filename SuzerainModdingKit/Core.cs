@@ -1,21 +1,27 @@
 using MelonLoader;
+using SuzerainModdingKit;
 using SuzerainModdingKit.Save;
 using SuzerainModdingKit.StoryFragments.Conversation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[assembly: MelonInfo(typeof(SuzerainModdingKit.Core), "Suzerain Modding Kit", "0.1.0", "Fluffyalien1422", null)]
+[assembly: MelonInfo(typeof(Core), "Suzerain Modding Kit", SmkInfo.VersionStr, "Fluffyalien1422", null)]
 [assembly: MelonGame("Torpor Games", "Suzerain")]
-// (also update version in SmkInfo.cs)
 
 namespace SuzerainModdingKit;
 
 internal sealed class Core : MelonMod
 {
+    private bool _isVersionMismatched;
+    private bool _isVersionMismatchWarningIgnored;
+    private bool _shouldShowVersionMismatchGui =>
+        _isVersionMismatched && !_isVersionMismatchWarningIgnored;
+    private bool _versionMismatchGuiShowAdvanced;
+
     public override void OnInitializeMelon()
     {
         LoggerInstance.Msg(
-            $"Suzerain Modding Kit version: {SmkInfo.ModVersion}, " +
+            $"Suzerain Modding Kit version: {SmkInfo.VersionStr}, " +
             $"Suzerain version: {Application.version}, " +
             $"Target Suzerain version: {SmkInfo.TargetSuzerainVersion}.");
 
@@ -27,6 +33,7 @@ internal sealed class Core : MelonMod
             LoggerInstance.Warning(
                 $"Expected Suzerain version {SmkInfo.TargetSuzerainVersion}, " +
                 $"but got {Application.version}. Suzerain Modding Kit may not work properly.");
+            _isVersionMismatched = true;
         }
 
         LoggerInstance.Msg("Cleaning up mod saves.");
@@ -59,6 +66,48 @@ internal sealed class Core : MelonMod
 
     public override void OnGUI()
     {
+        UpdateVersionMismatchGui();
         DebugOverlay.Update();
+    }
+
+    public void UpdateVersionMismatchGui()
+    {
+        if (!_shouldShowVersionMismatchGui)
+        {
+            return;
+        }
+
+        int size = 250;
+        int sizeHalf = size / 2;
+        int x = (Screen.width / 2) - sizeHalf;
+        int y = (Screen.height / 2) - sizeHalf;
+        GUILayout.BeginArea(new Rect(x, y, size, size));
+        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Height(size));
+
+        GUILayout.Label("Suzerain Modding Kit Warning");
+        GUILayout.Label($"VERSION MISMATCH: Expected Suzerain v{SmkInfo.TargetSuzerainVersion}, " +
+            $"but got v{Application.version}.");
+        GUILayout.Label("Suzerain Modding Kit may not work properly.");
+
+        if (GUILayout.Button("Quit"))
+        {
+            Application.Quit();
+        }
+        if (_versionMismatchGuiShowAdvanced)
+        {
+            GUILayout.Label("Advanced:");
+            if (GUILayout.Button("Continue Anyway"))
+            {
+                LoggerInstance.Warning("User ignored version mismatch warning.");
+                _isVersionMismatchWarningIgnored = true;
+            }
+        }
+        else if (GUILayout.Button("Advanced Options"))
+        {
+            _versionMismatchGuiShowAdvanced = true;
+        }
+
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
     }
 }
