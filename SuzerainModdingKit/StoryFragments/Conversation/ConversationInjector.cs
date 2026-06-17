@@ -10,6 +10,7 @@ namespace SuzerainModdingKit.StoryFragments.Conversation;
 internal static class ConversationInjector
 {
     private static readonly HashSet<string> _conversationsPatched = [];
+    private static bool _customConversationsCreated;
 
     private static bool CompareLink(Link link, Link other)
     {
@@ -91,7 +92,7 @@ internal static class ConversationInjector
         // in all final nodes in the vanilla dialogues. Remove 'End' calls from the parent
         // so the new nodes will play.
         parent.userScript = parent.userScript
-            .Replace("End()", string.Empty, StringComparison.Ordinal);
+            ?.Replace("End()", string.Empty, StringComparison.Ordinal);
         // 'End' seems to not actually be required to end a conversation since Dialogue System
         // does it automatically if the last played node has no outgoing links, so we don't
         // need to add 'End' to our custom nodes.
@@ -374,6 +375,29 @@ internal static class ConversationInjector
         }
 
         Melon<Core>.Logger.Msg($"Patched conversation '{conversation.Title}'.");
+    }
+
+    public static void CreateCustomConversations()
+    {
+        if (_customConversationsCreated)
+        {
+            return;
+        }
+        _customConversationsCreated = true;
+
+        Melon<Core>.Logger.Msg("Creating registered custom conversations.");
+
+        int successCount = 0;
+        foreach (string name in ConversationRegistry.CustomConversations)
+        {
+            if (DialogueUtils.CreateConversation(name) != null)
+            {
+                successCount++;
+            }
+        }
+
+        Melon<Core>.Logger.Msg(string.Create(CultureInfo.InvariantCulture,
+            $"Successfully created {successCount} conversations."));
     }
 
     /// <summary>

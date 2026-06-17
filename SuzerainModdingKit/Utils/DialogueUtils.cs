@@ -33,4 +33,37 @@ internal static class DialogueUtils
     {
         return DialogueManager.MasterDatabase?.GetConversation(id);
     }
+
+    /// <summary>
+    /// Creates a conversation with only a START node.
+    /// </summary>
+    /// <param name="name">
+    /// The name of the conversation.
+    /// </param>
+    /// <returns>
+    /// The new conversation or null if it couldn't be added.
+    /// </returns>
+    public static DialogueConversation CreateConversation(string name)
+    {
+        DialogueDatabase db = DialogueManager.MasterDatabase;
+        if (db == null)
+        {
+            return null;
+        }
+
+        DialogueConversation templateConv = db.conversations[0];
+        Template template = Template.FromDefault();
+        int id = template.GetNextConversationID(db);
+
+        DialogueConversation conversation = template.CreateConversation(id, name);
+        conversation.ActorID = templateConv.ActorID;
+        conversation.ConversantID = templateConv.ConversantID;
+
+        DialogueEntry startNode = template.CreateDialogueEntry(0, id, "START");
+        conversation.dialogueEntries.Add(startNode);
+
+        db.conversations.Add(conversation);
+
+        return conversation;
+    }
 }

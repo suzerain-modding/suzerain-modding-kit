@@ -1,5 +1,6 @@
 using Il2Cpp;
 using SuzerainModdingKit.StoryPack;
+using ConversationType = Il2Cpp.ConversationData.ConversationType;
 
 namespace SuzerainModdingKit.StoryFragments.Conversation;
 
@@ -21,6 +22,13 @@ public class CustomConversationFragment : CustomStoryFragmentData
     /// The short description of this bill shown under the assigned token.
     /// </summary>
     public string HubDescription
+    {
+        get;
+    }
+    /// <summary>
+    /// The conversation type.
+    /// </summary>
+    public ConversationType Type
     {
         get;
     }
@@ -52,6 +60,9 @@ public class CustomConversationFragment : CustomStoryFragmentData
     /// <param name="hubDescription">
     /// The short description of this bill shown under the assigned token.
     /// </param>
+    /// <param name="type">
+    /// The conversation type.
+    /// </param>
     /// <param name="conversationName">
     /// The name of the conversation that this story fragment opens.
     /// </param>
@@ -64,10 +75,12 @@ public class CustomConversationFragment : CustomStoryFragmentData
         string assignedTokenName,
         string hubTitle,
         string hubDescription,
+        ConversationType type,
         string conversationName) : base(name, storyPack, assignedTokenName)
     {
         HubTitle = hubTitle ?? throw new ArgumentNullException(nameof(hubTitle));
         HubDescription = hubDescription ?? throw new ArgumentNullException(nameof(hubDescription));
+        Type = type;
         ConversationName = conversationName
             ?? throw new ArgumentNullException(nameof(conversationName));
     }
@@ -110,7 +123,7 @@ public class CustomConversationFragment : CustomStoryFragmentData
                 OnStoryFragmentBeginInstruction = string.Empty,
                 OnStoryFragmentEndInstruction = string.Empty,
             },
-            Type = ConversationData.ConversationType.Administration,
+            Type = Type,
         };
         return data;
     }

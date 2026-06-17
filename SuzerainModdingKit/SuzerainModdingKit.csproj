@@ -506,6 +506,7 @@
 		<Compile Include="StoryFragments\Conversation\NodeSelectors\ConversationNodeArticyIDSelector.cs" />
 		<Compile Include="StoryFragments\Conversation\NodeSelectors\ConversationNodeSelector.cs" />
 		<Compile Include="StoryFragments\Conversation\ConversationRegistry.cs" />
+		<Compile Include="StoryFragments\Conversation\NodeSelectors\ConversationStartNodeSelector.cs" />
 		<Compile Include="StoryFragments\Conversation\Patches.cs" />
 		<Compile Include="StoryFragments\Conversation\ResolvedConversationNodeHook.cs" />
 		<Compile Include="StoryFragments\Bill\CustomBillFragment.cs" />

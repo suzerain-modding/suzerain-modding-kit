@@ -1,6 +1,7 @@
 using HarmonyLib;
 using Il2Cpp;
 using MelonLoader;
+using SuzerainModdingKit.StoryFragments.Conversation;
 
 namespace SuzerainModdingKit;
 
@@ -21,6 +22,11 @@ internal static class GameFlowManager_EvaluateCurrentStep_Patch
     public static void Postfix()
     {
         Melon<Core>.Logger.Msg("Event: OnEvaluateStep.");
+
+        // Create all the registered custom conversations.
+        // Only runs once, so it's fine to call it repeatedly.
+        ConversationInjector.CreateCustomConversations();
+
         Events.TriggerOnEvaluateStep();
     }
 }

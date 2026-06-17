@@ -60,13 +60,6 @@ internal sealed class Core : MelonMod
 
         if (kb.ctrlKey.isPressed && kb.dKey.wasPressedThisFrame)
         {
-            //_ = GameState.AddCustomStoryFragment(new CustomConversationFragment(
-            //     name: "ExampleMod.ExampleConversationFragment",
-            //     storyPack: StoryPack.SuzerainStoryPackInfo.Sordland,
-            //     assignedTokenName: StoryPack.SuzerainTokenName.SordlandCityHolsord,
-            //     hubTitle: "hubTitle",
-            //     hubDescription: "hubDescription",
-            //     conversationName: "Sordland/Turn04/PSnW_SchoolVisit"));
             DebugOverlay.SetVisibility(value: !DebugOverlay.IsShowing());
         }
     }
