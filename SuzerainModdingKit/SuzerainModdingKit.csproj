@@ -500,6 +500,7 @@
 		<Compile Include="StoryFragments\Conversation\ConversationInjector.cs" />
 		<Compile Include="StoryFragments\Conversation\ConversationNode.cs" />
 		<Compile Include="StoryFragments\Conversation\ConversationNodeHook.cs" />
+		<Compile Include="StoryFragments\Conversation\CustomConversationFragment.cs" />
 		<Compile Include="StoryFragments\Conversation\InjectedConversationNode.cs" />
 		<Compile Include="StoryFragments\Conversation\NodeSelectors\ConversationNodeModdedNameSelector.cs" />
 		<Compile Include="StoryFragments\Conversation\NodeSelectors\ConversationNodeArticyIDSelector.cs" />

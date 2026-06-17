@@ -7,7 +7,7 @@ namespace SuzerainModdingKit.StoryPack;
 public static class SuzerainStoryPackInfo
 {
     public const string SordlandStoryPackName = "StoryPack_Main";
-    public static readonly StoryPackInfo Sordland = new("AppBundle_Main", SordlandStoryPackName);
+    public static readonly StoryPackInfo Sordland = new(SordlandStoryPackName);
     public const string RiziaStoryPackName = "StoryPack_Rizia";
-    public static readonly StoryPackInfo Rizia = new("AppBundle_Rizia", RiziaStoryPackName);
+    public static readonly StoryPackInfo Rizia = new(RiziaStoryPackName);
 }
