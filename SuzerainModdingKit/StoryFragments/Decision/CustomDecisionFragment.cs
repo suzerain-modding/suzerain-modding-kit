@@ -8,7 +8,7 @@ namespace SuzerainModdingKit.StoryFragments.Decision;
 /// into the game.
 /// </summary>
 /// <seealso cref="GameState.AddCustomStoryFragment"/>
-public class CustomDecisionData : CustomStoryFragmentData
+public class CustomDecisionFragment : CustomStoryFragmentData
 {
     /// <summary>
     /// The full title of this decision shown in the decision panel.
@@ -68,7 +68,7 @@ public class CustomDecisionData : CustomStoryFragmentData
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
-    public CustomDecisionData(
+    public CustomDecisionFragment(
         string name,
         StoryPackInfo storyPack,
         string assignedTokenName,

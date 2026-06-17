@@ -8,7 +8,7 @@ namespace SuzerainModdingKit.StoryFragments.Bill;
 /// into the game.
 /// </summary>
 /// <seealso cref="GameState.AddCustomStoryFragment"/>
-public class CustomBillData : CustomStoryFragmentData
+public class CustomBillFragment : CustomStoryFragmentData
 {
     /// <summary>
     /// The full title of this bill shown in the bill panel.
@@ -68,7 +68,7 @@ public class CustomBillData : CustomStoryFragmentData
     /// <exception cref="ArgumentNullException">
     /// Thrown if any required arguments are null.
     /// </exception>
-    public CustomBillData(
+    public CustomBillFragment(
         string name,
         StoryPackInfo storyPack,
         string assignedTokenName,
