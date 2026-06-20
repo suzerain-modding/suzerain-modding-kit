@@ -10,7 +10,6 @@ namespace SuzerainModdingKit.StoryFragments.Conversation;
 internal static class ConversationInjector
 {
     private static readonly HashSet<string> _conversationsPatched = [];
-    private static bool _customConversationsCreated;
 
     private static bool CompareLink(Link link, Link other)
     {
@@ -253,12 +252,26 @@ internal static class ConversationInjector
         ConversationNode node,
         DialogueConversation conversation)
     {
-        int? speakerID = node.SpeakerSelector?.Resolve();
-        if (speakerID == null && !node.IsChoice && !node.IsOverride)
+        int? speakerID = null;
+        if (node.SpeakerSelector == null)
         {
-            Melon<Core>.Logger.Error($"Failed to inject conversation node '{node.Name}': " +
-                "Speaker character could not be resolved.");
-            return new(success: false);
+            if (!node.IsOverride)
+            {
+                // Default to the player as the speaker if speakerSelector is null
+                // and the node is not an override.
+                // conversation.ActorID is the player actor.
+                speakerID = conversation.ActorID;
+            }
+        }
+        else
+        {
+            speakerID = node.SpeakerSelector.Resolve();
+            if (speakerID == null)
+            {
+                Melon<Core>.Logger.Error($"Failed to inject conversation node '{node.Name}': " +
+                    "Speaker character could not be resolved.");
+                return new(success: false);
+            }
         }
 
         DialogueEntry newEntry;
@@ -280,9 +293,10 @@ internal static class ConversationInjector
             newEntry = template.CreateDialogueEntry(newID, conversation.id, node.Name);
             string articyID = ArticyIDGenerator.GenerateArticyID(node.Name);
             newEntry.SetTextField("Articy Id", articyID);
+            newEntry.SetTextField("SuzerainModdingKit.NodeName", node.Name);
         }
 
-        newEntry.SetTextField("SuzerainModdingKit.NodeName", node.Name);
+        // Note that 'newEntry' references an existing entry if 'node' is an override.
         if (node.Text != null)
         {
             newEntry.currentLocalizedDialogueText = node.Text;
@@ -299,27 +313,15 @@ internal static class ConversationInjector
         {
             newEntry.currentLocalizedSequence = node.Sequence;
         }
+        if (node.MenuText != null)
+        {
+            newEntry.currentLocalizedMenuText = node.MenuText;
+        }
 
         // Actor = The person speaking the line.
         // Conversant = The person listening to the line.
-        if (node.IsChoice)
-        {
-            // An override node cannot change a node from a choice to a dialogue line.
-            // Ignore if the node is an override.
-            if (!node.IsOverride)
-            {
-                // conversation.ActorID is the player.
-                newEntry.ActorID = conversation.ActorID;
-                // ConversantID doesn't matter for choices, so just inherit from the conversation.
-                newEntry.ConversantID = conversation.ConversantID;
-            }
-        }
-        else
-        {
-            newEntry.ActorID = speakerID ?? 0;
-            // The conversant should be the player.
-            newEntry.ConversantID = conversation.ActorID;
-        }
+        newEntry.ActorID = speakerID ?? newEntry.ActorID;
+        newEntry.ConversantID = conversation.ActorID;
 
         // Early return before adding to dialogueEntries because the node already exists there.
         if (node.IsOverride)
@@ -379,12 +381,6 @@ internal static class ConversationInjector
 
     public static void CreateCustomConversations()
     {
-        if (_customConversationsCreated)
-        {
-            return;
-        }
-        _customConversationsCreated = true;
-
         Melon<Core>.Logger.Msg("Creating registered custom conversations.");
 
         int successCount = 0;

@@ -46,7 +46,7 @@ internal static class DialogueUtils
     public static DialogueConversation CreateConversation(string name)
     {
         DialogueDatabase db = DialogueManager.MasterDatabase;
-        if (db == null)
+        if (db == null || GetConversation(name) != null)
         {
             return null;
         }

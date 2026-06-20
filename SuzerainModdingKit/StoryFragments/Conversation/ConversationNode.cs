@@ -18,9 +18,21 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// The text of the node. This may be null if the node is an override.
+    /// The text of the node. This may be null.
     /// </summary>
     public string Text
+    {
+        get;
+    }
+    /// <summary>
+    /// The text shown in the options list. This may be null.
+    /// </summary>
+    /// <remarks>
+    /// The text shown in the options list. Possibly null.
+    /// If null, the text shown will be the same as <c cref="Text">Text</c>.
+    /// If the node isn't a choice (spoken by the player), this property is ignored.
+    /// </remarks>
+    public string MenuText
     {
         get;
     }
@@ -48,8 +60,8 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// The speaker of the line. This property is optional. If null, the node should
-    /// be considered a choice rather than a dialogue line.
+    /// The speaker of the line. This property is optional. If null, defaults to the player.
+    /// If the speaker is the player, it will show up as a choice.
     /// </summary>
     public CharacterSelector SpeakerSelector
     {
@@ -85,11 +97,6 @@ public class ConversationNode
         get;
     }
     /// <summary>
-    /// Returns a boolean indicating whether the node should be considered a choice
-    /// (is <c cref="SpeakerSelector">SpeakerSelector</c> null?).
-    /// </summary>
-    public bool IsChoice => SpeakerSelector == null;
-    /// <summary>
     /// Returns a boolean indicating whether the node is meant to override an existing node.
     /// (is <c cref="OverrideTarget">OverrideTarget</c> not null?)
     /// </summary>
@@ -102,7 +109,7 @@ public class ConversationNode
     /// The unique identifier of the node.
     /// </param>
     /// <param name="text">
-    /// The text of the node.
+    /// Optional: The text of the node.
     /// </param>
     /// <param name="hooks">
     /// Optional: A list of hooks. Hooks are nodes that this node should attach (or hook) to.
@@ -117,8 +124,8 @@ public class ConversationNode
     /// all choice nodes with successful conditions will show.
     /// </param>
     /// <param name="speakerSelector">
-    /// Optional: The speaker of the line. If null, the node will
-    /// be considered a choice rather than a dialogue line.
+    /// Optional: The speaker of the line. If null, defaults to the player.
+    /// If the speaker is the player, it will show up as a choice.
     /// </param>
     /// <param name="luaScript">
     /// Optional: A Lua script to run when the dialogue is spoken.
@@ -130,6 +137,10 @@ public class ConversationNode
     /// Optional: Conversation-related actions to perform when this dialogue is spoken.
     /// See <see cref="ConversationNodeSequenceBuilder"/>.
     /// </param>
+    /// <param name="menuText">
+    /// The text shown in the options list.
+    /// Ignored if the node isn't a choice (spoken by the player).
+    /// </param>
     /// <exception cref="ArgumentException">
     /// Thrown if any arguments are invalid.
     /// </exception>
@@ -138,13 +149,14 @@ public class ConversationNode
     /// </exception>
     public ConversationNode(
         string name,
-        string text,
+        string text = null,
         IReadOnlyList<ConversationNodeHook> hooks = null,
         IReadOnlyList<ConversationNodeSelector> nextNodes = null,
         CharacterSelector speakerSelector = null,
         string luaScript = null,
         string luaCondition = null,
-        string sequence = null)
+        string sequence = null,
+        string menuText = null)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -152,13 +164,14 @@ public class ConversationNode
         }
 
         Name = name;
-        Text = text ?? throw new ArgumentNullException(nameof(text));
+        Text = text;
         Hooks = new(hooks != null ? [.. hooks] : []);
         NextNodes = new(nextNodes != null ? [.. nextNodes] : []);
         SpeakerSelector = speakerSelector;
         LuaScript = luaScript;
         LuaCondition = luaCondition;
         Sequence = sequence;
+        MenuText = menuText;
     }
 
     /// <summary>
@@ -185,6 +198,10 @@ public class ConversationNode
     /// <param name="sequence">
     /// Optional: Override the sequence of the node.
     /// </param>
+    /// <param name="menuText">
+    /// Optional: Override the text shown in the options list.
+    /// Ignored if the node isn't a choice (spoken by the player).
+    /// </param>
     /// <exception cref="ArgumentException">
     /// Thrown if any arguments are invalid.
     /// </exception>
@@ -198,7 +215,8 @@ public class ConversationNode
         CharacterSelector speakerSelector = null,
         string luaScript = null,
         string luaCondition = null,
-        string sequence = null)
+        string sequence = null,
+        string menuText = null)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -214,5 +232,6 @@ public class ConversationNode
         LuaScript = luaScript;
         LuaCondition = luaCondition;
         Sequence = sequence;
+        MenuText = menuText;
     }
 }
