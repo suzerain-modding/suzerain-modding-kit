@@ -1,5 +1,7 @@
 using Il2Cpp;
+using MelonLoader;
 using SuzerainModdingKit.StoryPack;
+using SuzerainModdingKit.Utils;
 using ConversationType = Il2Cpp.ConversationData.ConversationType;
 
 namespace SuzerainModdingKit.StoryFragments.Conversation;
@@ -87,6 +89,13 @@ public class CustomConversationFragment : CustomStoryFragmentData
 
     internal override ConversationData RegisterInSuzerain(AddStoryFragmentOptions options)
     {
+        if (DialogueUtils.GetConversation(ConversationName) == null)
+        {
+            Melon<Core>.Logger.Error("Failed to register conversation story fragment: " +
+                $"The referenced conversation '{ConversationName}' does not exist.");
+            return null;
+        }
+
         ConversationData data = ToSuzerainStoryFragmentData();
         Func<ConversationData, bool> match = d => string.Equals(
             d.NameInDatabase,

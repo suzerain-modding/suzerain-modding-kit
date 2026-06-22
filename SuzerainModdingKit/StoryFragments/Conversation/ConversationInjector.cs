@@ -379,23 +379,6 @@ internal static class ConversationInjector
         Melon<Core>.Logger.Msg($"Patched conversation '{conversation.Title}'.");
     }
 
-    public static void CreateCustomConversations()
-    {
-        Melon<Core>.Logger.Msg("Creating registered custom conversations.");
-
-        int successCount = 0;
-        foreach (string name in ConversationRegistry.CustomConversations)
-        {
-            if (DialogueUtils.CreateConversation(name) != null)
-            {
-                successCount++;
-            }
-        }
-
-        Melon<Core>.Logger.Msg(string.Create(CultureInfo.InvariantCulture,
-            $"Successfully created {successCount} conversations."));
-    }
-
     /// <summary>
     /// The result of the 'InjectNode' method.
     /// </summary>

@@ -41,14 +41,20 @@ internal static class DialogueUtils
     /// The name of the conversation.
     /// </param>
     /// <returns>
-    /// The new conversation or null if it couldn't be added.
+    /// The new conversation, the existing conversation if it already exists,
+    /// or null if it couldn't be added.
     /// </returns>
     public static DialogueConversation CreateConversation(string name)
     {
         DialogueDatabase db = DialogueManager.MasterDatabase;
-        if (db == null || GetConversation(name) != null)
+        if (db == null)
         {
             return null;
+        }
+        DialogueConversation existing = GetConversation(name);
+        if (existing != null)
+        {
+            return existing;
         }
 
         DialogueConversation templateConv = db.conversations[0];

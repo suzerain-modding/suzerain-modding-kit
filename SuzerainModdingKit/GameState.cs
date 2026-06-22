@@ -2,7 +2,9 @@ using Il2Cpp;
 using MelonLoader;
 using SuzerainModdingKit.Report;
 using SuzerainModdingKit.StoryFragments;
+using SuzerainModdingKit.StoryFragments.Conversation;
 using SuzerainModdingKit.StoryPack;
+using SuzerainModdingKit.Utils;
 
 namespace SuzerainModdingKit;
 
@@ -134,6 +136,11 @@ public static class GameState
         }
 
         StoryFragmentData registeredData = customStoryFragmentData.RegisterInSuzerain(options);
+        if (registeredData == null)
+        {
+            Melon<Core>.Logger.Error("Failed to add custom story fragment: Registration failed.");
+            return false;
+        }
 
         // Add it to the scene.
         _gameFlowManager.currentStep.Fragments.Add(customStoryFragmentData.Name);
@@ -209,6 +216,33 @@ public static class GameState
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Add a custom conversation to the game.
+    /// </summary>
+    /// <remarks>
+    /// The conversation name must exist in the custom conversations registry.
+    /// This should be called before adding a conversation story fragment for a
+    /// custom conversation to the game.
+    /// </remarks>
+    /// <param name="name">
+    /// The name of the conversation.
+    /// </param>
+    /// <returns>
+    /// A boolean indicating whether the operation succeeded or not.
+    /// Fails if the conversation does not exist in the registry or another error occurs.
+    /// Succeeds if the conversation was successfully added or it already exists.
+    /// </returns>
+    public static bool AddCustomConversation(string name)
+    {
+        if (!ConversationRegistry.CustomConversations.Contains(name))
+        {
+            Melon<Core>.Logger.Error($"Failed to add conversation '{name}': " +
+                "The conversation does not exist in the custom conversation registry.");
+            return false;
+        }
+        return DialogueUtils.CreateConversation(name) != null;
     }
 
     internal static void ThrowIfInactive()
