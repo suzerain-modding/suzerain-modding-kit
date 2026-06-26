@@ -1,5 +1,6 @@
 using Il2Cpp;
 using SuzerainModdingKit.StoryPack;
+using SuzerainModdingKit.VanillaData;
 
 namespace SuzerainModdingKit.Report;
 

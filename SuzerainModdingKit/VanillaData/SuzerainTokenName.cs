@@ -1,4 +1,4 @@
-namespace SuzerainModdingKit.StoryPack;
+namespace SuzerainModdingKit.VanillaData;
 
 /// <summary>
 /// Static class containing the names of all tokens in vanilla Suzerain.

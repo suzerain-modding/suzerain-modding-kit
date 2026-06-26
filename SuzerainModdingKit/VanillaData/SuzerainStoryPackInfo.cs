@@ -1,4 +1,6 @@
-namespace SuzerainModdingKit.StoryPack;
+using SuzerainModdingKit.StoryPack;
+
+namespace SuzerainModdingKit.VanillaData;
 
 /// <summary>
 /// Static class containing <c cref="StoryPackInfo">StoryPackInfo</c> objects representing the

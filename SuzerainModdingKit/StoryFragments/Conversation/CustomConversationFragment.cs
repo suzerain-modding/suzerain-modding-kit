@@ -2,6 +2,7 @@ using Il2Cpp;
 using MelonLoader;
 using SuzerainModdingKit.StoryPack;
 using SuzerainModdingKit.Utils;
+using SuzerainModdingKit.VanillaData;
 using ConversationType = Il2Cpp.ConversationData.ConversationType;
 
 namespace SuzerainModdingKit.StoryFragments.Conversation;

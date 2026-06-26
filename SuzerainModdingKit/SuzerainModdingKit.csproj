@@ -520,8 +520,9 @@
 		<Compile Include="Utils\ConversationNodeSequenceBuilder.cs" />
 		<Compile Include="Utils\DialogueUtils.cs" />
 		<Compile Include="Utils\Il2CppUtils.cs" />
-		<Compile Include="StoryPack\SuzerainStoryPackInfo.cs" />
-		<Compile Include="StoryPack\SuzerainTokenName.cs" />
+		<Compile Include="VanillaData\SuzerainStoryPackInfo.cs" />
+		<Compile Include="VanillaData\SuzerainTokenName.cs" />
+		<Compile Include="VanillaData\SuzerainCharacterName.cs" />
 		<Compile Include="Variables.cs" />
 	</ItemGroup>
 
