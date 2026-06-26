@@ -659,6 +659,26 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "guides/dev/env-setup-linux.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/env-setup-linux.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/dev/env-setup-windows.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/dev/env-setup-windows.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "guides/dev/events.md",
       "output": {
         ".html": {

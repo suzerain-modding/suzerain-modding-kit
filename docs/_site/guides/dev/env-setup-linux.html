@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Environment Setup (Linux) | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Environment Setup (Linux) | Suzerain Modding Kit ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/env-setup-linux.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="environment-setup-linux">Environment Setup (Linux)</h1>
+
+<p>A guide to setting up a Suzerain mod development environment on Linux.</p>
+<p>This guide covers Linux-specific setup only. For the full mod development walkthrough including code examples, see <a href="developing-mods.html">Developing Mods</a>. For Windows setup, see <a href="env-setup-windows.html">Environment Setup (Windows)</a>.</p>
+<p>This guide assumes you have already followed <a href="../user/installing-mods.html">Installing Mods</a>.</p>
+<h2 id="setup">Setup</h2>
+<h3 id="install-net-sdk">Install .NET SDK</h3>
+<p>Install the <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.NET 6 SDK</a> for your Linux distribution.</p>
+<p>Verify the installation:</p>
+<pre><code class="lang-bash">dotnet --version
+</code></pre>
+<h3 id="install-an-ide">Install an IDE</h3>
+<p>Visual Studio is not available on Linux. The recommended alternatives are:</p>
+<ul>
+<li><a href="https://www.jetbrains.com/rider/">JetBrains Rider</a> - Full-featured .NET IDE.</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a> - Lightweight editor. Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a> extension for C# support.</li>
+</ul>
+<h3 id="create-the-project">Create the Project</h3>
+<p>Create a new class library project targeting .NET 6:</p>
+<pre><code class="lang-bash">dotnet new classlib -n MyMod -f net6
+cd MyMod
+</code></pre>
+<p>Open the generated <code>.csproj</code> file and replace its contents with the following.</p>
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net6&lt;/TargetFramework&gt;
+    &lt;Platforms&gt;x64&lt;/Platforms&gt;
+    &lt;GamePath&gt;$(HOME)/.local/share/Steam/steamapps/common/Suzerain&lt;/GamePath&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;Reference Include=&quot;SuzerainModdingKit&quot;&gt;
+      &lt;HintPath&gt;$(GamePath)/Mods/SuzerainModdingKit.dll&lt;/HintPath&gt;
+    &lt;/Reference&gt;
+    &lt;Reference Include=&quot;MelonLoader&quot;&gt;
+      &lt;HintPath&gt;$(GamePath)/MelonLoader/net6/MelonLoader.dll&lt;/HintPath&gt;
+    &lt;/Reference&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you installed Steam via Flatpak, set <code>GamePath</code> to:
+<code>$(HOME)/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain</code></p>
+</div>
+<p>If you need to reference IL2CPP types directly (beyond what Suzerain Modding Kit exposes), add references to the interop assemblies generated by MelonLoader. These are found in <code>$(GamePath)/MelonLoader/Il2CppAssemblies/</code> after launching the game at least once with MelonLoader installed.</p>
+<h3 id="add-mod-metadata">Add Mod Metadata</h3>
+<p>Delete the generated <code>Class1.cs</code> and create <code>Core.cs</code>. Add the assembly-level attributes that identify your mod to MelonLoader. These must be outside any namespace declaration:</p>
+<pre><code class="lang-cs">using MelonLoader;
+using SuzerainModdingKit;
+
+[assembly: MelonInfo(typeof(MyMod.Core), &quot;My Mod&quot;, &quot;1.0.0&quot;, &quot;Your Name&quot;, null)]
+[assembly: MelonGame(&quot;Torpor Games&quot;, &quot;Suzerain&quot;)]
+
+namespace MyMod;
+
+internal sealed class Core : MelonMod
+{
+    public override void OnInitializeMelon()
+    {
+        LoggerInstance.Msg(&quot;Initialized.&quot;);
+    }
+}
+</code></pre>
+<p>Update the mod name (second argument of <code>MelonInfo</code>) and your name (fourth argument — ideally your Nexus Mods username).</p>
+<h2 id="building-and-installing">Building and Installing</h2>
+<p>Build the mod targeting x64:</p>
+<pre><code class="lang-bash">dotnet build -c Debug -p:Platform=x64
+</code></pre>
+<p>Use <code>Debug</code> when building for testing and <code>Release</code> when building for a public release. Replace <code>Debug</code> in the file paths below with <code>Release</code> when building in <code>Release</code> mode.</p>
+<p>The compiled DLL is at <code>bin/x64/Debug/net6/MyMod.dll</code>. Copy it to the Suzerain <code>Mods</code> folder:</p>
+<pre><code class="lang-bash">cp bin/x64/Debug/net6/MyMod.dll ~/.local/share/Steam/steamapps/common/Suzerain/Mods/
+</code></pre>
+<p>Or if you installed Steam via Flatpak:</p>
+<pre><code class="lang-bash">cp bin/x64/Debug/net6/MyMod.dll ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain/Mods/
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Add a post-build target to your <code>.csproj</code> to copy the DLL automatically after each build:</p>
+<pre><code class="lang-xml">&lt;Target Name=&quot;PostBuild&quot; AfterTargets=&quot;PostBuildEvent&quot;&gt;
+  &lt;Copy SourceFiles=&quot;$(TargetPath)&quot; DestinationFolder=&quot;$(GamePath)/Mods&quot; /&gt;
+&lt;/Target&gt;
+</code></pre>
+</div>
+<p>Launch Suzerain through Steam to test your mod. Check the MelonLoader console output for diagnostics.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/env-setup-linux.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

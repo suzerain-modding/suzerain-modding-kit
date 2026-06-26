@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Back Up Saves | Suzerain Modding Kit </title>
+      <title>Environment Setup (Windows) | Suzerain Modding Kit </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Back Up Saves | Suzerain Modding Kit ">
+      <meta name="title" content="Environment Setup (Windows) | Suzerain Modding Kit ">
       
       
       <link rel="icon" href="../../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/user/back-up-saves.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/env-setup-windows.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,46 +85,51 @@
         </div>
 
         <article data-uid="">
-<h1 id="back-up-saves">Back Up Saves</h1>
+<h1 id="environment-setup-windows">Environment Setup (Windows)</h1>
 
-<p>If something goes wrong, your save files could get lost or corrupted.</p>
-<h2 id="windows">Windows</h2>
+<p>A guide to setting up a Suzerain mod development environment on Windows.</p>
+<p>This guide covers Windows-specific setup only. For the full mod development walkthrough including code examples, see <a href="developing-mods.html">Developing Mods</a>. For Linux setup, see <a href="env-setup-linux.html">Environment Setup (Linux)</a>.</p>
+<h2 id="setup">Setup</h2>
 <ol>
-<li>Press Win + R to open Run.</li>
-<li>Type <code>%localappdata%low\Torpor Games\Suzerain</code> and press OK.</li>
-<li>All saves are named <code>Autosave</code>, <code>FinalSave</code>, <code>ManualSave</code>, or <code>TurnSave</code> and then the date. Copy the ones you want to back up (or all of them) into another folder somewhere safe.
+<li>Follow the <a href="../user/installing-mods.html">Installing Mods</a> guide to install MelonLoader and Suzerain Modding Kit.</li>
+<li>Install <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio</a> (Visual Studio, not Visual Studio Code).
+<ul>
+<li>In the Visual Studio Installer, ensure you also install the &quot;.NET desktop development&quot; workload.</li>
+</ul>
+</li>
+<li>Download the <a href="https://github.com/TrevTV/MelonLoader.VSWizard/releases">MelonLoader VS Wizard</a> and run the <code>.vsix</code> file to install it as a Visual Studio extension.</li>
+<li>Open Visual Studio and create a new project. Select &quot;MelonLoader Mod&quot; as the project template.</li>
+<li>Fill in the project info and create. Visual Studio will open a file selector, navigate to and select <code>Suzerain.exe</code>.
+<ul>
+<li>The default install location is <code>C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Suzerain.exe</code>.</li>
+</ul>
+</li>
+<li>Open the <code>.csproj</code> and add <code>&lt;Reference Include=&quot;SuzerainModdingKit&quot;&gt;&lt;HintPath&gt;$(GamePath)\Mods\SuzerainModdingKit.dll&lt;/HintPath&gt;&lt;/Reference&gt;</code> where the other references are (usually in the first <code>ItemGroup</code>).</li>
+<li>In Visual Studio, set the build platform to <code>x64</code>.
 <ol>
-<li>Make sure you are only copying the save files.</li>
-<li>If you have played with mods before, also copy the <code>moddingkit</code> folder. This folder contains additional save data related to mods.</li>
+<li>Select Build &gt; Configuration Manager.</li>
+<li>Open the active solution platform dropdown. If <code>x64</code> is already there, skip the next step. Otherwise, continue.</li>
+<li>Select new. Set the new platform to <code>x64</code>, copy settings from <code>Any CPU</code>, and enable &quot;Create new project platforms.&quot; Select OK.</li>
+<li>Set the active solution platform to <code>x64</code>.</li>
+<li>Under project contexts, open the platform dropdown. Select <code>x64</code>.</li>
+<li>Close the configuration manager.</li>
+<li>Use your <code>Debug</code> configuration when building for development and <code>Release</code> when building to publish.</li>
 </ol>
 </li>
-<li>If you need to restore the saves, copy the back ups back into <code>%localappdata%low\Torpor Games\Suzerain</code>.</li>
-</ol>
-<h2 id="linux">Linux</h2>
-<h3 id="find-your-save-directory">Find Your Save Directory</h3>
-<p>Your saves are stored at:</p>
-<pre><code>~/.local/share/Steam/steamapps/compatdata/1207650/pfx/drive_c/users/steamuser/AppData/LocalLow/Torpor Games/Suzerain/
-</code></pre>
-<div class="NOTE">
-<h5>Note</h5>
-<p>If you installed Steam via Flatpak, the path begins with <code>~/.var/app/com.valvesoftware.Steam/.local/share/Steam/</code> instead of <code>~/.local/share/Steam/</code>.</p>
-</div>
-<h3 id="back-up">Back Up</h3>
+<li>Recommended: Update <code>MelonInfo</code>.
 <ol>
-<li>Navigate to the save directory above.</li>
-<li>All saves are named <code>Autosave</code>, <code>FinalSave</code>, <code>ManualSave</code>, or <code>TurnSave</code> followed by the date. Copy the ones you want to back up (or all of them) into another folder somewhere safe.
-<ol>
-<li>Make sure you are only copying the save files.</li>
-<li>If you have played with mods before, also copy the <code>moddingkit</code> folder. This folder contains additional save data related to mods.</li>
+<li>When creating the project, the auto generated <code>MelonInfo</code> will look something like this: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;MyMod&quot;, &quot;1.0.0&quot;, &quot;userprofilename&quot;, null)]</code>.</li>
+<li>Add spaces to the mod name (second argument) and change your user profile name (fourth argument) to your Nexus Mods account name.</li>
+<li>It should look like this now: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;My Mod&quot;, &quot;1.0.0&quot;, &quot;My User Name&quot;, null)]</code>.</li>
 </ol>
 </li>
-<li>If you need to restore the saves, copy the back ups back into the save directory.</li>
+<li>Recommended: Set the <code>Core</code> class to <code>internal sealed</code>: <code>internal sealed class Core : MelonMod</code>.</li>
 </ol>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/user/back-up-saves.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-1.3/docs/guides/dev/env-setup-windows.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

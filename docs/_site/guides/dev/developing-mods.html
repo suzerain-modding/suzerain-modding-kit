@@ -88,37 +88,16 @@
 <h1 id="developing-mods">Developing Mods</h1>
 
 <p>A guide to creating Suzerain mods with MelonLoader and Suzerain Modding Kit. This is a simple guide that should be easy to follow, but it does assume that you have atleast a basic understanding of programming and C#. If you have never programmed in C# before, we highly recommend learning the basics of programming and/or C# first.</p>
-<p>This guide is intended for Windows and the Steam version of Suzerain.</p>
+<p>This guide is for Windows and Linux. You must own Suzerain on Steam.</p>
 <h2 id="beta-disclaimer">Beta Disclaimer</h2>
-<p>Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.</p>
+<p>Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes.</p>
 <h2 id="setup">Setup</h2>
-<ol>
-<li>Follow the <a href="../user/installing-mods.html">Installing Mods</a> guide to install MelonLoader and Suzerain Modding Kit.</li>
-<li>Install <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio</a> (Visual Studio, not Visual Studio Code).</li>
-<li>Download the <a href="https://github.com/TrevTV/MelonLoader.VSWizard/releases">MelonLoader VS Wizard</a> and run the <code>.vsix</code> file to install it as a Visual Studio extension.</li>
-<li>Open Visual Studio and create a new project. Select &quot;MelonLoader Mod&quot; as the project template.</li>
-<li>Fill in the project info and create. Visual Studio will open a file selector, navigate to and select <code>C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Suzerain.exe</code>.</li>
-<li>Open the <code>.csproj</code> and add <code>&lt;Reference Include=&quot;SuzerainModdingKit&quot;&gt;&lt;HintPath&gt;$(GamePath)\Mods\SuzerainModdingKit.dll&lt;/HintPath&gt;&lt;/Reference&gt;</code> where the other references are (usually in the first <code>ItemGroup</code>).</li>
-<li>In Visual Studio, set the build platform to <code>x64</code>.
-<ol>
-<li>Select Build &gt; Configuration Manager.</li>
-<li>Open the active solution platform dropdown. If <code>x64</code> is already there, skip the next step. Otherwise, continue.</li>
-<li>Select new. Set the new platform to <code>x64</code>, copy settings from <code>Any CPU</code>, and enable &quot;Create new project platforms.&quot; Select OK.</li>
-<li>Set the active solution platform to <code>x64</code>.</li>
-<li>Under project contexts, open the platform dropdown. Select <code>x64</code>.</li>
-<li>Close the configuration manager.</li>
-<li>Use your <code>Debug</code> configuration when building for development and <code>Release</code> when building to publish.</li>
-</ol>
-</li>
-<li>Recommended: Update <code>MelonInfo</code>.
-<ol>
-<li>When creating the project, the auto generated <code>MelonInfo</code> will look something like this: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;MyMod&quot;, &quot;1.0.0&quot;, &quot;userprofilename&quot;, null)]</code>.</li>
-<li>Add spaces to the mod name (second argument) and change your user profile name (fourth argument) to your Nexus Mods account name.</li>
-<li>It should look like this now: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;My Mod&quot;, &quot;1.0.0&quot;, &quot;My User Name&quot;, null)]</code>.</li>
-</ol>
-</li>
-<li>Recommended: Set the <code>Core</code> class to <code>internal sealed</code>: <code>internal sealed class Core : MelonMod</code>.</li>
-</ol>
+<p>First, follow the <a href="../user/installing-mods.html">Installing Mods</a> guide.</p>
+<p>Next, follow the environment setup guide for your OS:</p>
+<ul>
+<li><strong>Windows:</strong> See <a href="env-setup-windows.html">Environment Setup (Windows)</a>.</li>
+<li><strong>Linux:</strong> See <a href="env-setup-linux.html">Environment Setup (Linux)</a>.</li>
+</ul>
 <h2 id="a-new-decision">A New Decision</h2>
 <p>Now that our project is set up. Let's get to coding!</p>
 <p>In this guide, we'll make a very simple mod that adds a new decision to the game. The full example project is available <a href="https://github.com/suzerain-modding/suzerain-mod-examples/tree/main/DecisionExample">here</a>.</p>
@@ -294,6 +273,19 @@ using SuzerainModdingKit;
 }
 </code></pre>
 <p>We have updated the <code>Core</code> class to listen to the events we need for our decision, and forward each one to our <code>SpendBudgetDecision</code> class.</p>
+<h3 id="building">Building</h3>
+<p><strong>Windows:</strong> Set the configuration to Debug x64 in the Visual Studio toolbar then select Build &gt; Build Solution. The DLL will automatically be copied to your <code>Mods</code> folder.</p>
+<p><strong>Linux:</strong></p>
+<ol>
+<li>Run <code>dotnet build -c Debug -p:Platform=x64</code>.</li>
+<li>If you didn't add a copy post-build target, manually copy the DLL:
+<ul>
+<li>Run <code>cp bin/x64/Debug/net6/MyMod.dll ~/.local/share/Steam/steamapps/common/Suzerain/Mods/</code>.</li>
+<li>If you installed Steam via Flatpak: <code>cp bin/x64/Debug/net6/MyMod.dll ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain/Mods/</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="results">Results</h3>
 <p>The fruits of our labor:</p>
 <p><img src="https://raw.githubusercontent.com/suzerain-modding/suzerain-mod-examples/refs/heads/main/DecisionExample/images/screenshot_hub.png" alt="Screenshot 1"></p>
 <p><img src="https://raw.githubusercontent.com/suzerain-modding/suzerain-mod-examples/refs/heads/main/DecisionExample/images/screenshot_panel.png" alt="Screenshot 1"></p>
