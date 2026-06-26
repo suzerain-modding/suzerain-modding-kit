@@ -2,33 +2,20 @@
 
 A guide to creating Suzerain mods with MelonLoader and Suzerain Modding Kit. This is a simple guide that should be easy to follow, but it does assume that you have atleast a basic understanding of programming and C#. If you have never programmed in C# before, we highly recommend learning the basics of programming and/or C# first.
 
-This guide is intended for Windows and the Steam version of Suzerain.
+This guide is for Windows and Linux. You must own Suzerain on Steam.
 
 ## Beta Disclaimer
 
-Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes. Minor updates may contain breaking API changes.
+Suzerain Modding Kit is currently in beta and should not be considered stable. Expect bugs and crashes.
 
 ## Setup
 
-1. Follow the [Installing Mods](../user/installing-mods.md) guide to install MelonLoader and Suzerain Modding Kit.
-2. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (Visual Studio, not Visual Studio Code).
-3. Download the [MelonLoader VS Wizard](https://github.com/TrevTV/MelonLoader.VSWizard/releases) and run the `.vsix` file to install it as a Visual Studio extension.
-4. Open Visual Studio and create a new project. Select "MelonLoader Mod" as the project template.
-5. Fill in the project info and create. Visual Studio will open a file selector, navigate to and select `C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Suzerain.exe`.
-6. Open the `.csproj` and add `<Reference Include="SuzerainModdingKit"><HintPath>$(GamePath)\Mods\SuzerainModdingKit.dll</HintPath></Reference>` where the other references are (usually in the first `ItemGroup`).
-7. In Visual Studio, set the build platform to `x64`.
-    1. Select Build > Configuration Manager.
-    2. Open the active solution platform dropdown. If `x64` is already there, skip the next step. Otherwise, continue.
-    3. Select new. Set the new platform to `x64`, copy settings from `Any CPU`, and enable "Create new project platforms." Select OK.
-    4. Set the active solution platform to `x64`.
-    5. Under project contexts, open the platform dropdown. Select `x64`.
-    6. Close the configuration manager.
-    7. Use your `Debug` configuration when building for development and `Release` when building to publish.
-8. Recommended: Update `MelonInfo`.
-    1. When creating the project, the auto generated `MelonInfo` will look something like this: `[assembly: MelonInfo(typeof(MyMod.Core), "MyMod", "1.0.0", "userprofilename", null)]`.
-    2. Add spaces to the mod name (second argument) and change your user profile name (fourth argument) to your Nexus Mods account name.
-    3. It should look like this now: `[assembly: MelonInfo(typeof(MyMod.Core), "My Mod", "1.0.0", "My User Name", null)]`.
-9. Recommended: Set the `Core` class to `internal sealed`: `internal sealed class Core : MelonMod`.
+First, follow the [Installing Mods](../user/installing-mods.md) guide.
+
+Next, follow the environment setup guide for your OS:
+
+- **Windows:** See [Environment Setup (Windows)](env-setup-windows.md).
+- **Linux:** See [Environment Setup (Linux)](env-setup-linux.md).
 
 ## A New Decision
 
@@ -243,6 +230,19 @@ internal sealed class Core : MelonMod
 
 We have updated the `Core` class to listen to the events we need for our decision, and forward each one to our `SpendBudgetDecision` class.
 
+### Building
+
+**Windows:** Set the configuration to Debug x64 in the Visual Studio toolbar then select Build > Build Solution. The DLL will automatically be copied to your `Mods` folder.
+
+**Linux:**
+
+1. Run `dotnet build -c Debug -p:Platform=x64`.
+2. If you didn't add a copy post-build target, manually copy the DLL:
+    - Run `cp bin/x64/Debug/net6/MyMod.dll ~/.local/share/Steam/steamapps/common/Suzerain/Mods/`.
+    - If you installed Steam via Flatpak: `cp bin/x64/Debug/net6/MyMod.dll ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain/Mods/`.
+
+### Results
+
 The fruits of our labor:
 
 ![Screenshot 1](https://raw.githubusercontent.com/suzerain-modding/suzerain-mod-examples/refs/heads/main/DecisionExample/images/screenshot_hub.png)
@@ -256,4 +256,3 @@ Congratulations! You just made your first Suzerain mod.
 - See more [development guides](index.md).
 - See the [API reference](../../api/SuzerainModdingKit.yml).
 - **Where do I post my mods?** The recommended site to post mods on is [Nexus Mods](https://www.nexusmods.com/games/suzerain). You may also promote your mods in the `#mod-promotions` channel on our [Discord server](https://discord.gg/za8eDBJ8TH).
-

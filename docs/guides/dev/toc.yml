@@ -12,6 +12,10 @@
   href: developing-mods.md
 - name: Editing Conversations
   href: editing-conversations.md
+- name: Environment Setup (Linux)
+  href: env-setup-linux.md
+- name: Environment Setup (Windows)
+  href: env-setup-windows.md
 - name: Events
   href: events.md
 - name: Inspecting Game Data
