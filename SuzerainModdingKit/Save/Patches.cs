@@ -6,7 +6,7 @@ namespace SuzerainModdingKit.Save;
 [HarmonyPatch(typeof(JsonSaveLoad), nameof(JsonSaveLoad.SaveDataToFile))]
 internal static class JsonSaveLoad_SaveDataToFile_Patch
 {
-    public static void Postfix(string path)
+    public static void Postfix(string path, SaveData saveData)
     {
         if (!GameState.IsGameActive)
         {
@@ -17,7 +17,8 @@ internal static class JsonSaveLoad_SaveDataToFile_Patch
         }
 
         string fileName = Path.GetFileName(path);
-        SaveManager.Save(fileName);
+        bool isActiveSave = saveData.saveFileType == PersistenceManager.SaveFileType.Active;
+        SaveManager.Save(fileName, isActiveSave);
     }
 }
 

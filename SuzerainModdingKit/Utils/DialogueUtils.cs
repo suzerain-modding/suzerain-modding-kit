@@ -1,4 +1,6 @@
+using System.Globalization;
 using Il2CppPixelCrushers.DialogueSystem;
+using MelonLoader;
 using DialogueConversation = Il2CppPixelCrushers.DialogueSystem.Conversation;
 
 namespace SuzerainModdingKit.Utils;
@@ -69,6 +71,9 @@ internal static class DialogueUtils
         conversation.dialogueEntries.Add(startNode);
 
         db.conversations.Add(conversation);
+
+        Melon<Core>.Logger.Msg(string.Create(CultureInfo.InvariantCulture,
+            $"Created conversation '{name}' with ID {id}."));
 
         return conversation;
     }

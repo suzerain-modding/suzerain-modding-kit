@@ -19,8 +19,12 @@ internal static class SaveManager
         @"AppData\LocalLow\Torpor Games\Suzerain");
     public static readonly string ModSavePath = Path.Combine(SuzerainSavePath, "moddingkit");
 
-    private static bool _firstLoadSaveCalled;
-    private static string _loadedSaveName;
+    // Suzerain's active save (Active_[date].json) is the currently loaded save. Its file name
+    // is date-stamped and can change, and Suzerain also updates it by copying other saves onto
+    // it, which doesn't trigger the SaveDataToFile patch. Rather than mirror that file name, we
+    // maintain our own active save under this fixed name so it always stays in sync with the
+    // data we save and load.
+    internal const string ActiveSaveFileName = "active.json";
 
     public static void CleanupOrphanedModSaves()
     {
@@ -41,6 +45,11 @@ internal static class SaveManager
         foreach (string filePath in modSavePaths)
         {
             string fileName = Path.GetFileName(filePath);
+            if (string.Equals(fileName, ActiveSaveFileName, StringComparison.OrdinalIgnoreCase))
+            {
+                // Our active save has no matching Suzerain save file, so exclude it from cleanup.
+                continue;
+            }
             if (!suzerainSaveNames.Contains(fileName))
             {
                 File.Delete(filePath);
@@ -50,27 +59,29 @@ internal static class SaveManager
 
     public static void OnSuzerainLoadSaveFile(string fileName, bool isActiveSave)
     {
-        if (_firstLoadSaveCalled && isActiveSave)
+        if (isActiveSave)
         {
-            // Suzerain first loads the selected save, then loads the active save.
-            // Reload the initial save if we have already loaded a save and the active
-            // save is being loaded.
-            _firstLoadSaveCalled = false;
-            if (_loadedSaveName == null)
-            {
-                Melon<Core>.Logger.Error("Loaded save name is null. Cannot load mod save.");
-                return;
-            }
-            LoadSave(_loadedSaveName);
+            // Suzerain is loading its active save, so load our own active save.
+            LoadSave(ActiveSaveFileName);
             return;
         }
 
-        _firstLoadSaveCalled = true;
         LoadSave(fileName);
+
+        // Suzerain copies the loaded save onto its active save. That copy doesn't trigger the
+        // SaveDataToFile patch, so mirror it here to keep our active save in sync.
+        CopyToActiveSave(fileName);
     }
 
-    public static void Save(string fileName)
+    public static void Save(string fileName, bool isActiveSave)
     {
+        if (isActiveSave)
+        {
+            // Save our active save under a fixed file name instead of matching Suzerain's
+            // date-stamped active save file name.
+            fileName = ActiveSaveFileName;
+        }
+
         string savePath = Path.Combine(ModSavePath, fileName);
 
         Dictionary<string, object> variables = [];
@@ -128,9 +139,32 @@ internal static class SaveManager
         Melon<Core>.Logger.Msg($"Saved mod data to '{savePath}'.");
     }
 
+    private static void CopyToActiveSave(string fileName)
+    {
+        if (string.Equals(fileName, ActiveSaveFileName, StringComparison.OrdinalIgnoreCase))
+        {
+            // The active save is already the source; nothing to copy.
+            return;
+        }
+
+        string sourcePath = Path.Combine(ModSavePath, fileName);
+        string activePath = Path.Combine(ModSavePath, ActiveSaveFileName);
+
+        if (!File.Exists(sourcePath))
+        {
+            // The loaded save has no mod data, so our active save shouldn't either.
+            if (File.Exists(activePath))
+            {
+                File.Delete(activePath);
+            }
+            return;
+        }
+
+        File.Copy(sourcePath, activePath, overwrite: true);
+    }
+
     private static void LoadSave(string fileName)
     {
-        _loadedSaveName = fileName;
         string savePath = Path.Combine(ModSavePath, fileName);
 
         if (!File.Exists(savePath))
