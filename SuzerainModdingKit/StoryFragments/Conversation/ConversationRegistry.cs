@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
-using SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors;
 using MelonLoader;
+using SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors;
 
 namespace SuzerainModdingKit.StoryFragments.Conversation;
 
