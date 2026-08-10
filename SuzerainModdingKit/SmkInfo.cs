@@ -8,15 +8,15 @@ public static class SmkInfo
     /// <summary>
     /// The 'era' component of the current SMK version.
     /// </summary>
-    public const int VersionEra = 1;
+    public const int VersionEra = 2;
     /// <summary>
     /// The 'release' component of the current SMK version.
     /// </summary>
-    public const int VersionRelease = 3;
+    public const int VersionRelease = 4;
     /// <summary>
     /// The current SMK version as a string.
     /// </summary>
-    public const string VersionStr = "1.3";
+    public const string VersionStr = "2.4";
     /// <summary>
     /// The version of the mod.
     /// </summary>

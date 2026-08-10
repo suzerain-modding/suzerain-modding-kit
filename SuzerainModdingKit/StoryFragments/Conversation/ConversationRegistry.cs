@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
-using MelonLoader;
 using SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors;
+using MelonLoader;
 
 namespace SuzerainModdingKit.StoryFragments.Conversation;
 
@@ -65,7 +65,7 @@ public static class ConversationRegistry
     }
 
     /// <summary>
-    /// Register a new conversation.
+    /// Register a new conversation. This is a WIP feature - Use at your own risk.
     /// </summary>
     /// <remarks>
     /// This method creates a new conversation with only a START node. Use
