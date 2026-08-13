@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Environment Setup (Windows) | Suzerain Modding Kit </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Environment Setup (Windows) | Suzerain Modding Kit ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/env-setup-windows.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Suzerain Modding Kit">
+            Suzerain Modding Kit
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="environment-setup-windows">Environment Setup (Windows)</h1>
+
+<p>A guide to setting up a Suzerain mod development environment on Windows.</p>
+<p>This guide covers Windows-specific setup only. For the full mod development walkthrough including code examples, see <a href="developing-mods.html">Developing Mods</a>. For Linux setup, see <a href="env-setup-linux.html">Environment Setup (Linux)</a>.</p>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>Follow the <a href="../user/installing-mods.html">Installing Mods</a> guide to install MelonLoader and Suzerain Modding Kit.</li>
+<li>Install <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio</a> (Visual Studio, not Visual Studio Code).
+<ul>
+<li>In the Visual Studio Installer, ensure you also install the &quot;.NET desktop development&quot; workload.</li>
+</ul>
+</li>
+<li>Download the <a href="https://github.com/TrevTV/MelonLoader.VSWizard/releases">MelonLoader VS Wizard</a> and run the <code>.vsix</code> file to install it as a Visual Studio extension.</li>
+<li>Open Visual Studio and create a new project. Select &quot;MelonLoader Mod&quot; as the project template.</li>
+<li>Fill in the project info and create. Visual Studio will open a file selector, navigate to and select <code>Suzerain.exe</code>.
+<ul>
+<li>The default install location is <code>C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Suzerain.exe</code>.</li>
+</ul>
+</li>
+<li>Open the <code>.csproj</code> and add <code>&lt;Reference Include=&quot;SuzerainModdingKit&quot;&gt;&lt;HintPath&gt;$(GamePath)\Mods\SuzerainModdingKit.dll&lt;/HintPath&gt;&lt;/Reference&gt;</code> where the other references are (usually in the first <code>ItemGroup</code>).</li>
+<li>In Visual Studio, set the build platform to <code>x64</code>.
+<ol>
+<li>Select Build &gt; Configuration Manager.</li>
+<li>Open the active solution platform dropdown. If <code>x64</code> is already there, skip the next step. Otherwise, continue.</li>
+<li>Select new. Set the new platform to <code>x64</code>, copy settings from <code>Any CPU</code>, and enable &quot;Create new project platforms.&quot; Select OK.</li>
+<li>Set the active solution platform to <code>x64</code>.</li>
+<li>Under project contexts, open the platform dropdown. Select <code>x64</code>.</li>
+<li>Close the configuration manager.</li>
+<li>Use your <code>Debug</code> configuration when building for development and <code>Release</code> when building to publish.</li>
+</ol>
+</li>
+<li>Recommended: Update <code>MelonInfo</code>.
+<ol>
+<li>When creating the project, the auto generated <code>MelonInfo</code> will look something like this: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;MyMod&quot;, &quot;1.0.0&quot;, &quot;userprofilename&quot;, null)]</code>.</li>
+<li>Add spaces to the mod name (second argument) and change your user profile name (fourth argument) to your Nexus Mods account name.</li>
+<li>It should look like this now: <code>[assembly: MelonInfo(typeof(MyMod.Core), &quot;My Mod&quot;, &quot;1.0.0&quot;, &quot;My User Name&quot;, null)]</code>.</li>
+</ol>
+</li>
+<li>Recommended: Set the <code>Core</code> class to <code>internal sealed</code>: <code>internal sealed class Core : MelonMod</code>.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/env-setup-windows.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
