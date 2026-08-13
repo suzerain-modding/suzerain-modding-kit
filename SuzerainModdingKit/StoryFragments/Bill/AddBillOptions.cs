@@ -2,7 +2,7 @@ namespace SuzerainModdingKit.StoryFragments.Bill;
 
 /// <summary>
 /// Options for adding a bill to the game using
-/// <c cref="GameState.AddCustomStoryFragment"/></c>.
+/// <c cref="GameState.AddCustomStoryFragment"/>GameState.AddCustomStoryFragment</c>.
 /// </summary>
 public class AddBillOptions : AddStoryFragmentOptions
 {
