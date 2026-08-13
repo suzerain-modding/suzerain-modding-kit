@@ -37,7 +37,7 @@ internal sealed class Core : MelonMod
 
 public static class MyBill
 {
-    public static readonly CustomBillData Data = new(
+    public static readonly CustomBillFragment Data = new(
         // Other arguments ..
         name: "ExampleMod.MyBill");
 

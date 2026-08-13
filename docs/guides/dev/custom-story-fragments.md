@@ -40,7 +40,7 @@ public static class SpendBudgetDecision
     // Other code ..
 
     // The properties for this decision.
-    public static readonly CustomDecisionData Data = new(
+    public static readonly CustomDecisionFragment Data = new(
         // The unique name of the decision.
         name: "DecisionExample.MyDecision",
         // The story pack that this decision will be displayed in.
