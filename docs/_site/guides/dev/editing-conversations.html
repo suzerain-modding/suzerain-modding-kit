@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/editing-conversations.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/suzerain-modding/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/editing-conversations.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -87,7 +87,18 @@
         <article data-uid="">
 <h1 id="editing-conversations">Editing Conversations</h1>
 
-<p>This guide explains how to edit existing conversations. Note that adding new conversations is not yet supported. You can only add new nodes or override existing nodes in existing conversations.</p>
+<p>This guide explains how to edit existing conversations by adding new nodes or overriding existing nodes.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Creating fully custom conversations is possible, but the feature is <strong>experimental</strong>. It is incomplete and included for public testing. Its behavior and API may change significantly—or it may be removed—in any future release. Do not rely on it in production.</p>
+<p>There is no guide for it yet. See these API reference pages to get started:</p>
+<ul>
+<li><a href="../../api/SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry.html">ConversationRegistry.RegisterConversation</a> creates a new conversation containing only a START node. Like injections, it must be called in <code>OnInitializeMelon</code>.</li>
+<li><a href="../../api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationStartNodeSelector.html">ConversationStartNodeSelector</a> targets that START node, so a <code>ConversationInjection</code> can hook your dialogue to it. Everything in this guide applies to filling in a custom conversation.</li>
+<li><a href="../../api/SuzerainModdingKit.GameState.html">GameState.AddCustomConversation</a> adds a registered conversation to the game. Call it before adding the story fragment that opens the conversation.</li>
+<li><a href="../../api/SuzerainModdingKit.StoryFragments.Conversation.CustomConversationFragment.html">CustomConversationFragment</a> is the story fragment that opens a conversation from a token. Add it with <a href="../../api/SuzerainModdingKit.GameState.html">GameState.AddCustomStoryFragment</a>, like any other <a href="custom-story-fragments.html">story fragment</a>.</li>
+</ul>
+</div>
 <h2 id="what-is-a-conversation">What Is a Conversation?</h2>
 <p>A conversation is a graph of nodes. A node can be a line of dialogue, a choice for the player, or just an empty node that connects other nodes.</p>
 <h2 id="injecting-nodes">Injecting Nodes</h2>
@@ -125,6 +136,7 @@ new ConversationInjection(&quot;Sordland/Turn02/Personal_Funeral&quot;)
     .Register();
 </code></pre>
 <p>Injections <strong>must</strong> be registered in <code>OnInitializeMelon</code>. <code>Register</code> will throw an exception if called after <code>OnInitializeMelon</code>.</p>
+<p>A node's <code>name</code> must be a real identifier: <code>ConversationNode</code> throws an <code>ArgumentException</code> if the name is null, empty, or made up only of whitespace.</p>
 <h3 id="important-types">Important Types</h3>
 <p>What's happening here? First, let's look at the different types and what they do:</p>
 <ul>
@@ -132,8 +144,10 @@ new ConversationInjection(&quot;Sordland/Turn02/Personal_Funeral&quot;)
 <li><code>ConversationInjection</code> describes what you want to add or change in an existing conversation.</li>
 <li><code>CharacterSelector</code> (subclasses: <code>CharacterNameSelector</code>, ...) describes a character that should be selected when it is time to resolve the conversation node. If the character cannot be resolved, the conversation node will be ignored.</li>
 <li><code>ConversationNodeHook</code> contains a selector for a node to hook to and optionally describes how to hook it. In the example above, the &quot;how to hook&quot; arguments are omitted so the hook will just use the default hook strategy.</li>
-<li><code>ConversationNodeSelector</code> (subclasses: <code>ConversationNodeArticyIDSelector</code>, <code>ConversationNodeModdedNameSelector</code>, ...) describes another node that should be selected when it is time to resolve this conversation node.</li>
+<li><code>ConversationNodeSelector</code> (subclasses: <code>ConversationNodeArticyIDSelector</code>, <code>ConversationNodeModdedNameSelector</code>, ...) describes another node that should be selected when it is time to resolve this conversation node. If you write your own selector, override <code>DialogueEntry Resolve(Conversation currentConversation)</code> and return null when the node cannot be found.</li>
 </ul>
+<h3 id="choices">Choices</h3>
+<p>A node is a choice when its resolved speaker is the player. There is no property to set: omit <code>speakerSelector</code> (which defaults the speaker to the player) to make a node a choice, or pass a <code>speakerSelector</code> that resolves to another character to make it a dialogue line.</p>
 <h3 id="hooks">Hooks</h3>
 <p>We see <code>hooks</code> in the example. What exactly is a &quot;hook?&quot; A hook is an object that describes which node to attach this node to.</p>
 <p>What's the difference between hooks and next nodes? Notice that <code>nextNodes</code> can only be defined from within the node itself. We cannot add to a node's <code>nextNodes</code> from a different node. However, a node can hook to another node without the other node knowing about it.</p>
@@ -168,11 +182,12 @@ new ConversationInjection(&quot;Sordland/Turn02/Personal_Funeral&quot;)
 <li><code>luaScript</code> is the Lua script that will execute when the line is spoken. See <a href="lua-dialogue-system.html">Lua in the Dialogue System</a>.</li>
 <li><code>sequence</code> is the conversation-related actions to perform when this line is spoken. See <a href="../../api/SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.html">ConversationNodeSequenceBuilder</a>.</li>
 </ul>
+<p><code>ConversationNodeSequenceBuilder</code> silently skips any call whose input is invalid, which includes null, empty, and whitespace-only strings as well as strings containing <code>(</code>, <code>)</code>, or <code>;</code>. Use <code>ConversationNodeSequenceBuilder.IsValidInput</code> if you need to check a value yourself.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Fluffyalien1422/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/editing-conversations.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/suzerain-modding/suzerain-modding-kit/blob/docs-2.4/docs/guides/dev/editing-conversations.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>
