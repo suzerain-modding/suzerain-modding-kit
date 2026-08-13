@@ -32,7 +32,7 @@ Add the imports we will need to the top of the file:
 ```cs
 using SuzerainModdingKit;
 using SuzerainModdingKit.StoryFragments.Decision;
-using SuzerainModdingKit.StoryPack;
+using SuzerainModdingKit.VanillaData;
 ```
 
 Add the following properties to the class:
@@ -47,7 +47,7 @@ public const string SpendBudgetOptionVar = "DecisionExample.SpendBudgetDecision_
 public const string NothingOptionVar = "DecisionExample.SpendBudgetDecision_Nothing";
 
 // The properties for this decision.
-public static readonly CustomDecisionData Data = new(
+public static readonly CustomDecisionFragment Data = new(
     // The unique name of the decision.
     name: "DecisionExample.MyDecision",
     // The story pack that this decision will be displayed in.
