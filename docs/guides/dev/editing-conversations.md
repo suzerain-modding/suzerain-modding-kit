@@ -1,6 +1,16 @@
 # Editing Conversations
 
-This guide explains how to edit existing conversations. Note that adding new conversations is not yet supported. You can only add new nodes or override existing nodes in existing conversations.
+This guide explains how to edit existing conversations by adding new nodes or overriding existing nodes.
+
+> [!WARNING]
+> Creating fully custom conversations is possible, but the feature is **experimental**. It is incomplete and included for public testing. Its behavior and API may change significantly—or it may be removed—in any future release. Do not rely on it in production.
+>
+> There is no guide for it yet. See these API reference pages to get started:
+>
+> - [ConversationRegistry.RegisterConversation](../../api/SuzerainModdingKit.StoryFragments.Conversation.ConversationRegistry.yml) creates a new conversation containing only a START node. Like injections, it must be called in `OnInitializeMelon`.
+> - [ConversationStartNodeSelector](../../api/SuzerainModdingKit.StoryFragments.Conversation.NodeSelectors.ConversationStartNodeSelector.yml) targets that START node, so a `ConversationInjection` can hook your dialogue to it. Everything in this guide applies to filling in a custom conversation.
+> - [GameState.AddCustomConversation](../../api/SuzerainModdingKit.GameState.yml) adds a registered conversation to the game. Call it before adding the story fragment that opens the conversation.
+> - [CustomConversationFragment](../../api/SuzerainModdingKit.StoryFragments.Conversation.CustomConversationFragment.yml) is the story fragment that opens a conversation from a token. Add it with [GameState.AddCustomStoryFragment](../../api/SuzerainModdingKit.GameState.yml), like any other [story fragment](custom-story-fragments.md).
 
 ## What Is a Conversation?
 
@@ -46,6 +56,8 @@ new ConversationInjection("Sordland/Turn02/Personal_Funeral")
 
 Injections **must** be registered in `OnInitializeMelon`. `Register` will throw an exception if called after `OnInitializeMelon`.
 
+A node's `name` must be a real identifier: `ConversationNode` throws an `ArgumentException` if the name is null, empty, or made up only of whitespace.
+
 ### Important Types
 
 What's happening here? First, let's look at the different types and what they do:
@@ -54,7 +66,11 @@ What's happening here? First, let's look at the different types and what they do
 - `ConversationInjection` describes what you want to add or change in an existing conversation.
 - `CharacterSelector` (subclasses: `CharacterNameSelector`, ...) describes a character that should be selected when it is time to resolve the conversation node. If the character cannot be resolved, the conversation node will be ignored.
 - `ConversationNodeHook` contains a selector for a node to hook to and optionally describes how to hook it. In the example above, the "how to hook" arguments are omitted so the hook will just use the default hook strategy.
-- `ConversationNodeSelector` (subclasses: `ConversationNodeArticyIDSelector`, `ConversationNodeModdedNameSelector`, ...) describes another node that should be selected when it is time to resolve this conversation node.
+- `ConversationNodeSelector` (subclasses: `ConversationNodeArticyIDSelector`, `ConversationNodeModdedNameSelector`, ...) describes another node that should be selected when it is time to resolve this conversation node. If you write your own selector, override `DialogueEntry Resolve(Conversation currentConversation)` and return null when the node cannot be found.
+
+### Choices
+
+A node is a choice when its resolved speaker is the player. There is no property to set: omit `speakerSelector` (which defaults the speaker to the player) to make a node a choice, or pass a `speakerSelector` that resolves to another character to make it a dialogue line.
 
 ### Hooks
 
@@ -95,4 +111,6 @@ You can also pass the `luaCondition`, `luaScript`, and `sequence` arguments to `
 - `luaCondition` is the Lua script that must resolve to `true` to show this node. See [Lua in the Dialogue System](lua-dialogue-system.md).
 - `luaScript` is the Lua script that will execute when the line is spoken. See [Lua in the Dialogue System](lua-dialogue-system.md).
 - `sequence` is the conversation-related actions to perform when this line is spoken. See [ConversationNodeSequenceBuilder](../../api/SuzerainModdingKit.Utils.ConversationNodeSequenceBuilder.yml).
+
+`ConversationNodeSequenceBuilder` silently skips any call whose input is invalid, which includes null, empty, and whitespace-only strings as well as strings containing `(`, `)`, or `;`. Use `ConversationNodeSequenceBuilder.IsValidInput` if you need to check a value yourself.
 
