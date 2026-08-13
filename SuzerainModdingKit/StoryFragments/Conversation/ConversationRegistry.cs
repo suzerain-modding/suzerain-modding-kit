@@ -65,9 +65,14 @@ public static class ConversationRegistry
     }
 
     /// <summary>
-    /// Register a new conversation. This is a WIP feature - Use at your own risk.
+    /// [EXPERIMENTAL]
+    /// Register a new conversation.
     /// </summary>
     /// <remarks>
+    /// Experimental: This feature is incomplete and included for public testing.
+    /// Its behavior and API may change significantly—or it may be removed—in
+    /// any future release. Do not rely on it in production.
+    /// 
     /// This method creates a new conversation with only a START node. Use
     /// <c cref="ConversationInjection">ConversationInjection</c>s to add dialogue.
     /// Hook new dialogue to the START node using

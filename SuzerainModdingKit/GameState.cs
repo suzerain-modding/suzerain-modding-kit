@@ -219,9 +219,14 @@ public static class GameState
     }
 
     /// <summary>
+    /// [EXPERIMENTAL]
     /// Add a custom conversation to the game.
     /// </summary>
     /// <remarks>
+    /// Experimental: This feature is incomplete and included for public testing.
+    /// Its behavior and API may change significantly—or it may be removed—in
+    /// any future release. Do not rely on it in production.
+    /// 
     /// The conversation name must exist in the custom conversations registry.
     /// This should be called before adding a conversation story fragment for a
     /// custom conversation to the game.
