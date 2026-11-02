@@ -10,7 +10,9 @@ This guide assumes you have already followed [Installing Mods](../user/installin
 
 ### Install .NET SDK
 
-Install the [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) for your Linux distribution.
+Install the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) version
+**10.0.402**, which is pinned for SMK development. The examples use C# 12. The SDK compiles
+the mod for .NET 6; the game still uses MelonLoader's .NET runtime inside Proton.
 
 Verify the installation:
 
@@ -30,7 +32,7 @@ Visual Studio is not available on Linux. The recommended alternatives are:
 Create a new class library project targeting .NET 6:
 
 ```bash
-dotnet new classlib -n MyMod -f net6
+dotnet new classlib -n MyMod
 cd MyMod
 ```
 
@@ -39,7 +41,9 @@ Open the generated `.csproj` file and replace its contents with the following.
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Platforms>x64</Platforms>
     <GamePath>$(HOME)/.local/share/Steam/steamapps/common/Suzerain</GamePath>
   </PropertyGroup>
@@ -95,26 +99,35 @@ dotnet build -c Debug -p:Platform=x64
 
 Use `Debug` when building for testing and `Release` when building for a public release. Replace `Debug` in the file paths below with `Release` when building in `Release` mode.
 
-The compiled DLL is at `bin/x64/Debug/net6/MyMod.dll`. Copy it to the Suzerain `Mods` folder:
+The compiled DLL is at `bin/x64/Debug/net6.0/MyMod.dll`. Close Suzerain, then copy it to the
+`Mods` folder:
 
 ```bash
-cp bin/x64/Debug/net6/MyMod.dll ~/.local/share/Steam/steamapps/common/Suzerain/Mods/
+cp bin/x64/Debug/net6.0/MyMod.dll ~/.local/share/Steam/steamapps/common/Suzerain/Mods/
 ```
 
 Or if you installed Steam via Flatpak:
 
 ```bash
-cp bin/x64/Debug/net6/MyMod.dll ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain/Mods/
+cp bin/x64/Debug/net6.0/MyMod.dll ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/steamapps/common/Suzerain/Mods/
 ```
 
 > [!TIP]
-> Add a post-build target to your `.csproj` to copy the DLL automatically after each build:
+> Add an explicit deployment target to your `.csproj` to install only when requested:
 >
 > ```xml
-> <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+> <Target Name="Deploy" DependsOnTargets="Build">
+>   <MakeDir Directories="$(GamePath)/Mods" />
 >   <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)/Mods" />
 > </Target>
 > ```
+>
+> After closing the game, run `dotnet build -c Debug -p:Platform=x64 -t:Deploy`.
+
+When building the SMK repository itself, follow its contributor instructions: configure
+`GamePath` in `Directory.Build.local.props` and use its preflight, Stage, and Deploy commands.
+Its output is under `artifacts/`, rather than the example project's default `bin/` directory.
+The contributor workflow is currently verified on Windows; Proton verification is separate.
 
 Launch Suzerain through Steam to test your mod. Check the MelonLoader console output for diagnostics.
 

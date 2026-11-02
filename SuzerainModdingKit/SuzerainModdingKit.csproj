@@ -2,17 +2,15 @@
 	<PropertyGroup>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<TargetFramework>net6.0</TargetFramework>
+		<IsSuzerainMod>true</IsSuzerainMod>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<RootNamespace>SuzerainModdingKit</RootNamespace>
-		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<AssemblyName>SuzerainModdingKit</AssemblyName>
-		<LangVersion>latest</LangVersion>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<Platforms>x64</Platforms>
 	</PropertyGroup>
 
@@ -115,7 +113,4 @@
 	  </PackageReference>
 	</ItemGroup>
 	
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(GamePath)/Mods&quot;" />
-	</Target>
 </Project>

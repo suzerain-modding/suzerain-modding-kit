@@ -9,11 +9,15 @@ This guide covers Windows-specific setup only. For the full mod development walk
 1. Follow the [Installing Mods](../user/installing-mods.md) guide to install MelonLoader and Suzerain Modding Kit.
 2. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (Visual Studio, not Visual Studio Code).
     - In the Visual Studio Installer, ensure you also install the ".NET desktop development" workload.
+    - Install the .NET SDK **10.0.402** used by the SMK repository and these examples. The SDK
+      supplies the compiler; MelonLoader still requires the **.NET 6 Desktop Runtime**.
 3. Download the [MelonLoader VS Wizard](https://github.com/TrevTV/MelonLoader.VSWizard/releases) and run the `.vsix` file to install it as a Visual Studio extension.
 4. Open Visual Studio and create a new project. Select "MelonLoader Mod" as the project template.
 5. Fill in the project info and create. Visual Studio will open a file selector, navigate to and select `Suzerain.exe`.
     - The default install location is `C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Suzerain.exe`.
 6. Open the `.csproj` and add `<Reference Include="SuzerainModdingKit"><HintPath>$(GamePath)\Mods\SuzerainModdingKit.dll</HintPath></Reference>` where the other references are (usually in the first `ItemGroup`).
+    - Set `<TargetFramework>net6.0</TargetFramework>` and `<LangVersion>12.0</LangVersion>`
+      in the project's property group.
 7. In Visual Studio, set the build platform to `x64`.
     1. Select Build > Configuration Manager.
     2. Open the active solution platform dropdown. If `x64` is already there, skip the next step. Otherwise, continue.
@@ -27,4 +31,25 @@ This guide covers Windows-specific setup only. For the full mod development walk
     2. Add spaces to the mod name (second argument) and change your user profile name (fourth argument) to your Nexus Mods account name.
     3. It should look like this now: `[assembly: MelonInfo(typeof(MyMod.Core), "My Mod", "1.0.0", "My User Name", null)]`.
 9. Recommended: Set the `Core` class to `internal sealed`: `internal sealed class Core : MelonMod`.
+
+## Building and Installing
+
+Build using `dotnet build -c Debug -p:Platform=x64`, close Suzerain, and install the resulting
+mod DLL into its `Mods` directory. Use Release for publishing.
+
+Some MelonLoader templates install an automatic post-build copy. Remove that target to keep
+compilation separate from installation. An explicit target can build and install on request:
+
+```xml
+<Target Name="Deploy" DependsOnTargets="Build">
+  <MakeDir Directories="$(GamePath)/Mods" />
+  <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)/Mods" />
+</Target>
+```
+
+Run it with `dotnet build -c Debug -p:Platform=x64 -t:Deploy` after closing the game.
+
+For contributing to SMK itself, see [Contributing](https://github.com/suzerain-modding/suzerain-modding-kit/blob/main/CONTRIBUTING.md).
+Its repository includes ignored local configuration, a preflight script, and separate Stage
+and Deploy targets; ordinary builds write to its `artifacts` directory.
 

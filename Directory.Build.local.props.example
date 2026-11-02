@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!-- Copy this file to Directory.Build.local.props and use absolute paths. -->
+    <GamePath>C:/Program Files (x86)/Steam/steamapps/common/Suzerain</GamePath>
+
+    <!-- Optional overrides. Defaults are inside this checkout. -->
+    <!-- <ArtifactsPath>D:/SMK/artifacts</ArtifactsPath> -->
+    <!-- <StagingPath>D:/SMK/staging</StagingPath> -->
+    <!-- <DeploymentPath>D:/Suzerain/Mods</DeploymentPath> -->
+    <!-- <ExpectedGameVersion>3.1.0.1.175</ExpectedGameVersion> -->
+  </PropertyGroup>
+</Project>

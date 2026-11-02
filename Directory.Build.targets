@@ -1,0 +1,33 @@
+<Project>
+  <Target Name="ValidateGameReferences" BeforeTargets="ResolveAssemblyReferences"
+          Condition="'$(IsSuzerainMod)' == 'true'">
+    <Error Condition="'$(GamePath)' == '' or !Exists('$(GamePath)/Suzerain.exe')"
+           Text="Set GamePath to the Suzerain installation in Directory.Build.local.props or with -p:GamePath=... . Run scripts/preflight.ps1 for details." />
+    <ItemGroup>
+      <_MissingGameReference Include="@(Reference)"
+        Condition="'%(Reference.HintPath)' != '' and !Exists('%(Reference.HintPath)')" />
+    </ItemGroup>
+    <Error Condition="'@(_MissingGameReference)' != ''"
+           Text="Game assemblies are missing under '$(GamePath)'. Launch the game with MelonLoader to generate interop assemblies, then run scripts/preflight.ps1. Missing: @(_MissingGameReference, ', ')." />
+  </Target>
+
+  <Target Name="Stage" DependsOnTargets="Build" Condition="'$(IsSuzerainMod)' == 'true'">
+    <ItemGroup>
+      <_ModFiles Include="$(TargetPath)" />
+      <_ModFiles Include="$(TargetDir)$(TargetName).pdb"
+        Condition="'$(DebugType)' != 'none' and '$(DebugType)' != 'embedded' and Exists('$(TargetDir)$(TargetName).pdb')" />
+    </ItemGroup>
+    <MakeDir Directories="$(StagingPath)/Mods" />
+    <Copy SourceFiles="@(_ModFiles)" DestinationFolder="$(StagingPath)/Mods"
+          SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Staged mod files: $(StagingPath)/Mods" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="Stage" Condition="'$(IsSuzerainMod)' == 'true'">
+    <Message Importance="high"
+             Text="Explicit deployment to '$(DeploymentPath)'. Suzerain must be closed." />
+    <MakeDir Directories="$(DeploymentPath)" />
+    <Copy SourceFiles="@(_ModFiles)" DestinationFolder="$(DeploymentPath)"
+          SkipUnchangedFiles="true" />
+  </Target>
+</Project>

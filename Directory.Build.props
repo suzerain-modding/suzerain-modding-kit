@@ -1,5 +1,16 @@
 <Project>
+  <Import Project="$(MSBuildThisFileDirectory)Directory.Build.local.props"
+          Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build.local.props')" />
+
   <PropertyGroup>
-    <GamePath>C:\Program Files (x86)\Steam\steamapps\common\Suzerain</GamePath>
+    <GamePath Condition="'$(GamePath)' == '' and '$(OS)' == 'Windows_NT'"
+      >$(MSBuildProgramFiles32)/Steam/steamapps/common/Suzerain</GamePath>
+    <ArtifactsPath Condition="'$(ArtifactsPath)' == ''"
+      >$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <StagingPath Condition="'$(StagingPath)' == ''"
+      >$(ArtifactsPath)/staging/$(Configuration)/$(Platform)</StagingPath>
+    <DeploymentPath Condition="'$(DeploymentPath)' == ''">$(GamePath)/Mods</DeploymentPath>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
 </Project>
